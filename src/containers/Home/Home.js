@@ -1,24 +1,21 @@
 import React, { Component } from "react";
-import { StyleSheet, Image, Button } from 'react-native-web';
-import { homeIcon } from '../images';
+import { StyleSheet, View, Image, Button } from 'react-native-web';
+import { homeIcon } from '../../images';
 
 export default class Home extends Component {
-  static navigationOptions = {
-    drawerLabel: "Home",
-    drawerIcon: ({ tintColor }) => (
-      <Image
-        source={homeIcon}
-        style={[styles.icon, { tintColor: tintColor }]}
-      />
-    )
-  };
-
+  
   render() {
     return (
-      <Button
-        onPress={() => this.props.navigation.navigate("Login")}
-        title="Go to Login"
-      />
+      <View> 
+        <Button
+          onPress={() => console.log('foi')}
+          title="Go to notifications"
+        />
+        <Image
+          source={homeIcon}
+          style={styles.icon}
+        />
+      </View>
     );
   }
 }

@@ -1,16 +1,30 @@
-import { createDrawerNavigator } from 'react-navigation';
-import Home from './containers/Home';
-import Login from './containers/Login';
+import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
+import Home from './containers/Home/Home';
+import Login from './containers/Login/Login';
 
-const routerConfig = {
-  Home: { screen: Home },
-  Login: { screen: Login }
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/login">Login</Link></li>
+          </ul>
+
+          <hr />
+
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={Login} />
+        </div>
+      </Router>
+    );
+  }
 }
-
-const drawerConfig = {
-  drawerPosition: 'left'
-}
-
-const App = createDrawerNavigator(routerConfig, drawerConfig)
 
 export default App;

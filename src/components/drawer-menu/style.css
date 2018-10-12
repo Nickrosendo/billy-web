@@ -1,0 +1,46 @@
+.drawerMenu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 51;
+  width: 100%;
+  height: 100%;
+  background: rgba(125, 125, 125, 0.6);
+}
+
+.drawerContent {
+  width: 80%;
+  height: 100%;
+  background: #fff;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  z-index: 52;
+  list-style: none;
+  transition: all .5s ease-in-out;
+}
+
+.drawerContent li {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: #444;
+  text-align: left;
+}
+
+.drawerContent i {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.drawerBackdrop {
+  width: 100%;
+  height: 100%;
+  background: rgba(125, 125, 125, 0.6);
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}

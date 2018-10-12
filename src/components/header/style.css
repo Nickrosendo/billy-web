@@ -1,0 +1,41 @@
+.header {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 56px;
+	background: #eee;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	padding: 0 15px;
+	justify-content: space-between;
+	z-index: 50;
+}
+
+.headerIcon {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	color: #666;
+	text-decoration: none;
+}
+
+.headerImg {
+	width: 30px;
+	height: 30px;
+}
+
+
+.menuBtn {
+	width: 30px;
+	height: 30px;
+	font-size: 30px;
+	display: inline-block;
+	background: transparent;
+	border: none;
+	color: #444;
+	outline: 0;
+}

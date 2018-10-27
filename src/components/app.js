@@ -8,17 +8,18 @@ import DrawerMenu from './drawer-menu';
 import Restaurants from '../routes/restaurants/index.jsx';
 
 export default class App extends Component {
-	
+
 	state = {
-		drawerOpen: false
+		drawerOpen: false,
+		isNested: null
 	}
 
 	hanldeOpenDrawer = () => {
-		this.setState( { drawerOpen: true } );
+		this.setState({ drawerOpen: true });
 	}
 
 	handlecloseDrawer = () => {
-		this.setState( { drawerOpen: false } );
+		this.setState({ drawerOpen: false });
 	}
 
 	/** Gets fired when the route changes.
@@ -27,13 +28,19 @@ export default class App extends Component {
 	 */
 	handleRoute = e => {
 		this.currentUrl = e.url;
+		if (e.url.split('/').length === 3) {
+			this.setState({ isNested: true });
+		}
+		else {
+			this.setState({ isNested: false });
+		}
 	};
 
 	render() {
 		const drawer = this.state.drawerOpen ? <DrawerMenu closeDrawer={this.handlecloseDrawer} /> : null;
 		return (
 			<div id="app">
-				<Header onOpenDrawer={this.hanldeOpenDrawer} />
+				<Header onOpenDrawer={this.hanldeOpenDrawer} isNested={this.state.isNested} />
 				{drawer}
 				<Router onChange={this.handleRoute}>
 					<Restaurants path="/" />

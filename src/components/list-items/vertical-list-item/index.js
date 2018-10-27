@@ -11,7 +11,7 @@ const VerticalListItem = props => {
 			</div>
 		</li>
 	);
-}
+};
 
 
 export default VerticalListItem;

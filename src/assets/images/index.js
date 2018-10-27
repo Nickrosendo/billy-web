@@ -13,3 +13,4 @@ export const paymentIcon = require('./payment.png');
 export const dolarIcon = require('./banknote.png');
 export const walletIcon = require('./wallet.png');
 export const profileImage = require('./profile-img.jpg');
+export const hamburguerDemoImage = require('./hamburguer-demo.jpg');

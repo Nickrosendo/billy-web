@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?g5xeix');
-  src:  url('fonts/icomoon.eot?g5xeix#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.woff2?g5xeix') format('woff2'),
-    url('fonts/icomoon.ttf?g5xeix') format('truetype'),
-    url('fonts/icomoon.woff?g5xeix') format('woff'),
-    url('fonts/icomoon.svg?g5xeix#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?ni42n8');
+  src:  url('fonts/icomoon.eot?ni42n8#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.woff2?ni42n8') format('woff2'),
+    url('fonts/icomoon.ttf?ni42n8') format('truetype'),
+    url('fonts/icomoon.woff?ni42n8') format('woff'),
+    url('fonts/icomoon.svg?ni42n8#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -40,7 +40,7 @@
 .icon-pushpin:before {
   content: "\e946";
 }
-.icon-location2:before {
+.icon-location:before {
   content: "\e948";
 }
 .icon-profile-icon:before {
@@ -67,9 +67,15 @@
 .icon-exit:before {
   content: "\ea14";
 }
-.icon-loop2:before {
+.icon-loop:before {
   content: "\ea2e";
 }
-.icon-facebook2:before {
+.icon-arrow-left:before {
+  content: "\ea38";
+}
+.icon-arrow-left2:before {
+  content: "\ea40";
+}
+.icon-facebook:before {
   content: "\ea91";
 }

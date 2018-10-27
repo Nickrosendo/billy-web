@@ -4,7 +4,10 @@ import style from './style';
 
 const Header = (props) => (
 	<header class={style.header}>
-		<Link class={style.headerIcon} activeClassName={style.active} href="/">
+		<Link class={style.backBtn} href="/restaurantes">
+			<i class="icon-arrow-left" />
+		</Link>
+		<Link class={style.headerIcon} href="/">
 			<img class={style.headerImg} src={require('../../assets/images/billy-icon.png')} />
 			<span> Billy </span>
 		</Link>

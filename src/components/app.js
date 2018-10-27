@@ -37,7 +37,7 @@ export default class App extends Component {
 				{drawer}
 				<Router onChange={this.handleRoute}>
 					<Restaurants path="/" />
-					<Restaurants path="/restaurantes" />
+					<Restaurants path="/restaurantes/:id?" />
 				</Router>
 			</div>
 		);

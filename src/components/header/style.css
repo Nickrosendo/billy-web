@@ -28,6 +28,20 @@
 	height: 30px;
 }
 
+.backBtn {
+	height: 30px;
+	width: 30px;
+	font-size: 18px;
+	display: inline-block;
+	background: #444;
+	border: none;
+	color: #fff;
+	outline: 0;
+	border-radius: 6px;
+	text-decoration: none;
+	padding: 5px;
+}
+
 
 .menuBtn {
 	width: 30px;

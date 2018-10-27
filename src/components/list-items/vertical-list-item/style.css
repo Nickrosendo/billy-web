@@ -4,6 +4,8 @@
   align-items: center;
   margin: 15px;
   width: 100%;
+  text-decoration: none;
+  color: #444;
 }
 
 .verticalListItem img {

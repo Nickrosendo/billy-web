@@ -37,13 +37,14 @@ class Restaurants extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('https://billy-server.herokuapp.com/api/restaurants')
+		// axios.get('https://billy-server.herokuapp.com/api/restaurants')
+		axios.get('http://192.168.0.111:4000/api/restaurants')
 			.then(res => this.setState({ restaurants: res.data, fetchingData: false }));
 	}
 
 	render(props, state) {
 
-		const routeContent = props.id ? this.restaurant() : <RestaurantsList restaurants={this.state.restaurants} goToDetails={this.goToDetails} />;
+		const routeContent = props.id ? this.restaurant() : <RestaurantsList restaurants={this.state.restaurants} />;
 		return (
 			<div class={style.restaurants}>
 				{

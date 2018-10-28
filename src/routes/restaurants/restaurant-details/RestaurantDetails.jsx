@@ -1,8 +1,9 @@
 import { h } from 'preact';
+import style from './style';
 
 const RestaurantDetails = (props, state) => {
 	return (
-		<div style="padding-top: 15px;">
+		<div class={style.detailContainer } style="padding-top: 15px;">
 			<h1 class="text-center">
 				{props.restaurant.name}
 			</h1>

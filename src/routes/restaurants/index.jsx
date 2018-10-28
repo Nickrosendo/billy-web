@@ -4,8 +4,8 @@ import { route } from 'preact-router';
 
 import style from './style';
 
-import RestaurantsList from './RestaurantsList.jsx';
-import RestaurantDetails from './RestaurantDetails.jsx';
+import RestaurantsList from './restaurants-list/RestaurantsList.jsx';
+import RestaurantDetails from './restaurant-details/RestaurantDetails.jsx';
 
 
 class Restaurants extends Component {
@@ -37,8 +37,8 @@ class Restaurants extends Component {
 	}
 
 	componentDidMount() {
-		// axios.get('https://billy-server.herokuapp.com/api/restaurants')
-		axios.get('http://192.168.0.111:4000/api/restaurants')
+		axios.get('https://billy-server.herokuapp.com/api/restaurants')
+		// axios.get('http://192.168.0.111:4000/api/restaurants')
 			.then(res => this.setState({ restaurants: res.data, fetchingData: false }));
 	}
 

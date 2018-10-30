@@ -1,13 +1,18 @@
 import { h, Component } from 'preact';
 import axios from 'axios';
 import { route } from 'preact-router';
+import { connect } from 'preact-redux';
+
+import reduce from '../../reducers';
+import * as actions from '../../actions';
+
 
 import style from './style';
 
 import RestaurantsList from './restaurants-list/RestaurantsList.jsx';
 import RestaurantDetails from './restaurant-details/RestaurantDetails.jsx';
 
-
+@connect(reduce, actions)
 class Restaurants extends Component {
 
 	state = {

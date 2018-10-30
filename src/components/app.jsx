@@ -1,5 +1,8 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
+import { Provider } from 'preact-redux';
+
+import store from '../store';
 
 import Header from './header';
 import DrawerMenu from './drawer-menu';
@@ -7,7 +10,7 @@ import DrawerMenu from './drawer-menu';
 // Code-splitting is automated for routes
 import Restaurants from '../routes/restaurants/index.jsx';
 
-export default class App extends Component {
+class App extends Component {
 
 	state = {
 		drawerOpen: false,
@@ -37,6 +40,7 @@ export default class App extends Component {
 	};
 
 	render() {
+		console.log('app props: ', this.props);
 		const drawer = this.state.drawerOpen ? <DrawerMenu closeDrawer={this.handlecloseDrawer} /> : null;
 		return (
 			<div id="app">
@@ -50,3 +54,11 @@ export default class App extends Component {
 		);
 	}
 }
+
+export default () => (
+	<div id="outer">
+		<Provider store={store} >
+			<App />
+		</Provider>
+	</div>
+);

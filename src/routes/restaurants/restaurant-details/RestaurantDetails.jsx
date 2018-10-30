@@ -1,7 +1,11 @@
 import { h } from 'preact';
+import { connect } from 'preact-redux';
+
 import style from './style';
 
-const RestaurantDetails = (props, state) => {
+const RestaurantDetails = connect(state => state)((props, state) => {
+	console.log('details props: ', props);
+	console.log('details state: ', state);
 	const menuItemsMap = props.restaurant.menu.map(item => (
 		<div class={style.menuItemContainer}>
 			<p class={style.menuItemName}>
@@ -31,6 +35,6 @@ const RestaurantDetails = (props, state) => {
 			{menuItemsMap}
 		</div>
 	);
-};
+});
 
 export default RestaurantDetails;

@@ -40,7 +40,6 @@ class App extends Component {
 	};
 
 	render() {
-		console.log('app props: ', this.props);
 		const drawer = this.state.drawerOpen ? <DrawerMenu closeDrawer={this.handlecloseDrawer} /> : null;
 		return (
 			<div id="app">
@@ -55,10 +54,10 @@ class App extends Component {
 	}
 }
 
-export default () => (
-	<div id="outer">
-		<Provider store={store} >
-			<App />
-		</Provider>
-	</div>
+const exportedApp = () => (
+	<Provider store={store} >
+		<App />
+	</Provider>
 );
+
+export default exportedApp;

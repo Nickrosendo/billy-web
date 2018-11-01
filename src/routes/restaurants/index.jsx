@@ -9,12 +9,13 @@ import * as actions from '../../actions';
 
 import style from './style';
 
-import RestaurantsList from './restaurants-list/RestaurantsList.jsx';
-import RestaurantDetails from './restaurant-details/RestaurantDetails.jsx';
+import OrderLabel from './order/order-label/OrderLabel.jsx';
+import RestaurantsList from './restaurant/restaurants-list/RestaurantsList.jsx';
+import RestaurantDetails from './restaurant/restaurant-details/RestaurantDetails.jsx';
 
 @connect(reduce, actions)
 class Restaurants extends Component {
-
+	
 	state = {
 		restaurants: [],
 		fetchingData: true
@@ -30,9 +31,9 @@ class Restaurants extends Component {
 
 	restaurant() {
 		const findRestaurant = this.state.restaurants.find(r => r._id === this.props.id);
-		
+
 		if (findRestaurant) {
-			return (<RestaurantDetails restaurant={findRestaurant} />);
+			return (<RestaurantDetails addItem={this.addOrderItem} restaurant={findRestaurant} />);
 		}
 		return this.fetchingLoader();
 	}
@@ -43,18 +44,20 @@ class Restaurants extends Component {
 
 	componentDidMount() {
 		axios.get('https://billy-server.herokuapp.com/api/restaurants')
-		// axios.get('http://192.168.0.111:4000/api/restaurants')
+			// axios.get('http://192.168.0.111:4000/api/restaurants')
 			.then(res => this.setState({ restaurants: res.data, fetchingData: false }));
 	}
 
 	render(props, state) {
-
 		const routeContent = props.id ? this.restaurant() : <RestaurantsList restaurants={this.state.restaurants} />;
 		return (
 			<div class={style.restaurants}>
-				{
-					this.state.fetchingData ? this.fetchingLoader() : routeContent
-				}
+				<OrderLabel />
+				<div style={props.order.items.length > 0 ? { marginTop: 56 } : null} >
+					{
+						this.state.fetchingData ? this.fetchingLoader() : routeContent
+					}
+				</div>
 			</div>
 		);
 	}

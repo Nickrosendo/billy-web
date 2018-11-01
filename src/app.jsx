@@ -2,13 +2,13 @@ import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 import { Provider } from 'preact-redux';
 
-import store from '../store';
+import store from './store';
 
-import Header from './header';
-import DrawerMenu from './drawer-menu';
+import Header from './components/header';
+import DrawerMenu from './components/drawer-menu';
 
 // Code-splitting is automated for routes
-import Restaurants from '../routes/restaurants/index.jsx';
+import Restaurants from './routes/restaurants/index.jsx';
 
 class App extends Component {
 

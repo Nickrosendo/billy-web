@@ -5,7 +5,6 @@ import { connect } from 'preact-redux';
 import style from './style';
 
 const Header = connect(state => state)((props) => {
-	console.log('header props: ', props);
 	const hasBack = props.isNested ? (
 		<Link class={style.backBtn} href="/restaurantes">
 			<i class="icon-arrow-left" />

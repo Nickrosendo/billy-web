@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { connect } from 'preact-redux';
-import { addOrderItem } from '../../../actions';
+import { addOrderItem } from '../../../../actions';
 
 import style from './style';
 

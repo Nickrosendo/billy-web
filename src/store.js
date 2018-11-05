@@ -1,15 +1,14 @@
 import { createStore } from 'redux';
 
 let ACTIONS = {
-	ADD_ORDER_ITEM: ({ ...state }, { item }) => {
-		return ({
-			order: {
-				...state.order,
-				totalPrice: state.order.totalPrice + item.price,
-				items: [...state.order.items, item]
-			}
-		});
-	},
+	ADD_ORDER_ITEM: ({ ...state }, { item }) => ({
+		order: {
+			...state.order,
+			id: state.order.id,
+			totalPrice: state.order.totalPrice + item.price,
+			items: [...state.order.items, item]
+		}
+	}),
 
 	REMOVE_ORDER_ITEM: ({ items, ...state }, { itemId }) => ({
 		todos: items.filter(i => i._id !== itemId),
@@ -19,6 +18,7 @@ let ACTIONS = {
 
 const INITIAL_STATE = {
 	order: {
+		id: new Date(),
 		totalPrice: 0,
 		items: []
 	}

@@ -51,9 +51,9 @@ class Restaurants extends Component {
 	render(props, state) {
 		const routeContent = props.id ? this.restaurant() : <RestaurantsList restaurants={this.state.restaurants} />;
 		return (
-			<div class={style.restaurants}>
+			<div>
 				<OrderLabel />
-				<div style={props.order.items.length > 0 ? { marginTop: 56 } : null} >
+				<div style={props.order.items.length > 0 ? { paddingTop: 56 } : null} >
 					{
 						this.state.fetchingData ? this.fetchingLoader() : routeContent
 					}

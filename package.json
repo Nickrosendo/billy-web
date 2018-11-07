@@ -4,14 +4,15 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "npm run preact build && npm run preact serve",
+    "start": "preact build && preact serve",
     "dev-start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
     "build": "preact build",
     "serve": "preact build && preact serve",
     "dev": "preact watch",
     "lint": "eslint src --fix",
     "test": "jest",
-    "preact": "preact"
+    "preact": "preact",
+    "firebase": "firebase"
   },
   "eslintConfig": {
     "extends": "eslint-config-synacor"
@@ -30,6 +31,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "firebase-tools": "^6.0.1",
     "preact": "^8.2.6",
     "preact-compat": "^3.17.0",
     "preact-redux": "^2.0.3",

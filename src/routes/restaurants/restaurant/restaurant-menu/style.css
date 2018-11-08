@@ -61,3 +61,32 @@
 	display: block;
 	width: 100%;
 }
+
+.orderItemContainer {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+}
+
+.orderItemInput {
+	margin: 0 15px;
+	padding: 6px;
+	min-width: 10px;
+	width: 50px;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+}
+
+.orderItemQuantityContainer {
+	margin-right: 10px;
+}
+
+.orderItemQuantityBtn {
+	padding: 4px;
+	color: #444;
+	border: 1px solid #ddd;
+	background: #eee;
+	border-radius: 8px;
+	display: block;
+	margin-bottom: 5px;
+}

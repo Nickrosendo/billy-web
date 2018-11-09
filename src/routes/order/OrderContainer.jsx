@@ -14,16 +14,55 @@ class OrderDetails extends Component {
 		return (
 			<div>
 				<h1 class="text-center"> Detalhes do pedido</h1>
-
-				<div style="margin-top: 30px; background: #216C2A; color: #fff; padding: 8px; border: 1px solid #fff; border-radius: 8px;">
-					<p class="text-center"> Total: R$ {props.order.totalPrice}</p>
-					<p>Itens: </p>
+				<button style="padding: 6px; border-radius: 6px;background: #216C2A;color: #fff;border: none;margin-top: 10px;	display: block;	width: 100%;" >
+					Pedir a conta
+				</button>
+				<div style="margin-top: 30px; padding: 8px; color: #444;">
+					<div style="border-bottom: 1px dotted #444; border-top: 1px dotted #444; margin: 20px 0; padding: 10px;">
+						<p style="display: flex; justify-content: space-between;">
+							<span>Subtotal: </span>
+							<span>R$ {props.order.totalPrice}</span>
+						</p>
+						<p style="display: flex; justify-content: space-between;">
+							<span>Total: </span>
+							<span>R$ {props.order.totalPrice}</span>
+						</p>
+					</div>
+					<p>
+						Descrição:
+					</p>
 					{props.order.items.map(i =>
 						(
-							<p style="display: flex; justify-content: space-between; border-bottom: 1px dotted #fff; margin-bottom: 20px;">
-								<span> Nome: {i.name}</span>
-								<span> Preço: {i.price}</span>
-							</p>
+							<div style="border-bottom: 1px dotted #444; border-top: 1px dotted #444; padding: 10px; margin: 10px 0;">
+								<div style="display: flex; justify-content: space-between; background: #fff3cd; color: #856404; border-radius: 12px; padding: 8px; margin-bottom: 5px;">
+									<span>Status do pedido: </span>
+									<span>à confirmar</span>
+								</div>
+								<p style="display: flex; justify-content: space-between;">
+									<span>Horário do pedido:</span>
+									<span> { new Date().getHours() === 0 ? '00' : new Date().getHours() }:{ new Date().getMinutes() }</span>
+								</p>
+								<p style="display: flex; justify-content: space-between;">
+									<span>Item:</span>
+									<span>{i.name}</span>
+								</p>
+								<p style="display: flex; justify-content: space-between;">
+									<span>Quantidade: </span>
+									<span>1</span>
+								</p>
+								<p style="display: flex; justify-content: space-between;">
+									<span>Preço unitário:</span>
+									<span>R$ {i.price} </span>
+								</p>
+								<p style="display: flex; justify-content: space-between;">
+									<span>SubTotal:</span>
+									<span>R$ {i.price} </span>
+								</p>
+								<p style="display: flex; justify-content: space-between;">
+									<span>Observações:</span>
+									<span>Sem picles</span>
+								</p>
+							</div>
 						)
 					)}
 				</div>

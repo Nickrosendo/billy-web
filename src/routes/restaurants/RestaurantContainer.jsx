@@ -29,10 +29,8 @@ class Restaurants extends Component {
 		);
 	}
 
-	handleAddOrderItem(orderItem, quantity) {
-		for (let i of Array(quantity)) {
-			this.props.addOrderItem(orderItem);
-		}
+	handleAddOrderItem(orderItem) {
+		this.props.addOrderItem(orderItem);
 	}
 
 	restaurant() {
@@ -64,7 +62,7 @@ class Restaurants extends Component {
 		return (
 			<div>
 				<OrderLabel />
-				<div style={props.order.items.length > 0 ? { paddingTop: 56 } : null} >
+				<div style={props.order.items && props.order.items.length > 0 ? { paddingTop: 56 } : null} >
 					{
 						this.state.fetchingData ? this.fetchingLoader() : routeContent
 					}

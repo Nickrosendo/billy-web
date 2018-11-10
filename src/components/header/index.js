@@ -5,11 +5,21 @@ import { connect } from 'preact-redux';
 import style from './style';
 
 const Header = connect(state => state)((props) => {
-	const hasBack = props.isNested ? (
-		<Link class={style.backBtn} href="/restaurantes">
-			<i class="icon-arrow-left" />
-		</Link>
-	) : null;
+	let hasBack;
+	if (props.order.items.length > 0 && window.location.pathname.indexOf('/restaurantes') === -1) {
+		hasBack = (
+			<Link class={style.backBtn} href={`/restaurantes/${props.order.restaurantId}`}>
+				<i class="icon-arrow-left" />
+			</Link>
+		);
+	}
+	else if (window.location.pathname.indexOf('/restaurantes') !== -1 && window.location.pathname.split('/restaurantes/').length === 2) {
+		hasBack = (
+			<Link class={style.backBtn} href={`/restaurantes/`}>
+				<i class="icon-arrow-left" />
+			</Link>
+		);
+	}
 	return (
 		<header class={style.header}>
 			{

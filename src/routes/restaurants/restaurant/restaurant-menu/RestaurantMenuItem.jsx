@@ -4,11 +4,18 @@ import style from './style';
 class RestaurantMenuItem extends Component {
 
 	state = {
-		quantity: 1
+		quantity: 1,
+		observation: ''
 	}
 
 	handleOrderItem() {
-		this.props.addItem(this.props.item, this.state.quantity);
+		const orderItem = {
+			...this.props.item,
+			quantity: this.state.quantity,
+			observation: this.state.observation,
+			restaurantId: this.props.restaurantId
+		};
+		this.props.addItem(orderItem);
 	}
 
 	handleAdd() {
@@ -30,12 +37,20 @@ class RestaurantMenuItem extends Component {
 		}
 	}
 
+	handleAddObservation(event) {
+		const observation = event.target.value;
+		if (observation) {
+			this.setState({ observation });
+		}
+	}
+
 	constructor(...args) {
 		super(...args);
 		this.handleOrderItem = this.handleOrderItem.bind(this);
 		this.handleAdd = this.handleAdd.bind(this);
 		this.handleSubtract = this.handleSubtract.bind(this);
 		this.handleManualChange = this.handleManualChange.bind(this);
+		this.handleAddObservation = this.handleAddObservation.bind(this);
 	}
 
 	render(props) {
@@ -57,12 +72,16 @@ class RestaurantMenuItem extends Component {
 						<label for="qnt">Quantidade: </label>
 						<input class={style.orderItemInput} onChange={this.handleManualChange} value={this.state.quantity} id="qnt" type="number" />
 						<div class={style.orderItemQuantityContainer}>
-							<button class={style.orderItemQuantityBtn} onClick={this.handleAdd}type="button"><i class="icon icon-plus" /></button>
+							<button class={style.orderItemQuantityBtn} onClick={this.handleAdd} type="button"><i class="icon icon-plus" /></button>
 							<button class={style.orderItemQuantityBtn} onClick={this.handleSubtract} type="button"><i class="icon icon-minus" /></button>
 						</div>
 						<button class={style.menuItemDataOrder} onClick={this.handleOrderItem}>
 							Pedir
 						</button>
+					</div>
+					<div style="margin-top: 10px;">
+						<label for="textarea" > Observações:</label>
+						<input type="textarea" onChange={this.handleAddObservation} value={this.state.observation} style="width: 100%; height: 40px; padding: 8px; resize: none; border: 1px solid #ddd; border-radius: 8px;" />
 					</div>
 				</div>
 			</div >

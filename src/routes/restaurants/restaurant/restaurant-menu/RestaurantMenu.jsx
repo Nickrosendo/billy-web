@@ -7,7 +7,7 @@ import style from './style';
 const RestaurantDetails = (props) => {
 
 	const menuItemsMap = props.restaurant.menu.map(item => (
-		<RestaurantMenuItem item={item} addItem={props.addItem} />
+		<RestaurantMenuItem restaurantId={props.restaurant._id} item={item} addItem={props.addItem} />
 	));
 
 	return (

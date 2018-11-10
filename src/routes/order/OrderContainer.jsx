@@ -33,35 +33,37 @@ class OrderDetails extends Component {
 					</p>
 					{props.order.items.map(i =>
 						(
-							<div style="border-bottom: 1px dotted #444; border-top: 1px dotted #444; padding: 10px; margin: 10px 0;">
-								<div style="display: flex; justify-content: space-between; background: #fff3cd; color: #856404; border-radius: 12px; padding: 8px; margin-bottom: 5px;">
+							<div>
+								<div style="display: flex; justify-content: space-between; background: #fff3cd; color: #856404; border-radius: 12px; padding: 8px; margin: 10px 0;">
 									<span>Status do pedido: </span>
 									<span>à confirmar</span>
 								</div>
-								<p style="display: flex; justify-content: space-between;">
-									<span>Horário do pedido:</span>
-									<span> { new Date().getHours() === 0 ? '00' : new Date().getHours() }:{ new Date().getMinutes() }</span>
-								</p>
-								<p style="display: flex; justify-content: space-between;">
-									<span>Item:</span>
-									<span>{i.name}</span>
-								</p>
-								<p style="display: flex; justify-content: space-between;">
-									<span>Quantidade: </span>
-									<span>1</span>
-								</p>
-								<p style="display: flex; justify-content: space-between;">
-									<span>Preço unitário:</span>
-									<span>R$ {i.price} </span>
-								</p>
-								<p style="display: flex; justify-content: space-between;">
-									<span>SubTotal:</span>
-									<span>R$ {i.price} </span>
-								</p>
-								<p style="display: flex; justify-content: space-between;">
-									<span>Observações:</span>
-									<span>Sem picles</span>
-								</p>
+								<div style="border-bottom: 1px dotted #444; border-top: 1px dotted #444; padding: 10px; margin: 10px 0;">
+									<p style="display: flex; justify-content: space-between;">
+										<span>Horário do pedido:</span>
+										<span> {new Date().getHours() === 0 ? '00' : new Date().getHours()}:{new Date().getMinutes()}</span>
+									</p>
+									<p style="display: flex; justify-content: space-between;">
+										<span>Item:</span>
+										<span>{i.name}</span>
+									</p>
+									<p style="display: flex; justify-content: space-between;">
+										<span>Quantidade: </span>
+										<span>{i.quantity}</span>
+									</p>
+									<p style="display: flex; justify-content: space-between;">
+										<span>Preço unitário:</span>
+										<span>R$ {i.price} </span>
+									</p>
+									<p style="display: flex; justify-content: space-between;">
+										<span>SubTotal:</span>
+										<span>R$ {i.price * i.quantity} </span>
+									</p>
+									<p style="display: flex; justify-content: space-between;">
+										<span>Observações:</span>
+										<span>{i.observation}</span>
+									</p>
+								</div>
 							</div>
 						)
 					)}

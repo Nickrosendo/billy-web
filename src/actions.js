@@ -5,6 +5,13 @@ export function addOrderItem(item) {
 	};
 }
 
+export function setPreviousRoute(previousRoute) {
+	return {
+		type: 'SET_PREVIOUS_ROUTE',
+		previousRoute
+	};
+}
+
 export function removeOrderItem(item) {
 	return {
 		type: 'REMOVE_ORDER_ITEM',

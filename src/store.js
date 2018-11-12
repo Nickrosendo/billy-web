@@ -1,13 +1,16 @@
 import { createStore } from 'redux';
 
 let ACTIONS = {
+	SET_PREVIOUS_ROUTE: ({ ...state }, { previousRoute }) => ({ ...state, previousRoute }),
 	ADD_ORDER_ITEM: ({ ...state }, { item }) => {
 		let itemsPrice = 0;
 		for (let i = 0; i < item.quantity; i++) {
 			itemsPrice += item.price;
 		}
 		const totalPrice = state.order.totalPrice + itemsPrice;
+		console.log('add store state: ', state);
 		return {
+			...state,
 			order: {
 				...state.order,
 				id: state.order.id,
@@ -30,7 +33,8 @@ const INITIAL_STATE = {
 		totalPrice: 0,
 		items: [],
 		restaurantId: undefined
-	}
+	},
+	previousRoute: ''
 };
 
 let hasDevToolsExtension = () => typeof devToolsExtension === 'function' ? window.devToolsExtension() : undefined;

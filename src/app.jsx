@@ -1,8 +1,10 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
-import { Provider } from 'preact-redux';
+import { Provider, connect } from 'preact-redux';
 
 import store from './store';
+import reduce from './reducers';
+import * as actions from './actions';
 
 import Header from './components/header';
 import DrawerMenu from './components/drawer-menu';
@@ -11,6 +13,7 @@ import DrawerMenu from './components/drawer-menu';
 import Restaurants from './routes/restaurants/RestaurantContainer.jsx';
 import OrderDetails from './routes/order/OrderContainer.jsx';
 
+@connect(reduce, actions)
 class App extends Component {
 
 	state = {
@@ -18,7 +21,7 @@ class App extends Component {
 		isNested: null
 	}
 
-	hanldeOpenDrawer = () => {
+	handleOpenDrawer = () => {
 		this.setState({ drawerOpen: true });
 	}
 
@@ -31,20 +34,19 @@ class App extends Component {
 	 *	@param {string} event.url	The newly routed URL
 	 */
 	handleRoute = e => {
+		console.log('route Event: ', e);
+		console.log('app props: ', this.props);
 		this.currentUrl = e.url;
-		if (e.url.split('/').length === 3) {
-			this.setState({ isNested: true });
-		}
-		else {
-			this.setState({ isNested: false });
-		}
+		const hasPrevious = e.previous ? e.previous : '';
+		this.props.setPreviousRoute(hasPrevious);
+		
 	};
 
 	render() {
 		const drawer = this.state.drawerOpen ? <DrawerMenu closeDrawer={this.handlecloseDrawer} /> : null;
 		return (
 			<div id="app">
-				<Header onOpenDrawer={this.hanldeOpenDrawer} isNested={this.state.isNested} />
+				<Header onOpenDrawer={this.handleOpenDrawer} />
 				{drawer}
 				<main class="route-container">
 					<Router onChange={this.handleRoute}>

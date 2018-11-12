@@ -8,7 +8,6 @@ let ACTIONS = {
 			itemsPrice += item.price;
 		}
 		const totalPrice = state.order.totalPrice + itemsPrice;
-		console.log('add store state: ', state);
 		return {
 			...state,
 			order: {

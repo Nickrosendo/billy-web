@@ -76,7 +76,7 @@ class RestaurantMenuItem extends Component {
 							<button class={style.orderItemQuantityBtn} onClick={this.handleSubtract} type="button"><i class="icon icon-minus" /></button>
 						</div>
 						<button class={style.menuItemDataOrder} onClick={this.handleOrderItem}>
-							Pedir
+							Adicionar
 						</button>
 					</div>
 					<div style="margin-top: 10px;">

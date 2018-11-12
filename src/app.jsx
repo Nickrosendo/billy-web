@@ -29,17 +29,23 @@ class App extends Component {
 		this.setState({ drawerOpen: false });
 	}
 
+	handleReturnRoute(routeEvent) {
+		if (routeEvent.url === '/') {
+			return '';
+		}
+		else if (routeEvent.url.split('/restaurantes').length === 2 && routeEvent.url.split('/restaurantes')[1] !== '') {
+			return '/';
+		}
+		return routeEvent.previous;
+	}
+
 	/** Gets fired when the route changes.
 	 *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
 	 *	@param {string} event.url	The newly routed URL
 	 */
 	handleRoute = e => {
-		console.log('route Event: ', e);
-		console.log('app props: ', this.props);
 		this.currentUrl = e.url;
-		const hasPrevious = e.previous ? e.previous : '';
-		this.props.setPreviousRoute(hasPrevious);
-		
+		this.props.setPreviousRoute(this.handleReturnRoute(e));
 	};
 
 	render() {

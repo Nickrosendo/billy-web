@@ -62,7 +62,7 @@ class Restaurants extends Component {
 		return (
 			<div>
 				<OrderLabel />
-				<div style={props.order.items && props.order.items.length > 0 ? { paddingTop: 56 } : null} >
+				<div>
 					{
 						this.state.fetchingData ? this.fetchingLoader() : routeContent
 					}

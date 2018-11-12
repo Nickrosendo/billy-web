@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { Link, Match } from 'preact-router/match';
+import { Link } from 'preact-router/match';
 import { connect } from 'preact-redux';
 
 import style from './style';

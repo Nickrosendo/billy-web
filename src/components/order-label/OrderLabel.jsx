@@ -9,8 +9,8 @@ const OrderLabel = connect(state => state)((props, state) => {
 	const { order } = props;
 	return (order.items && order.items.length > 0 ? (
 		<Link class={style.orderLabelContainer} href={`/pedidos/${order.id}`}>
-			Total: R$ {order.totalPrice}
-			<p>(Clique para ver detalhes)</p>
+			<span style="text-transform: capitalize;">confirmar pedido</span>
+			<span> SubTotal: R$ {order.totalPrice}</span>
 		</Link>
 	) : null);
 });

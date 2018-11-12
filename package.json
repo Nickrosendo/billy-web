@@ -12,6 +12,7 @@
     "lint": "eslint src --fix",
     "test": "jest",
     "preact": "preact",
+    "deploy": "preact build && firebase deploy",
     "firebase": "firebase"
   },
   "eslintConfig": {

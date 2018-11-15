@@ -30,7 +30,14 @@ class RestaurantMenu extends Component {
 			items
 		};
 		this.setState({ order: updatedOrder });
+		if (this.order.items.length > 0) {
+			this.props.updatedOrder({ ...this.state.order });
+		}
+		else {
+			this.props.createOrder({ ...this.state.order });
+		}
 		console.log('state after add', this.state.order);
+		console.log('menu props: ', this.props);
 	}
 
 	menuItemsMap() {
@@ -40,6 +47,7 @@ class RestaurantMenu extends Component {
 	}
 
 	handleConfirmOrder() {
+
 		console.log('confirmou');
 	}
 

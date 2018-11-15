@@ -28,10 +28,11 @@ let ACTIONS = {
 
 const INITIAL_STATE = {
 	order: {
-		id: new Date(),
+		id: '',
+		startDate: '',
 		totalPrice: 0,
 		items: [],
-		restaurantId: undefined
+		restaurantId: ''
 	},
 	previousRoute: ''
 };

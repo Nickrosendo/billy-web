@@ -13,24 +13,9 @@
 	z-index: 50;
 }
 
-.headerIcon {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	font-size: 16px;
-	color: #666;
-	text-decoration: none;
-}
-
-.headerImg {
-	width: 30px;
-	height: 30px;
-}
-
 .backBtn {
 	height: 30px;
-	width: 30px;
+	min-width: 33px;
 	font-size: 18px;
 	display: inline-block;
 	background: #444;
@@ -40,6 +25,8 @@
 	border-radius: 6px;
 	text-decoration: none;
 	padding: 5px;
+	text-align: center;
+	vertical-align: middle;
 }
 
 

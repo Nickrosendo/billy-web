@@ -7,7 +7,7 @@ import style from './style';
 
 const OrderLabel = connect(state => state)((props, state) => {
 	const { order } = props;
-	return (order.items && order.items.length > 0 ? (
+	return (order && order.id ? (
 		<Link class={style.orderLabelContainer} href={`/pedidos/${order.id}`}>
 			<span style="text-transform: capitalize;">confirmar pedido</span>
 			<span> SubTotal: R$ {order.totalPrice}</span>

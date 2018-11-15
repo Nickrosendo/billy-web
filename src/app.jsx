@@ -6,7 +6,7 @@ import store from './store';
 import reduce from './reducers';
 import * as actions from './actions';
 
-import Header from './components/header';
+import Header from './components/header/Header';
 import DrawerMenu from './components/drawer-menu';
 
 // Code-splitting is automated for routes
@@ -35,6 +35,9 @@ class App extends Component {
 		}
 		else if (routeEvent.url.split('/restaurantes').length === 2 && routeEvent.url.split('/restaurantes')[1] !== '') {
 			return '/';
+		}
+		else if (routeEvent.url.indexOf('pedidos') !== -1 && this.props.order && this.props.order.restaurantId) {
+			return `/restaurantes/${this.props.order.restaurantId}`;
 		}
 		return routeEvent.previous;
 	}

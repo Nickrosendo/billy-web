@@ -7,7 +7,7 @@ import reduce from '../../reducers';
 import * as actions from '../../actions';
 
 
-// import style from './style';
+import style from './style';
 
 import OrderLabel from '../../components/order-label/OrderLabel.jsx';
 import RestaurantsList from './restaurant/restaurants-list/RestaurantsList.jsx';
@@ -61,12 +61,12 @@ class Restaurants extends Component {
 		const routeContent = props.id ? this.restaurant() : <RestaurantsList restaurants={this.state.restaurants} />;
 		return (
 			<div>
-				<OrderLabel />
 				<div>
 					{
 						this.state.fetchingData ? this.fetchingLoader() : routeContent
 					}
 				</div>
+				{/* <OrderLabel /> */}
 			</div>
 		);
 	}

@@ -13,7 +13,7 @@ class RestaurantMenuItem extends Component {
 			...this.props.item,
 			quantity: this.state.quantity,
 			observation: this.state.observation,
-			restaurantId: this.props.restaurantId
+			status: 'à confirmar'
 		};
 		this.props.addItem(orderItem);
 	}

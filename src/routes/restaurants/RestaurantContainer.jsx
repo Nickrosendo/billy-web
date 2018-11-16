@@ -35,7 +35,6 @@ class Restaurants extends Component {
 
 	restaurant() {
 		const findRestaurant = this.state.restaurants.find(r => r._id === this.props.id);
-
 		if (findRestaurant) {
 			return (<RestaurantMenu addItem={this.handleAddOrderItem} restaurant={findRestaurant} />);
 		}
@@ -58,12 +57,12 @@ class Restaurants extends Component {
 	}
 
 	render(props) {
-		const routeContent = props.id ? this.restaurant() : <RestaurantsList restaurants={this.state.restaurants} />;
+		const routeContent = props.id ? this.restaurant() : this.state.fetchingData ? this.fetchingLoader() : <RestaurantsList restaurants={this.state.restaurants} />;
 		return (
 			<div>
 				<div>
 					{
-						this.state.fetchingData ? this.fetchingLoader() : routeContent
+						routeContent
 					}
 				</div>
 				{/* <OrderLabel /> */}

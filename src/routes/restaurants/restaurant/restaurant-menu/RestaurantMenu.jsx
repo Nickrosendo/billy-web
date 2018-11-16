@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
+import { route } from 'preact-router';
 
 import reduce from '../../../../reducers';
 import * as actions from '../../../../actions';
@@ -30,14 +31,6 @@ class RestaurantMenu extends Component {
 			items
 		};
 		this.setState({ order: updatedOrder });
-		if (this.order.items.length > 0) {
-			this.props.updatedOrder({ ...this.state.order });
-		}
-		else {
-			this.props.createOrder({ ...this.state.order });
-		}
-		console.log('state after add', this.state.order);
-		console.log('menu props: ', this.props);
 	}
 
 	menuItemsMap() {
@@ -47,8 +40,20 @@ class RestaurantMenu extends Component {
 	}
 
 	handleConfirmOrder() {
-
-		console.log('confirmou');
+		if (this.props.order.items.length > 0) {
+			this.props.updateOrder({ ...this.state.order });
+		}
+		else {
+			this.props.createOrder({ ...this.state.order });
+			
+		}
+		// this.setState({ order: {
+		// 	...this.state.order,
+		// 	totalPrice: 0,
+		// 	items: []
+		// }
+		// });
+		route(`/pedidos/${this.props.order.id}`, true);
 	}
 
 	hasConfirmOrder() {

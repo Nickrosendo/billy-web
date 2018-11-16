@@ -5,7 +5,6 @@ import { connect } from 'preact-redux';
 import style from './style';
 
 const Header = connect(state => state)((props) => {
-	console.log('props.previousRoute: ', props.previousRoute);
 	let hasBack = props.previousRoute ? (
 		<Link class={style.backBtn} href={props.previousRoute}>
 			{props.previousRoute === '/' || props.previousRoute === '/restaurantes' ? (

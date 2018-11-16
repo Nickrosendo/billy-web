@@ -2,6 +2,7 @@ import { createStore } from 'redux';
 
 let ACTIONS = {
 	SET_PREVIOUS_ROUTE: ({ ...state }, { previousRoute }) => ({ ...state, previousRoute }),
+	SET_RESTAURANT: ({ ...state }, { openedRestaurant }) => ({ ...state, openedRestaurant }),
 	CREATE_ORDER: ({ ...state }, { order }) => ({ ...state, order }),
 	UPDATE_ORDER: ({ ...state }, { order }) => ({ ...state, order: { ...state.order, ...order } }),
 	REMOVE_ORDER_ITEM: ({ items, ...state }, { itemId }) => ({
@@ -17,6 +18,8 @@ const INITIAL_STATE = {
 		totalPrice: 0,
 		items: [],
 		restaurantId: ''
+	},
+	openedRestaurant: {
 	},
 	previousRoute: ''
 };

@@ -7,10 +7,7 @@ const DrawerMenu = (props) => (
 			<li> <i class="icon-home" /> Inicio</li>
 			<li> <i class="icon-profile-icon" /> Perfil</li>
 			<li> <i class="icon-spoon-knife" /> Como pedir</li>
-			<li> <i class="icon-credit-card" /> Carteira</li>
-			<li> <i class="icon-coin-dollar" /> Meios de pagamento</li>
 			<li> <i class="icon-qrcode" /> Histórico de compras</li>
-			<li> <i class="icon-cog" /> Configurações</li>
 			<li> <i class="icon-exit" /> Sair</li>
 		</ul>
 		<div class={style.drawerBackdrop} onClick={props.closeDrawer} />

@@ -10,11 +10,24 @@ import style from './style';
 @connect(reduce, actions)
 class OrderDetails extends Component {
 
+	handleAddMoreItens() {
+		console.log('order Props: ', this.props);
+		route(`/restaurantes/${this.props.order.restaurantId}`, true);
+	}
+
+	constructor(...args) {
+		super(...args);
+		this.handleAddMoreItens = this.handleAddMoreItens.bind(this);
+	}
+
 	render(props) {
 		return (
 			<div>
 				<h1 class="text-center"> Detalhes do pedido</h1>
-				<div style="margin-top: 30px; padding: 8px; color: #444;">
+				<div class={style.orderContainer}>
+					<button class={style.addMoreItensBtn} onClick={this.handleAddMoreItens}>
+						Adicionar mais itens
+					</button>
 					{/* <p style="display: flex; justify-content: space-between;">
 						<span>Horário do pedido:</span>
 						<span> {new Date().getHours() === 0 ? '00' : new Date().getHours()}:{new Date().getMinutes()}</span>
@@ -27,17 +40,13 @@ class OrderDetails extends Component {
 									<span>Status do pedido: </span>
 									<span>à confirmar</span>
 								</div> */}
-								<div style="border-top: 1px dotted #444; padding: 10px; margin: 10px 0; position: relative;">
-									<div style="position: absolute; right: 10px; top: 5px; height: 100%">
-										<button style="border: none; width: 30px; height: 30px; display: block; font-size: 14px; background: transparent; margin-bottom: 8px;"> <i class="icon icon-pencil2" /> </button>
-										<button style="border: none; width: 30px; height: 30px; display: block; font-size: 14px; background: transparent;"> <i class="icon icon-bin" /> </button>
+								<div class={style.orderItemContainer}>
+									<div class={style.orderItemEditContainer}>
+										<button class={style.orderItemEditBtn}> <i class="icon icon-pencil1" /> </button>
+										<button class={style.orderItemEditBtn}> <i class="icon icon-close" /> </button>
 									</div>
-									<div style="width: 80%;">
-										<p style="display: flex; justify-content: space-between;">
-											{/* <span>Item:</span> */}
-											<span>{i.name}</span>
-										</p>
-										<p style="display: flex; justify-content: space-between;">
+									<div class={style.orderItemContentContainer}>
+										<p class={style.orderItemContentField}>
 											{/* <span>Quantidade: </span> */}
 											<span>{i.quantity}x</span>
 											{/* <div style="display: flex; width: 80px; justify-content: space-between; align-items: center;">
@@ -46,20 +55,18 @@ class OrderDetails extends Component {
 												<button style="padding: 4px; color: #444; border: 1px solid #ddd;	background: #eee;	border-radius: 8px;	display: block;	font-size: 10px;" type="button"><i class="icon icon-plus" /></button>
 											</div> */}
 										</p>
-										<p style="display: flex; justify-content: space-between;">
-											{/* <span>unit:</span> */}
-											<span>R$ {i.price * i.quantity} ( {i.quantity} x { i.price } )</span>
+										<p class={style.orderItemContentField}>
+											{/* <span>Item:</span> */}
+											<span>{i.name}</span>
 										</p>
+										<p>R$ {i.price * i.quantity} ( {i.quantity} x {i.price} )</p>
 										{/* <p style="display: flex; justify-content: space-between;">
 											<span>SubTotal:</span>
 											<span>R$ {i.price * i.quantity} </span>
 										</p> */}
 									</div>
 									{i.observation ? (
-										<p style="display: flex; justify-content: space-between;">
-											<span>Observações:</span>
-											<span>{i.observation}</span>
-										</p>
+										<p> Observações: {i.observation}</p>
 									) : null
 									}
 									{/* <button style="padding: 6px; border-radius: 6px;background: #216C2A;color: #fff;border: none;margin-top: 10px;	display: block;	width: 100%;" >
@@ -69,19 +76,19 @@ class OrderDetails extends Component {
 							</div>
 						)
 					)}
-					<p style="text-align: center; margin-top: 10px;"> Pagamento </p>
-					<div style="border-bottom: 1px dotted #444; border-top: 1px dotted #444; margin: 10px 0; padding: 10px;">
-						<p style="display: flex; justify-content: space-between;">
+					<p class={style.orderPaymentTitle}> Pagamento </p>
+					<div class={style.orderPaymentContainer}>
+						<p class={style.orderItemContentField}>
 							<span>Subtotal: </span>
 							<span>R$ {props.order.totalPrice}</span>
 						</p>
-						<p style="display: flex; justify-content: space-between;">
+						<p class={style.orderItemContentField}>
 							<span>Total: </span>
 							<span>R$ {props.order.totalPrice}</span>
 						</p>
 					</div>
 				</div>
-				<button style="padding: 6px; border-radius: 6px;background: #216C2A;color: #fff;border: none;margin-top: 10px;	display: block;	width: 100%;" >
+				<button class={style.orderPaymentBtn} >
 					Realizar pagamento
 				</button>
 			</div>

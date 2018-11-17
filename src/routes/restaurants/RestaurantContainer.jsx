@@ -3,8 +3,8 @@ import axios from 'axios';
 import { route } from 'preact-router';
 import { connect } from 'preact-redux';
 
-import reduce from '../../reducers';
-import * as actions from '../../actions';
+import reduce from '../../redux/reducers';
+import * as actions from '../../redux/actions';
 
 
 import style from './style';

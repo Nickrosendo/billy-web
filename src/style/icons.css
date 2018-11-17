@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?a3fsix');
-  src:  url('fonts/icomoon.eot?a3fsix#iefix') format('embedded-opentype'),
+  src: url('fonts/icomoon.eot?a3fsix');
+  src: url('fonts/icomoon.eot?a3fsix#iefix') format('embedded-opentype'),
     url('fonts/icomoon.woff2?a3fsix') format('woff2'),
     url('fonts/icomoon.ttf?a3fsix') format('truetype'),
     url('fonts/icomoon.woff?a3fsix') format('woff'),
@@ -10,7 +10,8 @@
   font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"],
+[class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
@@ -28,96 +29,127 @@
 .icon-check:before {
   content: "\f00c";
 }
+
 .icon-close:before {
   content: "\f00d";
 }
+
 .icon-remove:before {
   content: "\f00d";
 }
+
 .icon-times:before {
   content: "\f00d";
 }
+
 .icon-clock-o:before {
   content: "\f017";
 }
+
 .icon-list-alt:before {
   content: "\f022";
 }
+
 .icon-pencil1:before {
   content: "\f040";
 }
+
 .icon-chevron-left:before {
   content: "\f053";
 }
+
 .icon-chevron-right:before {
   content: "\f054";
 }
+
 .icon-question-circle:before {
   content: "\f059";
 }
+
 .icon-home:before {
   content: "\e900";
 }
+
 .icon-pencil:before {
   content: "\e905";
 }
+
 .icon-pencil2:before {
   content: "\e906";
 }
+
 .icon-file-text:before {
   content: "\e922";
 }
+
 .icon-qrcode:before {
   content: "\e938";
 }
+
 .icon-coin-dollar:before {
   content: "\e93b";
 }
+
 .icon-credit-card:before {
   content: "\e93f";
 }
+
 .icon-pushpin:before {
   content: "\e946";
 }
+
 .icon-location:before {
   content: "\e948";
 }
+
 .icon-profile-icon:before {
   content: "\e971";
 }
+
 .icon-search:before {
   content: "\e986";
 }
+
 .icon-cog:before {
   content: "\e994";
 }
+
 .icon-spoon-knife:before {
   content: "\e9a3";
 }
+
 .icon-bin:before {
   content: "\e9ac";
 }
+
 .icon-menu:before {
   content: "\e9bd";
 }
+
 .icon-plus:before {
   content: "\ea0a";
 }
+
 .icon-minus:before {
   content: "\ea0b";
 }
+
 .icon-exit:before {
   content: "\ea14";
 }
+
 .icon-loop:before {
   content: "\ea2e";
 }
+
 .icon-arrow-left:before {
   content: "\ea38";
 }
+
 .icon-arrow-left2:before {
   content: "\ea40";
 }
+
 .icon-facebook:before {
   content: "\ea91";
 }

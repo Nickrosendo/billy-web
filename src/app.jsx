@@ -2,12 +2,12 @@ import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 import { Provider, connect } from 'preact-redux';
 
-import store from './store';
-import reduce from './reducers';
-import * as actions from './actions';
+import store from './redux/store';
+import reduce from './redux/reducers';
+import * as actions from './redux/actions';
 
-import Header from './components/header/Header';
-import DrawerMenu from './components/drawer-menu';
+import Header from './components/header/Header.jsx';
+import DrawerMenu from './components/drawer-menu/DrawerMenu.jsx';
 
 // Code-splitting is automated for routes
 import Restaurants from './routes/restaurants/RestaurantContainer.jsx';
@@ -17,8 +17,7 @@ import OrderContainer from './routes/order/OrderContainer.jsx';
 class App extends Component {
 
 	state = {
-		drawerOpen: false,
-		isNested: null
+		drawerOpen: false
 	}
 
 	handleOpenDrawer = () => {

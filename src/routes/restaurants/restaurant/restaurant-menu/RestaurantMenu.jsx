@@ -1,9 +1,8 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
-import { route } from 'preact-router';
 
-import reduce from '../../../../reducers';
-import * as actions from '../../../../actions';
+import reduce from '../../../../redux/reducers';
+import * as actions from '../../../../redux/actions';
 
 import RestaurantMenuItem from './RestaurantMenuItem.jsx';
 

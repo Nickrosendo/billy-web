@@ -13,9 +13,10 @@ class RestaurantMenuItem extends Component {
 			...this.props.item,
 			quantity: this.state.quantity,
 			observation: this.state.observation,
+			orderedDate: new Date(),
 			status: 'à confirmar'
 		};
-		this.props.addItem(orderItem);
+		this.props.handleAddOrderItem(orderItem);
 	}
 
 	handleAdd() {

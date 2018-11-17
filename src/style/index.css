@@ -21,6 +21,14 @@ html, body {
 	height: 100%;
 }
 
+.text-success {
+	color: #216C2A;
+}
+
+.text-danger {
+	color: #721c24;
+}
+
 .text-center {
 	text-align: center;
 }

@@ -6,87 +6,46 @@ import reduce from '../../../../reducers';
 import * as actions from '../../../../actions';
 
 import RestaurantMenuItem from './RestaurantMenuItem.jsx';
-import ConfirmOrder from './ConfirmOrder.jsx';
 
 import style from './style';
 
 @connect(reduce, actions)
 class RestaurantMenu extends Component {
 
-	state = {
-		order: {
-			id: '',
-			totalPrice: 0,
-			items: [],
-			restaurantId: ''
-		}
-	}
-
 	handleAddOrderItem(item) {
-		const totalPrice = this.state.order.totalPrice + (item.price * item.quantity);
-		const items = [...this.state.order.items, item];
-		const updatedOrder = {
-			...this.state.order,
-			totalPrice,
-			items
-		};
-		this.setState({ order: updatedOrder });
+		if (this.props.order.items.length > 0) {
+			let updatedItems = [...this.props.order.items, item];
+			const updatedTotalPrice = updatedItems.map(i => (i.quantity * i.price)).reduce((a, b) => (a + b), 0);
+
+			this.props.updateOrder({
+				...this.props.order,
+				totalPrice: updatedTotalPrice,
+				items: [...updatedItems]
+			});
+		}
+		else {
+			const totalPrice = (item.quantity * item.price);
+
+			this.props.createOrder({
+				id: new Date(),
+				restaurantId: this.props.restaurant._id,
+				totalPrice,
+				items: [item]
+			});
+
+		}
 	}
 
 	menuItemsMap() {
 		return this.props.restaurant.menu.map(item => (
-			<RestaurantMenuItem restaurantId={this.props.restaurant._id} item={item} addItem={this.handleAddOrderItem} />
+			<RestaurantMenuItem restaurantId={this.props.restaurant._id} item={item} handleAddOrderItem={this.handleAddOrderItem} />
 		));
-	}
-
-	handleConfirmOrder() {
-		if (this.props.order.items.length > 0) {
-			this.props.updateOrder({ ...this.state.order });
-		}
-		else {
-			this.props.createOrder({ ...this.state.order });
-			
-		}
-		// this.setState({ order: {
-		// 	...this.state.order,
-		// 	totalPrice: 0,
-		// 	items: []
-		// }
-		// });
-		route(`/pedidos/${this.props.order.id}`, true);
-	}
-
-	hasConfirmOrder() {
-		if (this.state.order.items.length > 0) {
-			return (
-				<ConfirmOrder unconfirmedOrder={this.state.order} handleConfirmOrder={this.handleConfirmOrder} />
-			);
-		}
-		return null;
 	}
 
 	constructor(...args) {
 		super(...args);
 		this.handleAddOrderItem = this.handleAddOrderItem.bind(this);
 		this.menuItemsMap = this.menuItemsMap.bind(this);
-		this.handleConfirmOrder = this.handleConfirmOrder.bind(this);
-		if (this.props.order && this.props.order.id) {
-			this.setState({
-				order: {
-					...this.props.order
-				}
-			});
-		}
-		else {
-			this.setState({
-				order: {
-					id: new Date(),
-					totalPrice: 0,
-					items: [],
-					restaurantId: this.props.restaurant._id
-				}
-			});
-		}
 	}
 
 	render() {
@@ -96,28 +55,9 @@ class RestaurantMenu extends Component {
 					{this.props.restaurant.name}
 				</h1>
 				{this.menuItemsMap()}
-				{this.hasConfirmOrder()}
 			</div>
 		);
 	}
 }
 
 export default RestaurantMenu;
-
-// const RestaurantDetails = (props) => {
-
-// 	const menuItemsMap = props.restaurant.menu.map(item => (
-// 		<RestaurantMenuItem restaurantId={props.restaurant._id} item={item} addItem={props.addItem} />
-// 	));
-
-// 	return (
-// 		<div class={style.detailContainer}>
-// 			<h1 class="text-center">
-// 				{props.restaurant.name}
-// 			</h1>
-// 			{menuItemsMap}
-// 		</div>
-// 	);
-// };
-
-// export default RestaurantDetails;

@@ -45,6 +45,13 @@ class Restaurants extends Component {
 		route(`/restaurantes/${id}`);
 	}
 
+	hasOrder() {
+		if (this.props.order.items.length > 0) {
+			return (<OrderLabel />);
+		}
+		return null;
+	}
+
 	constructor(...args) {
 		super(...args);
 		this.handleAddOrderItem = this.handleAddOrderItem.bind(this);
@@ -52,7 +59,7 @@ class Restaurants extends Component {
 
 	componentDidMount() {
 		axios.get('https://billy-server.herokuapp.com/api/restaurants')
-		// axios.get('http://192.168.0.111:4000/api/restaurants')
+			// axios.get('http://192.168.0.111:4000/api/restaurants')
 			.then(res => this.setState({ restaurants: res.data, fetchingData: false }));
 	}
 
@@ -65,7 +72,7 @@ class Restaurants extends Component {
 						routeContent
 					}
 				</div>
-				{/* <OrderLabel /> */}
+				{this.hasOrder()}
 			</div>
 		);
 	}

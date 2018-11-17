@@ -32,9 +32,8 @@ class OrderContainer extends Component {
 		});
 	}
 
-	handleRemoveOrderItem(itemId) {
-		
-		const updatedItems = this.props.order.items.filter( i => i._id !== itemId);
+	handleRemoveOrderItem(item) {
+		const updatedItems = this.props.order.items.filter( i => i._id !== item._id || i.orderedDate !== item.orderedDate);
 		const updatedTotalPrice = updatedItems.map(i => (i.quantity * i.price)).reduce((a, b) => (a + b), 0);
 
 		this.props.updateOrder({

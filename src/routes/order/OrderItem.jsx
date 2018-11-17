@@ -35,7 +35,7 @@ class OrderItem extends Component {
 			});
 		}
 		else {
-			this.props.handleRemoveOrderItem(this.props.item._id);
+			this.props.handleRemoveOrderItem(this.props.item);
 		}
 	}
 
@@ -79,8 +79,8 @@ class OrderItem extends Component {
 			<div>
 				<div class={style.orderItemContainer}>
 					<div class={style.orderItemEditContainer}>
-						<button onClick={this.handleEdit} class={style.orderItemEditBtn + ' transparent-btn-pressed'}> <i class={this.state.editing ? 'icon icon-check' : 'icon icon-pencil1'} /> </button>
-						<button onClick={this.handleRemove} class={style.orderItemEditBtn + ' transparent-btn-pressed'}> <i class={this.state.editing ? 'icon icon-bin' : 'icon icon-close'} /> </button>
+						<button onClick={this.handleEdit} class={style.orderItemEditBtn + ' transparent-btn-pressed'}> <i class={this.state.editing ? 'icon icon-check text-success' : 'icon icon-pencil1'} /> </button>
+						<button onClick={this.handleRemove} class={style.orderItemEditBtn + ' transparent-btn-pressed'}> <i class={this.state.editing ? 'icon icon-close text-danger' : 'icon icon-bin'} /> </button>
 					</div>
 					<div>
 						<p style="display: flex; align-items: center;">

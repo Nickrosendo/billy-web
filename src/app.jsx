@@ -11,7 +11,7 @@ import DrawerMenu from './components/drawer-menu';
 
 // Code-splitting is automated for routes
 import Restaurants from './routes/restaurants/RestaurantContainer.jsx';
-import OrderDetails from './routes/order/OrderContainer.jsx';
+import OrderContainer from './routes/order/OrderContainer.jsx';
 
 @connect(reduce, actions)
 class App extends Component {
@@ -61,7 +61,7 @@ class App extends Component {
 					<Router onChange={this.handleRoute}>
 						<Restaurants path="/" />
 						<Restaurants path="/restaurantes/:id?" />
-						<OrderDetails path="/pedidos/:id?" />
+						<OrderContainer path="/pedidos/:id?" />
 					</Router>
 				</main>
 			</div>

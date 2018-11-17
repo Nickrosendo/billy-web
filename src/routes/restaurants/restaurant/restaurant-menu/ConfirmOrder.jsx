@@ -6,7 +6,8 @@ import style from './style';
 const ConfirmOrder = (props) => {
 	return (
 		<div class={style.confirmOrderLabelContainer} onClick={props.handleConfirmOrder}>
-			<span style="text-transform: capitalize;">( {props.unconfirmedOrder.items.length} ) confirmar pedido</span>
+			<i class="icon icon-list-alt" style="font-size: 20px;" />
+			<span style="text-transform: capitalize;"> Confirmar pedido</span>
 			<span> SubTotal: R$ {props.unconfirmedOrder.totalPrice}</span>
 		</div>
 	);

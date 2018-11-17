@@ -72,8 +72,8 @@ class RestaurantMenuItem extends Component {
 						<label for="qnt">Quantidade: </label>
 						<input class={style.orderItemInput} onChange={this.handleManualChange} value={this.state.quantity} id="qnt" type="number" />
 						<div class={style.orderItemQuantityContainer}>
-							<button class={style.orderItemQuantityBtn} onClick={this.handleAdd} type="button"><i class="icon icon-plus" /></button>
-							<button class={style.orderItemQuantityBtn} onClick={this.handleSubtract} type="button"><i class="icon icon-minus" /></button>
+							<button class={style.orderItemQuantityBtn + ' transparent-btn-pressed'} onClick={this.handleAdd} type="button"><i class="icon icon-plus" /></button>
+							<button class={style.orderItemQuantityBtn + ' transparent-btn-pressed'} onClick={this.handleSubtract} type="button"><i class="icon icon-minus" /></button>
 						</div>
 						<button class={style.menuItemDataOrder} onClick={this.handleOrderItem}>
 							Adicionar

@@ -4,7 +4,7 @@
 	top: 0;
 	width: 100%;
 	height: 56px;
-	background: #eee;
+	background: #FF9933;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 	display: flex;
 	align-items: center;
@@ -45,7 +45,8 @@
 	align-items: center;
 	justify-content: center;
 	font-size: 18px;
-	color: #666;
+	font-weight: 700;
+	color: #444;
 	text-decoration: none;
 }
 

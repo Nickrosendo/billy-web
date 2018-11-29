@@ -11,9 +11,11 @@
 }
 
 .menuItemName {
-	background: #563d7c;
-	color: #fff;
-	font-weight: 600;
+	background: transparent;
+	color: #FF9933;
+	border: 1px solid #FF9933;
+	font-weight: 700;
+	font-size: 22px;
 	padding: 8px;
 	margin: 8px 0;
 	text-align: center;

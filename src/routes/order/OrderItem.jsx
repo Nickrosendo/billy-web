@@ -80,8 +80,8 @@ class OrderItem extends Component {
 			<div>
 				<div class={style.orderItemContainer}>
 					<div class={style.orderItemEditContainer}>
-						<button onClick={this.handleEdit} class={style.orderItemEditBtn + ' transparent-btn-pressed'}> <i class={this.state.editing ? 'icon icon-check text-success' : 'icon icon-pencil1'} /> </button>
-						<button onClick={this.handleRemove} class={style.orderItemEditBtn + ' transparent-btn-pressed'}> <i class={this.state.editing ? 'icon icon-close text-danger' : 'icon icon-bin'} /> </button>
+						<button onClick={this.handleEdit} class={style.orderItemEditBtn + ' transparent-btn-pressed'}> <i class={this.state.editing ? 'icon icon-check text-success' : 'icon icon-edit'} /> </button>
+						<button onClick={this.handleRemove} class={style.orderItemEditBtn + ' transparent-btn-pressed'}> <i class={this.state.editing ? 'icon icon-close text-danger' : 'icon icon-trash-o'} /> </button>
 					</div>
 					<div>
 						<p style="display: flex; align-items: center;">
@@ -89,8 +89,8 @@ class OrderItem extends Component {
 							{
 								this.state.editing ? (
 									<div>
-										<button onClick={this.handleSubtract} class="transparent-btn-pressed" style="display: inline-block; margin-left: 10px; padding: 4px; color: #444; font-size: 10px;" type="button"><i class="icon icon-minus" /></button>
-										<button onClick={this.handleAdd} class="transparent-btn-pressed" style="display: inline-block; margin-left: 10px; padding: 4px; color: #444;	font-size: 10px;" type="button"><i class="icon icon-plus" /></button>
+										<button onClick={this.handleSubtract} class="transparent-btn-pressed" style="display: inline-block; margin-left: 10px; padding: 4px; color: #444; font-size: 10px;" type="button"><i class="icon icon-minus1" /></button>
+										<button onClick={this.handleAdd} class="transparent-btn-pressed" style="display: inline-block; margin-left: 10px; padding: 4px; color: #444;	font-size: 10px;" type="button"><i class="icon icon-plus1" /></button>
 									</div>
 								) : null
 							}

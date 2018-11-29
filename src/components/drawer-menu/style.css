@@ -13,7 +13,7 @@
 .drawerContent {
   width: 80%;
   height: 100%;
-  background: #fff;
+  background: #FF9933;
   display: inline-block;
   vertical-align: top;
   position: relative;
@@ -27,6 +27,8 @@
   align-items: center;
   padding: 15px;
   color: #444;
+  font-weight: 700;
+  font-size: 18px;
   text-align: left;
 }
 

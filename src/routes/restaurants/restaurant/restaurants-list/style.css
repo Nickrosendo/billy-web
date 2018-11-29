@@ -12,27 +12,32 @@
   width: 100%;
   text-decoration: none;
   color: #444;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  background: #fff;
 }
 
 .verticalListItem img {
-  width: 50px;
-  max-width: 50px;
-  height: 50px;
+  width: 100px;
+  margin: 0 10px;
+  max-width: 30%;
+  height: 100px;
+  max-height: 40%;
   border-radius: 12px;
-  margin-right: 10px;
 }
 
 .itemContent {
   display: flex;
   padding: 5px 10px;
   flex-direction: column;
-  height: 50px;
-  border: 1px solid #ddd;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 700;
   border-radius: 12px;
   width: calc(100% - 50px);
 }
 
-.itemContent span{
+.itemContent span {
   font-size: 12px;
   color: #999;
 }

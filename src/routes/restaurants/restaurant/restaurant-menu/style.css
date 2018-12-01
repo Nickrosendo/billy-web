@@ -1,106 +1,115 @@
 .detailContainer {
-	padding-top: 15px;
+  padding-top: 15px;
 }
 
 .menuItemContainer {
-	border: 1px solid #ddd;
-	border-radius: 8px;
-	padding: 8px;
-	margin: 15px 0;
-	text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 15px 0;
+  text-align: center;
 }
 
 .menuItemName {
-	background: transparent;
-	color: #FF9933;
-	border: 1px solid #FF9933;
-	font-weight: 700;
-	font-size: 22px;
-	padding: 8px;
-	margin: 8px 0;
-	text-align: center;
-	border-radius: 12px;
+  background: transparent;
+  color: #FF9933;
+  border: 1px solid #FF9933;
+  font-weight: 500;
+  font-size: 22px;
+  padding: 8px;
+  margin: 8px 0;
+  text-align: center;
+  border-radius: 12px;
 }
 
 .menuItemImg {
-	width: 50%;
-	height: 100px;
-	border-radius: 8px;
-	display: inline-block;
+  width: 80%;
+	height: 150px;
+	max-height: 30%;
+  border-radius: 8px;
+  display: inline-block;
 }
 
 .menuItemData {
-	margin: 10px 0;
+  margin: 10px 0;
 }
 
 .menuItemDataPrice {
-	font-size: 18px;
-	color: #444;
-	font-weight: 600;
+  display: inline-block;
+  width: auto;
+  margin-top: 8px;
+  padding: 8px;
+  background: #FF9933;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .menuItemDataIngredients {
-	padding: 8px;
-	background: #ddd;
-	border-radius: 6px;
-	margin-top: 10px;
-	text-align: left;
+	background: #fff;
+	margin: 10px 10%;
+  border-radius: 8px;  
+  padding: 8px;
+  text-align: left;
 }
 
 .menuItemDataIngredientsTitle {
-	font-size: 16px;
-	color: #444;
-	font-weight: 600;
+  font-size: 16px;
+  color: #FF9933;
+  font-weight: 500;
 }
 
 .menuItemDataOrder {
-	padding: 6px;
-	border-radius: 6px;
-	background: #216C2A;
-	color: #fff;
-	border: none;
+  padding: 6px;
+  border-radius: 6px;
+  background: #FF9933;
+  color: #fff;
+  border: none;
 	margin-top: 10px;
-	display: block;
-	width: 100%;
+  display: block;
+	width: 80%;
+
 }
 
 .orderItemContainer {
-	display: flex;
-	align-items: center;
-	margin-top: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
 }
 
 .orderItemInput {
-	margin: 0 15px;
-	padding: 6px;
-	min-width: 10px;
-	width: 50px;
-	border-radius: 8px;
-	border: 1px solid #ddd;
+  padding: 6px;
+  min-width: 10px;
+  width: 50px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
 }
 
 .orderItemQuantityContainer {
-	margin-right: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .orderItemQuantityBtn {
-	padding: 4px;
-	display: block;
-	margin-bottom: 5px;
+  padding: 4px;
+  display: block;
+  margin: 0 5px;
 }
 
 .confirmOrderLabelContainer {
-	height: auto;
-	font-size: 16px;
-	width: 100%;
-	background: #216C2A;
-	color: #fff;
-	padding: 15px;
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	text-decoration: none;
+  height: auto;
+  font-size: 16px;
+  width: 100%;
+  background: #216C2A;
+  color: #fff;
+  padding: 15px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
 }

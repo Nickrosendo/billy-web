@@ -5,9 +5,9 @@
 }
 
 .addMoreItensBtn {
-	border: 1px solid #216C2A;
+	border: 1px solid #FF9933;
 	border-radius: 8px;
-	color: #216C2A;
+	color: #FF9933;
 	background: #fff;
 	width: 100%;
 	padding: 8px;
@@ -63,7 +63,7 @@
 .orderPaymentBtn {
 	padding: 6px;
 	border-radius: 6px;
-	background: #216C2A;
+	background: #FF9933;
 	color: #fff;
 	border: none;
 	margin-top: 10px;

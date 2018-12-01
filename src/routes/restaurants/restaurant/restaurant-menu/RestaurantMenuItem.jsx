@@ -3,13 +3,13 @@ import style from './style';
 
 class RestaurantMenuItem extends Component {
 
-	state = {
+	state={
 		quantity: 1,
 		observation: ''
 	}
 
 	handleOrderItem() {
-		const orderItem = {
+		const orderItem={
 			...this.props.item,
 			quantity: this.state.quantity,
 			observation: this.state.observation,
@@ -20,17 +20,17 @@ class RestaurantMenuItem extends Component {
 	}
 
 	handleAdd() {
-		this.setState({ quantity: this.state.quantity + 1 });
+		this.setState({ quantity: this.state.quantity+1 });
 	}
 
 	handleSubtract() {
-		if (this.state.quantity > 1)
-			this.setState({ quantity: this.state.quantity - 1 });
+		if (this.state.quantity>1)
+			this.setState({ quantity: this.state.quantity-1 });
 	}
 
 	handleManualChange(event) {
-		const value = event.target.value;
-		if (value < 1) {
+		const value=event.target.value;
+		if (value<1) {
 			this.setState({ quantity: 1 });
 		}
 		else {
@@ -39,7 +39,7 @@ class RestaurantMenuItem extends Component {
 	}
 
 	handleAddObservation(event) {
-		const observation = event.target.value;
+		const observation=event.target.value;
 		if (observation) {
 			this.setState({ observation });
 		}
@@ -47,11 +47,11 @@ class RestaurantMenuItem extends Component {
 
 	constructor(...args) {
 		super(...args);
-		this.handleOrderItem = this.handleOrderItem.bind(this);
-		this.handleAdd = this.handleAdd.bind(this);
-		this.handleSubtract = this.handleSubtract.bind(this);
-		this.handleManualChange = this.handleManualChange.bind(this);
-		this.handleAddObservation = this.handleAddObservation.bind(this);
+		this.handleOrderItem=this.handleOrderItem.bind(this);
+		this.handleAdd=this.handleAdd.bind(this);
+		this.handleSubtract=this.handleSubtract.bind(this);
+		this.handleManualChange=this.handleManualChange.bind(this);
+		this.handleAddObservation=this.handleAddObservation.bind(this);
 	}
 
 	render(props) {
@@ -60,31 +60,30 @@ class RestaurantMenuItem extends Component {
 				<p class={style.menuItemName}>
 					{props.item.name}
 				</p>
-				<img class={style.menuItemImg} src={props.item.img} />
 				<div class={style.menuItemData}>
-					<p class={style.menuItemDataPrice} ><i class="icon-coin-dollar" /> R$: <span>	{props.item.price} </span></p>
-					<div class={style.menuItemDataIngredients} >
-						<p class={style.menuItemDataIngredientsTitle}><i class="icon-spoon-knife" /> Ingredientes: </p>
+					<img class={style.menuItemImg} src={props.item.img} />
+					<div class={style.menuItemDataIngredients}>
 						{props.item.ingredients.map(i => (
-							<p> {i}</p>
+							<span> {i+', '} </span>
 						))}
 					</div>
-					<div class={style.orderItemContainer}>
-						<label for="qnt">Quantidade: </label>
+				</div>
+				<div class={style.orderItemContainer}>
+					<div class={style.orderItemQuantityContainer}>
+						<button class={style.orderItemQuantityBtn+' transparent-btn-pressed'} onClick={this.handleSubtract} type="button"><i class="icon icon-minus1" /></button>
 						<input class={style.orderItemInput} onChange={this.handleManualChange} value={this.state.quantity} id="qnt" type="number" />
-						<div class={style.orderItemQuantityContainer}>
-							<button class={style.orderItemQuantityBtn + ' transparent-btn-pressed'} onClick={this.handleAdd} type="button"><i class="icon icon-plus1" /></button>
-							<button class={style.orderItemQuantityBtn + ' transparent-btn-pressed'} onClick={this.handleSubtract} type="button"><i class="icon icon-minus1" /></button>
-						</div>
-						<button class={style.menuItemDataOrder} onClick={this.handleOrderItem}>
-							Adicionar
-						</button>
+						<button class={style.orderItemQuantityBtn+' transparent-btn-pressed'} onClick={this.handleAdd} type="button"><i class="icon icon-plus1" /></button>
 					</div>
+					<p class={style.menuItemDataPrice} >R$: <span>	{props.item.price} </span></p>
 					<div style="margin-top: 10px;">
 						<label for="textarea" > Observações:</label>
 						<input type="textarea" onChange={this.handleAddObservation} value={this.state.observation} style="width: 100%; height: 40px; padding: 8px; resize: none; border: 1px solid #ddd; border-radius: 8px;" />
 					</div>
+					<button class={style.menuItemDataOrder} onClick={this.handleOrderItem}>
+						adicionar
+					</button>
 				</div>
+
 			</div >
 		);
 	}

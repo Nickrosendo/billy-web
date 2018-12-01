@@ -17,7 +17,7 @@ const Header = connect(state => state)((props) => {
 				hasBack
 			}
 			<Link class={style.logoContainer} href="/">
-				<img class={style.logoImg} src={require('../../assets/images/billy-icon.png')} />
+				<img class={style.logoImg} src={require('../../assets/images/billy-pizza-icon.png')} />
 				<span> Billy </span>
 			</Link>
 			<button class={style.menuBtn} onClick={props.onOpenDrawer}>

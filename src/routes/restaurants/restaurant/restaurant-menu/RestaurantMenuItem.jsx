@@ -74,7 +74,7 @@ class RestaurantMenuItem extends Component {
 						<input class={style.orderItemInput} onChange={this.handleManualChange} value={this.state.quantity} id="qnt" type="number" />
 						<button class={style.orderItemQuantityBtn+' transparent-btn-pressed'} onClick={this.handleAdd} type="button"><i class="icon icon-plus1" /></button>
 					</div>
-					<p class={style.menuItemDataPrice} >R$: <span>	{props.item.price} </span></p>
+					<p class={style.menuItemDataPrice} >R$: <span>	{props.item.price*this.state.quantity} </span></p>
 					<div style="margin-top: 10px;">
 						<label for="textarea" > Observações:</label>
 						<input type="textarea" onChange={this.handleAddObservation} value={this.state.observation} style="width: 100%; height: 40px; padding: 8px; resize: none; border: 1px solid #ddd; border-radius: 8px;" />

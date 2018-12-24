@@ -16,26 +16,26 @@ import OrderContainer from './routes/order/OrderContainer.jsx';
 @connect(reduce, actions)
 class App extends Component {
 
-	state = {
+	state={
 		drawerOpen: false
 	}
 
-	handleOpenDrawer = () => {
+	handleOpenDrawer=() => {
 		this.setState({ drawerOpen: true });
 	}
 
-	handlecloseDrawer = () => {
+	handlecloseDrawer=() => {
 		this.setState({ drawerOpen: false });
 	}
 
 	handleReturnRoute(routeEvent) {
-		if (routeEvent.url === '/') {
+		if (routeEvent.url==='/') {
 			return '';
 		}
-		else if (routeEvent.url.split('/restaurantes').length === 2 && routeEvent.url.split('/restaurantes')[1] !== '') {
+		else if (routeEvent.url.split('/restaurantes').length===2&&routeEvent.url.split('/restaurantes')[1]!=='') {
 			return '/';
 		}
-		else if (routeEvent.url.indexOf('pedidos') !== -1 && this.props.order && this.props.order.restaurantId) {
+		else if (routeEvent.url.indexOf('pedidos')!==-1&&this.props.order&&this.props.order.restaurantId) {
 			return `/restaurantes/${this.props.order.restaurantId}`;
 		}
 		return routeEvent.previous;
@@ -45,13 +45,15 @@ class App extends Component {
 	 *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
 	 *	@param {string} event.url	The newly routed URL
 	 */
-	handleRoute = e => {
-		this.currentUrl = e.url;
+	handleRoute=e => {
 		this.props.setPreviousRoute(this.handleReturnRoute(e));
+		if (this.state.drawerOpen) {
+			this.handlecloseDrawer();
+		}
 	};
 
 	render() {
-		const drawer = this.state.drawerOpen ? <DrawerMenu closeDrawer={this.handlecloseDrawer} /> : null;
+		const drawer=this.state.drawerOpen? <DrawerMenu order={this.props.order} closeDrawer={this.handlecloseDrawer} />:null;
 		return (
 			<div id="app">
 				<Header onOpenDrawer={this.handleOpenDrawer} />
@@ -68,7 +70,7 @@ class App extends Component {
 	}
 }
 
-const exportedApp = () => (
+const exportedApp=() => (
 	<Provider store={store} >
 		<App />
 	</Provider>

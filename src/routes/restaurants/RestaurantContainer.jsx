@@ -10,11 +10,11 @@ import * as actions from '../../redux/actions';
 import style from './style';
 
 import OrderLabel from '../../components/order-label/OrderLabel.jsx';
-import RestaurantsList from './restaurant/restaurants-list/RestaurantsList.jsx';
-import RestaurantMenu from './restaurant/restaurant-menu/RestaurantMenu.jsx';
+import RestaurantsList from './restaurants-list/RestaurantsList.jsx';
+import RestaurantMenu from './restaurant-menu/RestaurantMenu.jsx';
 
 @connect(reduce, actions)
-class Restaurants extends Component {
+class RestaurantsContainer extends Component {
 
 	state = {
 		restaurants: [],
@@ -78,4 +78,4 @@ class Restaurants extends Component {
 	}
 }
 
-export default Restaurants;
+export default RestaurantsContainer;

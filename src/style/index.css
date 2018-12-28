@@ -36,7 +36,7 @@ html, body {
 }
 
 .route-container {
-	padding: 86px 20px;
+	padding: 75px 20px 0;
 	min-height: 100%;
 	width: 100%;
 }

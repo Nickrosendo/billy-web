@@ -5,6 +5,10 @@ import style from './style.css';
 
 const RestaurantsList=(props, state) => (
 	<div>
+		<div class={style.logoContainer}>
+			<img class={style.logoImg} src={require('../../../assets/images/billy-pizza.png')} />
+			<span> Billy </span>
+		</div>
 		<ul class={style.verticalList}>
 			{props.restaurants.map(item => (
 				<Link class={style.verticalListItem} href={`/restaurantes/${item._id}`}>
@@ -21,7 +25,7 @@ const RestaurantsList=(props, state) => (
 								<i class="icon-clock-o" /> 40min
 						 </p>
 						</div>
-						<p style="color: #FF9933;"> <i class="icon-star" /> <i class="icon-star" /> <i class="icon-star" /> <i class="icon-star-half-empty" /> (9000+)</p>
+						<p style="color: rgb(255, 180, 106);"> <i class="icon-star" /> <i class="icon-star" /> <i class="icon-star" /> <i class="icon-star-half-empty" /> (9000+)</p>
 					</div>
 				</Link>
 			))}

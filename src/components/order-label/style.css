@@ -4,7 +4,7 @@
   width: 100%;
   background: #fff;
   border-top: 1px solid #ddd;
-  color: #FF9933;
+  color: rgb(255, 180, 106);
   padding: 15px;
   position: fixed;
   bottom: 0;
@@ -19,7 +19,7 @@
   display: inline-block;
   width: auto;
   padding: 8px;
-  background: #FF9933;
+  background: rgb(255, 180, 106);
   border-radius: 6px;
   color: #fff;
 }

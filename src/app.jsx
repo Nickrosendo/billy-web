@@ -10,8 +10,10 @@ import Header from './components/header/Header.jsx';
 import DrawerMenu from './components/drawer-menu/DrawerMenu.jsx';
 
 // Code-splitting is automated for routes
-import Restaurants from './routes/restaurants/RestaurantContainer.jsx';
+import RestaurantsContainer from './routes/restaurants/RestaurantContainer.jsx';
 import OrderContainer from './routes/order/OrderContainer.jsx';
+import ProfileContainer from './routes/profile/ProfileContainer.jsx';
+import HelpContainer from './routes/help/HelpContainer.jsx';
 
 @connect(reduce, actions)
 class App extends Component {
@@ -60,9 +62,11 @@ class App extends Component {
 				{drawer}
 				<main class="route-container">
 					<Router onChange={this.handleRoute}>
-						<Restaurants path="/" />
-						<Restaurants path="/restaurantes/:id?" />
+						<RestaurantsContainer path="/" />
+						<RestaurantsContainer path="/restaurantes/:id?" />
 						<OrderContainer path="/pedidos/:id?" />
+						<ProfileContainer path="/perfil" />
+						<HelpContainer path="/ajuda" />
 					</Router>
 				</main>
 			</div>

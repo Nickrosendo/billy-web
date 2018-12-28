@@ -14,10 +14,12 @@
 .drawerContent {
   width: 80%;
   height: 100%;
-  background: #FF9933;
+  background: rgb(255, 180, 106);
   display: inline-block;
-  vertical-align: top;
-  position: relative;
+  /* vertical-align: top; */
+  position: absolute;
+  right: 0;
+  top: 0;
   z-index: 52;
   list-style: none;
   transition: all .5s ease-in-out;
@@ -41,11 +43,11 @@
 }
 
 .drawerBackdrop {
-  width: 100%;
+  width: 20%;
   height: 100%;
   background: rgba(125, 125, 125, 0.6);
   position: absolute;
-  right: 0;
+  left: 0;
   top: 0;
   cursor: pointer;
 }

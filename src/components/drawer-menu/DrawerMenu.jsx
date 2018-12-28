@@ -5,6 +5,7 @@ import style from './style';
 
 const DrawerMenu=(props) => (
 	<nav class={style.drawerMenu}>
+		<div class={style.drawerBackdrop} onClick={props.closeDrawer} />
 		<ul class={style.drawerContent} >
 			<li>
 				<Link href="/">
@@ -23,18 +24,18 @@ const DrawerMenu=(props) => (
 
 			}
 			<li>
-				<Link href="/">
+				<Link href="/pedidos">
+					<i class="icon-list-alt" /> Histórico de pedidos
+				</Link>
+			</li>
+			<li>
+				<Link href="/perfil">
 					<i class="icon-user-circle-o" /> Perfil
 				</Link>
 			</li>
 			<li>
-				<Link href="/">
+				<Link href="/ajuda">
 					<i class="icon-question-circle" /> Como pedir
-				</Link>
-			</li>
-			<li>
-				<Link href="/">
-					<i class="icon-list-alt" /> Histórico de compras
 				</Link>
 			</li>
 			<li>
@@ -43,7 +44,6 @@ const DrawerMenu=(props) => (
 				</Link>
 			</li>
 		</ul>
-		<div class={style.drawerBackdrop} onClick={props.closeDrawer} />
 	</nav>
 );
 

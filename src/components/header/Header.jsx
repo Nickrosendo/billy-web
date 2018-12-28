@@ -7,7 +7,7 @@ import style from './style';
 const Header = connect(state => state)((props) => {
 	let hasBack = props.previousRoute ? (
 		<Link class={style.backBtn} href={props.previousRoute}>
-			<i class="icon-chevron-left" style="vertical-align: middle; " />
+			<i class="icon-chevron-left"/>
 		</Link>
 	) : null;
 
@@ -16,10 +16,10 @@ const Header = connect(state => state)((props) => {
 			{
 				hasBack
 			}
-			<Link class={style.logoContainer} href="/">
+			{/* <Link class={style.logoContainer} href="/">
 				<img class={style.logoImg} src={require('../../assets/images/billy-pizza-icon.png')} />
 				<span> Billy </span>
-			</Link>
+			</Link> */}
 			<button class={style.menuBtn} onClick={props.onOpenDrawer}>
 				<i class="icon-menu" />
 			</button>

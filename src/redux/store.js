@@ -19,6 +19,8 @@ const INITIAL_STATE = {
 		items: [],
 		restaurantId: ''
 	},
+	orders: [],
+	restaurants: [],
 	openedRestaurant: {
 	},
 	previousRoute: ''

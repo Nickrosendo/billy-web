@@ -33,6 +33,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "firebase-tools": "^6.0.1",
+    "moment": "^2.23.0",
     "preact": "^8.2.6",
     "preact-compat": "^3.17.0",
     "preact-redux": "^2.0.3",

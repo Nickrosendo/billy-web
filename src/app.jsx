@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 import { Provider, connect } from 'preact-redux';
+import axios from 'axios';
 
 import store from './redux/store';
 import reduce from './redux/reducers';
@@ -53,6 +54,46 @@ class App extends Component {
 			this.handlecloseDrawer();
 		}
 	};
+
+	fetchRestaurants() {
+		axios.get('https://us-central1-billy-web.cloudfunctions.net/funcApp/api/restaurants')
+			// axios.get('http://192.168.0.111:4000/api/restaurants')
+			.then(({ data }) => {
+				this.props.setRestaurants(data);
+			});
+	}
+
+	fetchOrders() {
+		const orders=[
+			{
+				id: 1,
+				date: new Date(),
+				totalPrice: 159.99,
+				items: [],
+				restaurantId: ''
+			},
+			{
+				id: 2,
+				date: new Date(),
+				totalPrice: 89.99,
+				items: [],
+				restaurantId: ''
+			},
+			{
+				id: 3,
+				date: new Date(),
+				totalPrice: 1099.99,
+				items: [],
+				restaurantId: ''
+			}
+		];
+		this.props.setOrders(orders);
+	}
+
+	componentDidMount() {
+		this.fetchRestaurants();
+		this.fetchOrders();
+	}
 
 	render() {
 		const drawer=this.state.drawerOpen? <DrawerMenu order={this.props.order} closeDrawer={this.handlecloseDrawer} />:null;

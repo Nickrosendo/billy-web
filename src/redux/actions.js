@@ -1,3 +1,24 @@
+export function setRestaurants(restaurants) {
+	return {
+		type: 'SET_RESTAURANTS',
+		restaurants
+	};
+}
+
+export function setOrders(orders) {
+	return {
+		type: 'SET_ORDERS',
+		orders
+	};
+}
+
+export function setUser(user) {
+	return {
+		type: 'SET_USER',
+		user
+	};
+}
+
 export function createOrder(order) {
 	return {
 		type: 'CREATE_ORDER',

@@ -1,13 +1,9 @@
 import { h, Component } from 'preact';
-import axios from 'axios';
 import { route } from 'preact-router';
 import { connect } from 'preact-redux';
 
 import reduce from '../../redux/reducers';
 import * as actions from '../../redux/actions';
-
-
-import style from './style';
 
 import OrderLabel from '../../components/order-label/OrderLabel.jsx';
 import RestaurantsList from './restaurants-list/RestaurantsList.jsx';
@@ -15,11 +11,6 @@ import RestaurantMenu from './restaurant-menu/RestaurantMenu.jsx';
 
 @connect(reduce, actions)
 class RestaurantsContainer extends Component {
-
-	state = {
-		restaurants: [],
-		fetchingData: true
-	}
 
 	fetchingLoader() {
 		return (
@@ -34,7 +25,7 @@ class RestaurantsContainer extends Component {
 	}
 
 	restaurant() {
-		const findRestaurant = this.state.restaurants.find(r => r._id === this.props.id);
+		const findRestaurant=this.props.restaurants.find(r => r._id===this.props.id);
 		if (findRestaurant) {
 			return (<RestaurantMenu addItem={this.handleAddOrderItem} restaurant={findRestaurant} />);
 		}
@@ -46,7 +37,7 @@ class RestaurantsContainer extends Component {
 	}
 
 	hasOrder() {
-		if (this.props.order.items.length > 0) {
+		if (this.props.order.items.length>0) {
 			return (<OrderLabel />);
 		}
 		return null;
@@ -54,17 +45,11 @@ class RestaurantsContainer extends Component {
 
 	constructor(...args) {
 		super(...args);
-		this.handleAddOrderItem = this.handleAddOrderItem.bind(this);
-	}
-
-	componentDidMount() {
-		axios.get('https://us-central1-billy-web.cloudfunctions.net/funcApp/api/restaurants')
-			// axios.get('http://192.168.0.111:4000/api/restaurants')
-			.then(res => this.setState({ restaurants: res.data, fetchingData: false }));
+		this.handleAddOrderItem=this.handleAddOrderItem.bind(this);
 	}
 
 	render(props) {
-		const routeContent = props.id ? this.restaurant() : this.state.fetchingData ? this.fetchingLoader() : <RestaurantsList restaurants={this.state.restaurants} />;
+		const routeContent=props.id? this.restaurant():<RestaurantsList restaurants={this.props.restaurants} />;
 		return (
 			<div>
 				<div>

@@ -9,6 +9,7 @@
 	border-radius: 8px;
 	color: rgb(255, 180, 106);
 	background: #fff;
+	box-shadow: 3px 3px 5px #ccc;
 	width: 100%;
 	padding: 8px;
 	font-size: 16px;
@@ -64,6 +65,7 @@
 	padding: 6px;
 	border-radius: 6px;
 	background: rgb(255, 180, 106);
+	box-shadow: 3px 3px 5px #ccc;
 	color: #fff;
 	border: none;
 	margin-top: 10px;

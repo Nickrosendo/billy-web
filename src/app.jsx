@@ -4,19 +4,20 @@ import { Provider, connect } from 'preact-redux';
 import axios from 'axios';
 
 import store from './redux/store';
-import reduce from './redux/reducers';
+import rootReducer from './redux/reducers/root';
 import * as actions from './redux/actions';
 
 import Header from './components/header/Header.jsx';
 import DrawerMenu from './components/drawer-menu/DrawerMenu.jsx';
 
 // Code-splitting is automated for routes
+import LoginContainer from './routes/login/LoginContainer.jsx';
 import RestaurantsContainer from './routes/restaurants/RestaurantContainer.jsx';
 import OrderContainer from './routes/order/OrderContainer.jsx';
 import ProfileContainer from './routes/profile/ProfileContainer.jsx';
 import HelpContainer from './routes/help/HelpContainer.jsx';
 
-@connect(reduce, actions)
+@connect(rootReducer, actions)
 class App extends Component {
 
 	state={
@@ -38,8 +39,8 @@ class App extends Component {
 		else if (routeEvent.url.split('/restaurantes').length===2&&routeEvent.url.split('/restaurantes')[1]!=='') {
 			return '/';
 		}
-		else if (routeEvent.url.indexOf('pedidos')!==-1&&this.props.order&&this.props.order.restaurantId) {
-			return `/restaurantes/${this.props.order.restaurantId}`;
+		else if (routeEvent.url.indexOf('pedidos')!==-1&&this.props.order&&this.props.order.order.restaurantId) {
+			return `/restaurantes/${this.props.order.order.restaurantId}`;
 		}
 		return routeEvent.previous;
 	}
@@ -49,6 +50,7 @@ class App extends Component {
 	 *	@param {string} event.url	The newly routed URL
 	 */
 	handleRoute=e => {
+		this.props.testThunk('teste Thunk value');
 		this.props.setPreviousRoute(this.handleReturnRoute(e));
 		if (this.state.drawerOpen) {
 			this.handlecloseDrawer();
@@ -96,7 +98,8 @@ class App extends Component {
 	}
 
 	render() {
-		const drawer=this.state.drawerOpen? <DrawerMenu order={this.props.order} closeDrawer={this.handlecloseDrawer} />:null;
+		console.log('props: ', this.props);
+		const drawer=this.state.drawerOpen? <DrawerMenu auth={this.props.auth.isAuth} order={this.props.order.order} closeDrawer={this.handlecloseDrawer} />:null;
 		return (
 			<div id="app">
 				<Header onOpenDrawer={this.handleOpenDrawer} />
@@ -105,6 +108,7 @@ class App extends Component {
 					<Router onChange={this.handleRoute}>
 						<RestaurantsContainer path="/" />
 						<RestaurantsContainer path="/restaurantes/:id?" />
+						<LoginContainer path="/login" />
 						<OrderContainer path="/pedidos/:id?" />
 						<ProfileContainer path="/perfil" />
 						<HelpContainer path="/ajuda" />

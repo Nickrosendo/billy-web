@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 import { route } from 'preact-router';
 import { connect } from 'preact-redux';
 
-import reduce from '../../redux/reducers';
+import reduce from '../../redux/reducers/root';
 import * as actions from '../../redux/actions';
 
 import OrderLabel from '../../components/order-label/OrderLabel.jsx';
@@ -25,7 +25,7 @@ class RestaurantsContainer extends Component {
 	}
 
 	restaurant() {
-		const findRestaurant=this.props.restaurants.find(r => r._id===this.props.id);
+		const findRestaurant=this.props.order.restaurants.find(r => r._id===this.props.id);
 		if (findRestaurant) {
 			return (<RestaurantMenu addItem={this.handleAddOrderItem} restaurant={findRestaurant} />);
 		}
@@ -37,7 +37,7 @@ class RestaurantsContainer extends Component {
 	}
 
 	hasOrder() {
-		if (this.props.order.items.length>0) {
+		if (this.props.order.order.items.length>0) {
 			return (<OrderLabel />);
 		}
 		return null;
@@ -49,10 +49,10 @@ class RestaurantsContainer extends Component {
 	}
 
 	render(props) {
-		const routeContent=props.id? this.restaurant():<RestaurantsList restaurants={this.props.restaurants} />;
+		const routeContent=props.id? this.restaurant():<RestaurantsList restaurants={this.props.order.restaurants} />;
 		return (
 			<div>
-				<div>
+				<div style={this.props.order.order.items.length>0 ? 'padding-bottom: 66px;' : ''}>
 					{
 						routeContent
 					}

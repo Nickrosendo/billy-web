@@ -21,7 +21,6 @@ const DrawerMenu=(props) => (
 							</Link>
 						</li>
 					):null
-
 			}
 			<li>
 				<Link href="/pedidos">
@@ -38,11 +37,21 @@ const DrawerMenu=(props) => (
 					<i class="icon-question-circle" /> Como pedir
 				</Link>
 			</li>
-			<li>
-				<Link href="/">
-					<i class="icon-exit" /> Sair
-				</Link>
-			</li>
+			{
+				props.auth? (
+					<li>
+						<Link href="/">
+							<i class="icon-exit" /> Sair
+						</Link>
+					</li>
+				):(
+					<li>
+						<Link href="/login">
+							<i class="icon-enter" /> Entrar
+						</Link>
+					</li>
+				)
+			}
 		</ul>
 	</nav>
 );

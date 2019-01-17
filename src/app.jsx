@@ -3,9 +3,9 @@ import { Router } from 'preact-router';
 import { Provider, connect } from 'preact-redux';
 import axios from 'axios';
 
-import store from './redux/store';
-import rootReducer from './redux/reducers/root';
-import * as actions from './redux/actions';
+import store from './store';
+import reducer from './store/reducers';
+import * as actions from './store/actions';
 
 import Header from './components/header/Header.jsx';
 import DrawerMenu from './components/drawer-menu/DrawerMenu.jsx';
@@ -17,7 +17,7 @@ import OrderContainer from './routes/order/OrderContainer.jsx';
 import ProfileContainer from './routes/profile/ProfileContainer.jsx';
 import HelpContainer from './routes/help/HelpContainer.jsx';
 
-@connect(rootReducer, actions)
+@connect(reducer, actions)
 class App extends Component {
 
 	state={
@@ -50,7 +50,7 @@ class App extends Component {
 	 *	@param {string} event.url	The newly routed URL
 	 */
 	handleRoute=e => {
-		this.props.testThunk('teste Thunk value');
+		// this.props.testThunk('teste Thunk value');
 		this.props.setPreviousRoute(this.handleReturnRoute(e));
 		if (this.state.drawerOpen) {
 			this.handlecloseDrawer();
@@ -98,7 +98,6 @@ class App extends Component {
 	}
 
 	render() {
-		console.log('props: ', this.props);
 		const drawer=this.state.drawerOpen? <DrawerMenu auth={this.props.auth.isAuth} order={this.props.order.order} closeDrawer={this.handlecloseDrawer} />:null;
 		return (
 			<div id="app">

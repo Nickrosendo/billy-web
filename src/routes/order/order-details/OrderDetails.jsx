@@ -4,8 +4,8 @@ import { connect } from 'preact-redux';
 
 import OrderItem from './OrderItem.jsx';
 
-import reduce from '../../../redux/reducers/root';
-import * as actions from '../../../redux/actions';
+import reduce from '../../../store/reducers';
+import * as actions from '../../../store/actions';
 
 import style from './style';
 

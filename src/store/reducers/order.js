@@ -8,19 +8,14 @@ const INITIAL_STATE={
 	},
 	user: {},
 	orders: [],
-	restaurants: [],
-	openedRestaurant: {
-	},
 	previousRoute: '',
 	test: ''
 };
 
 let ACTIONS={
-	SET_RESTAURANTS: ({ ...state }, { restaurants }) => ({ ...state, restaurants }),
 	SET_ORDERS: ({ ...state }, { orders }) => ({ ...state, orders }),
 	SET_USER: ({ ...state }, { user }) => ({ ...state, user }),
 	SET_PREVIOUS_ROUTE: ({ ...state }, { previousRoute }) => ({ ...state, previousRoute }),
-	SET_RESTAURANT: ({ ...state }, { openedRestaurant }) => ({ ...state, openedRestaurant }),
 	CREATE_ORDER: ({ ...state }, { order }) => ({ ...state, order }),
 	UPDATE_ORDER: ({ ...state }, { order }) => ({ ...state, order: { ...state.order, ...order } }),
 	TEST_THUNK: ({ ...state }, { test }) => ({ ...state, test }),

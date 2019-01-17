@@ -2,8 +2,8 @@ import { h, Component } from 'preact';
 import { route } from 'preact-router';
 import { connect } from 'preact-redux';
 
-import reduce from '../../redux/reducers/root';
-import * as actions from '../../redux/actions';
+import reduce from '../../store/reducers';
+import * as actions from '../../store/actions';
 
 import OrderLabel from '../../components/order-label/OrderLabel.jsx';
 import RestaurantsList from './restaurants-list/RestaurantsList.jsx';
@@ -24,18 +24,6 @@ class RestaurantsContainer extends Component {
 		this.props.addOrderItem(orderItem);
 	}
 
-	restaurant() {
-		const findRestaurant=this.props.order.restaurants.find(r => r._id===this.props.id);
-		if (findRestaurant) {
-			return (<RestaurantMenu addItem={this.handleAddOrderItem} restaurant={findRestaurant} />);
-		}
-		return this.fetchingLoader();
-	}
-
-	goToDetails(id) {
-		route(`/restaurantes/${id}`);
-	}
-
 	hasOrder() {
 		if (this.props.order.order.items.length>0) {
 			return (<OrderLabel />);
@@ -49,10 +37,11 @@ class RestaurantsContainer extends Component {
 	}
 
 	render(props) {
-		const routeContent=props.id? this.restaurant():<RestaurantsList restaurants={this.props.order.restaurants} />;
+		console.log('restaurant props: ', props);
+		const routeContent=props.id? <RestaurantMenu id={props.id} addItem={this.handleAddOrderItem} />:<RestaurantsList restaurants={this.props.restaurant.restaurants} />;
 		return (
 			<div>
-				<div style={this.props.order.order.items.length>0 ? 'padding-bottom: 66px;' : ''}>
+				<div style={this.props.order.order.items.length>0? 'padding-bottom: 66px;':''}>
 					{
 						routeContent
 					}

@@ -2,8 +2,8 @@ import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 
 import style from './style';
-import reduce from '../../redux/reducers/root';
-import * as actions from '../../redux/actions';
+import reduce from '../../store/reducers';
+import * as actions from '../../store/actions';
 
 @connect(reduce, actions)
 class ProfileContainer extends Component {

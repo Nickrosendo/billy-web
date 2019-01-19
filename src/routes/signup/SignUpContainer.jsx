@@ -2,31 +2,49 @@ import React, { Component } from 'react';
 import { connect } from 'preact-redux';
 import { route } from 'preact-router';
 
-import { signIn } from '../../store/actions';
+import { signUp } from '../../store/actions';
 import state from '../../store/reducers';
 import style from './style.css';
 
-@connect(state, { signIn })
-class LoginContainer extends Component {
+@connect(state, { signUp })
+class SignUp extends Component {
 
 	state={
 		email: '',
-		password: ''
+		password: '',
+		firstName: '',
+		lastName: ''
 	}
 
-	handleSignin(event) {
+	handleSignup(event) {
 		event.preventDefault();
-		const credentials={
+		const newUser={
 			email: this.state.email,
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
 			password: this.state.password
 		};
-		this.props.signIn(credentials);
+		this.props.signUp(newUser);
 	}
 
 	handleEmail(event) {
 		const email=event.target.value;
 		if (email) {
 			this.setState({ email });
+		}
+	}
+
+	handleFirstName= (event) => {
+		const firstName=event.target.value;
+		if (firstName) {
+			this.setState({ firstName });
+		}
+	}
+
+	handleLastName= (event) => {
+		const lastName=event.target.value;
+		if (lastName) {
+			this.setState({ lastName });
 		}
 	}
 
@@ -39,7 +57,7 @@ class LoginContainer extends Component {
 
 	constructor(...args) {
 		super(...args);
-		this.handleSignin=this.handleSignin.bind(this);
+		this.handleSignup=this.handleSignup.bind(this);
 		this.handleEmail=this.handleEmail.bind(this);
 		this.handlePassword=this.handlePassword.bind(this);
 	}
@@ -55,14 +73,18 @@ class LoginContainer extends Component {
 					<span> Billy </span>
 				</div>
 				<form class="text-center">
+					<div class={style.inputGroup}>
+						<input class={style.inputFirstName} type="text" placeholder="Nome" value={this.state.firstName} onChange={this.handleFirstName} />
+						<input class={style.inputLastName} type="text" placeholder="Sobrenome" value={this.state.lastName} onChange={this.handleLastName} />
+					</div>
 					<input class={style.input} type="text" placeholder="Email" value={this.state.email} onChange={this.handleEmail} />
 					<input class={style.input} type="password" placeholder="Senha" value={this.state.password} onChange={this.handlePassword} />
-					<input class={style.btn} type="submit" value="Entrar" onClick={this.handleSignin} />
+					<input class={style.btn} type="submit" value="Cadastrar" onClick={this.handleSignup} />
 					{
-						this.props.auth.loginError? (
+						this.props.auth.signUpError? (
 							<div class={style.authErrorContainer}>
 								<span class={style.authError}>
-									{this.props.auth.loginError}
+									{this.props.auth.signUpError}
 								</span>
 							</div>
 						):null
@@ -74,4 +96,4 @@ class LoginContainer extends Component {
 	}
 }
 
-export default LoginContainer;
+export default SignUp;

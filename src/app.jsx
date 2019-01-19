@@ -12,6 +12,7 @@ import DrawerMenu from './components/drawer-menu/DrawerMenu.jsx';
 
 // Code-splitting is automated for routes
 import LoginContainer from './routes/login/LoginContainer.jsx';
+import SignUpContainer from './routes/signup/SignUpContainer.jsx';
 import RestaurantsContainer from './routes/restaurants/RestaurantContainer.jsx';
 import OrderContainer from './routes/order/OrderContainer.jsx';
 import ProfileContainer from './routes/profile/ProfileContainer.jsx';
@@ -19,18 +20,6 @@ import HelpContainer from './routes/help/HelpContainer.jsx';
 
 @connect(reducer, actions)
 class App extends Component {
-
-	state={
-		drawerOpen: false
-	}
-
-	handleOpenDrawer=() => {
-		this.setState({ drawerOpen: true });
-	}
-
-	handlecloseDrawer=() => {
-		this.setState({ drawerOpen: false });
-	}
 
 	handleReturnRoute(routeEvent) {
 		if (routeEvent.url==='/') {
@@ -52,8 +41,8 @@ class App extends Component {
 	handleRoute=e => {
 		// this.props.testThunk('teste Thunk value');
 		this.props.setPreviousRoute(this.handleReturnRoute(e));
-		if (this.state.drawerOpen) {
-			this.handlecloseDrawer();
+		if (this.props.ui.drawerOpen) {
+			this.props.closeDrawer();
 		}
 	};
 
@@ -98,16 +87,16 @@ class App extends Component {
 	}
 
 	render() {
-		const drawer=this.state.drawerOpen? <DrawerMenu auth={this.props.auth.isAuth} order={this.props.order.order} closeDrawer={this.handlecloseDrawer} />:null;
 		return (
 			<div id="app">
-				<Header onOpenDrawer={this.handleOpenDrawer} />
-				{drawer}
+				<Header />
+				<DrawerMenu />
 				<main class="route-container">
 					<Router onChange={this.handleRoute}>
 						<RestaurantsContainer path="/" />
 						<RestaurantsContainer path="/restaurantes/:id?" />
 						<LoginContainer path="/login" />
+						<SignUpContainer path="/cadastrar" />
 						<OrderContainer path="/pedidos/:id?" />
 						<ProfileContainer path="/perfil" />
 						<HelpContainer path="/ajuda" />

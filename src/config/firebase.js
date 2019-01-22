@@ -2,9 +2,8 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-
 // Initialize firebase
-const config = {
+const config={
 	apiKey: 'AIzaSyA7YYCcLmm9Jo-u3nx_kBYWJFJHjX_hjwU',
 	authDomain: 'billy-web.firebaseapp.com',
 	databaseURL: 'https://billy-web.firebaseio.com',
@@ -14,9 +13,6 @@ const config = {
 };
 
 firebase.initializeApp(config);
-
-firebase.firestore().settings( { timestampsInSnapshots: true });
+firebase.firestore().settings({ timestampsInSnapshots: true });
 
 export default firebase;
-
-export const firestore = firebase.firestore();

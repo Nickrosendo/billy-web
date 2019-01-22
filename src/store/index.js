@@ -4,9 +4,8 @@ import { reduxFirestore, getFirestore } from 'redux-firestore';
 import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
 import reducer from './reducers';
 
-import firebase from '../config/firebase';
+import firebase, { firestore } from '../config/firebase';
 
-let hasDevToolsExtension=() => typeof devToolsExtension==='function'? window.devToolsExtension():undefined;
+// let hasDevToolsExtension=() => typeof devToolsExtension==='function'? window.devToolsExtension():undefined;
 
-
-export default createStore(reducer, compose(applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })), reduxFirestore(firebase), reactReduxFirebase(firebase), hasDevToolsExtension()));
+export default createStore(reducer, compose(applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })), reduxFirestore(firestore), reactReduxFirebase(firebase)));

@@ -9,7 +9,7 @@ import style from './style.css';
 const OrdersList=connect(state => state)((props, state) => {
 	const { orders }=props;
 	// const orders = [];
-	const ordersMap=() => orders.map(item => (
+	const ordersMap=() => orders.history.map(item => (
 		<OrdersListItem order={item} />
 	));
 	const noOrders=() => (
@@ -29,7 +29,7 @@ const OrdersList=connect(state => state)((props, state) => {
 			<h1 style="text-align: center; font-weight: 500;">Histórico de pedidos</h1>
 			<ul class={style.ordersList}>
 				{
-					orders.length>0? ordersMap():noOrders()
+					orders.history.length>0? ordersMap():noOrders()
 				}
 			</ul>
 		</div>

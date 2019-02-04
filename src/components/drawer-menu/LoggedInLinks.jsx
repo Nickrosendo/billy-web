@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'preact-router/match';
+import { connect } from 'preact-redux';
 
 import style from './style';
 
-export default function LoggedInLinks(props) {
-
-	const hasOpenOrder=props.openOrder&&props.openOrder.id&&props.openOrder.items.length?
+const LoggedInLinks=connect(state => state)((props) => {
+	const hasOpenOrder=props.orders.currentOrder.status==='iniciada'?
 		(
 			<li>
-				<Link href={`/pedidos/${props.openOrder.id}`}>
+				<Link href={`/pedidos/${props.orders.currentOrder.id}`}>
 					<i class="icon-bell" /> Acompanhar pedido
 				</Link>
 			</li>
@@ -44,4 +44,6 @@ export default function LoggedInLinks(props) {
 			</li>
 		</ul>
 	);
-}
+});
+
+export default LoggedInLinks;

@@ -11,14 +11,14 @@ import style from './style';
 @connect(reduce, actions)
 class RestaurantMenu extends Component {
 
-	state = {
+	state={
 		currentRestaurant: {}
 	}
 
-	handleAddOrderItem(item) {
-		if (this.props.order.order.items.length > 0) {
-			let updatedItems = [...this.props.order.order.items, item];
-			const updatedTotalPrice = updatedItems.map(i => (i.quantity * i.price)).reduce((a, b) => (a + b), 0);
+	handleAddOrderItem=(item) => {
+		if (this.props.orders.currentOrder.items.length>0) {
+			let updatedItems=[...this.props.order.order.items, item];
+			const updatedTotalPrice=updatedItems.map(i => (i.quantity*i.price)).reduce((a, b) => (a+b), 0);
 
 			this.props.updateOrder({
 				...this.props.order.order,
@@ -27,46 +27,43 @@ class RestaurantMenu extends Component {
 			});
 		}
 		else {
-			const totalPrice = (item.quantity * item.price);
-
-			this.props.createOrder({
+			const totalPrice=(item.quantity*item.price);
+			
+			this.props.startOrder({
 				id: new Date(),
-				restaurantId: this.state.currentRestaurant,
+				restaurantId: this.props.restaurants.currentRestaurant._id,
+				restaurantName: this.props.restaurants.currentRestaurant.name,
 				totalPrice,
-				items: [item]
+				items: [item],
+				status: 'iniciada'
 			});
 
 		}
 	}
 
-	menuItemsMap() {
-		if (this.state.currentRestaurant) {
-			return this.state.currentRestaurant.menu.map(item => (
-				<RestaurantMenuItem restaurantId={this.state.currentRestaurant._id} item={item} handleAddOrderItem={this.handleAddOrderItem} />
+	menuItemsMap=() => {
+		if (this.props.restaurants.currentRestaurant && this.props.restaurants.currentRestaurant.menu) {
+			return this.props.restaurants.currentRestaurant.menu.map(item => (
+				<RestaurantMenuItem restaurantId={this.props.restaurants.currentRestaurant._id} item={item} handleAddOrderItem={this.handleAddOrderItem} />
 			));
 		}
 		return (
-			<p>Sem restaurantes</p>
+			<p>Sem restaurante</p>
 		);
 	}
 
-	constructor(...args) {
-		super(...args);
-		if (this.props.restaurant.restaurants && this.props.id) {
-			const currentRestaurant = this.props.restaurant.restaurants.find(r => r._id===this.props.id);
-			this.setState({ currentRestaurant });
-			console.log('current:: ', this.state.currentRestaurant);
+	componentWillMount() {
+		if (this.props.restaurants.list.length&&this.props.id) {
+			const currentRestaurant=this.props.restaurants.list.find(r => r._id===this.props.id);
+			this.props.setRestaurant(currentRestaurant);
 		}
-		this.handleAddOrderItem = this.handleAddOrderItem.bind(this);
-		this.menuItemsMap = this.menuItemsMap.bind(this);
 	}
 
 	render() {
-		console.log('restaurantMenu props: ', this.props);
 		return (
 			<div class={style.detailContainer}>
 				<h1 class="text-center">
-					{this.state.currentRestaurant.name}
+					{this.props.restaurants.currentRestaurant.name}
 				</h1>
 				{this.menuItemsMap()}
 			</div>

@@ -1,11 +1,10 @@
 const INITIAL_STATE={
-	restaurants: [],
-	currentRestaurant: {
-	}
+	list: [],
+	currentRestaurant: {}
 };
 
 let ACTIONS={
-	SET_RESTAURANTS: ({ ...state }, { restaurants }) => ({ ...state, restaurants }),
+	SET_RESTAURANTS: ({ ...state }, { list }) => ({ ...state, list }),
 	SET_RESTAURANT: ({ ...state }, { currentRestaurant }) => ({ ...state, currentRestaurant })
 };
 

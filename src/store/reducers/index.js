@@ -4,14 +4,14 @@ import { firebaseReducer } from 'react-redux-firebase';
 
 import auth from './auth';
 import ui from './ui';
-import order from './order';
-import restaurant from './restaurant';
+import orders from './orders';
+import restaurants from './restaurants';
 
 const root = combineReducers({
 	auth,
 	ui,
-	order,
-	restaurant,
+	orders,
+	restaurants,
 	firestore: firestoreReducer,
 	firebase: firebaseReducer
 });

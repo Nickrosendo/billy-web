@@ -46,45 +46,60 @@ class App extends Component {
 		}
 	};
 
-	fetchRestaurants() {
-		axios.get('https://us-central1-billy-web.cloudfunctions.net/funcApp/api/restaurants')
-			// axios.get('http://192.168.0.111:4000/api/restaurants')
-			.then(({ data }) => {
-				this.props.setRestaurants(data);
-			});
+	fetchRestaurants=() => {
+		if (!this.props.restaurants.list.length) {
+			axios.get('https://us-central1-billy-web.cloudfunctions.net/funcApp/api/restaurants')
+				// axios.get('http://192.168.0.111:4000/api/restaurants')
+				.then(({ data }) => {
+					this.props.setRestaurants(data);
+				});
+		}
 	}
 
-	fetchOrders() {
+	fetchOrders= () => {
 		const orders=[
 			{
 				id: 1,
 				date: new Date(),
 				totalPrice: 159.99,
 				items: [],
-				restaurantId: ''
+				restaurantId: '',
+				restaurantName: 'Manhattan',
+				status: 'finalizada'
 			},
 			{
 				id: 2,
 				date: new Date(),
 				totalPrice: 89.99,
 				items: [],
-				restaurantId: ''
+				restaurantId: '',
+				restaurantName: 'McDonalds',
+				status: 'finalizada'
 			},
 			{
 				id: 3,
 				date: new Date(),
 				totalPrice: 1099.99,
 				items: [],
-				restaurantId: ''
+				restaurantId: '',
+				restaurantName: 'McDonalds',
+				status: 'finalizada'
 			}
 		];
-		this.props.setOrders(orders);
+		this.props.setOrderHistory(orders);
 	}
 
-	componentDidMount() {
-		this.fetchRestaurants();
+	componentWillMount() {
 		this.fetchOrders();
+		this.fetchRestaurants();
 	}
+
+	// shouldComponentUpdate(nextProps, nextState) {
+	// 	// console.log('app current props: ', this.props);
+	// 	// console.log('app Nextprops: ', nextProps);
+	// 	// console.log('app NextState: ', nextState);
+	// 	return false;
+	// }
 
 	render() {
 		return (

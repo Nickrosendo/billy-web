@@ -13,12 +13,12 @@ import style from './style';
 class OrderDetails extends Component {
 
 	handleAddMoreItens() {
-		route(`/restaurantes/${this.props.order.restaurantId}`, true);
+		route(`/restaurantes/${this.props.orders.currentOrder.restaurantId}`, true);
 	}
 
 	handleUpdateOrderItem(updatedItem) {
-		const itemIndex = this.props.order.items.findIndex(i => i._id === updatedItem._id);
-		let updatedItems = [...this.props.order.items];
+		const itemIndex = this.props.orders.currentOrder.items.findIndex(i => i._id === updatedItem._id);
+		let updatedItems = [...this.props.orders.currentOrder.items];
 		if (itemIndex !== -1) {
 			updatedItems[itemIndex] = updatedItem;
 		}
@@ -26,15 +26,15 @@ class OrderDetails extends Component {
 		const updatedTotalPrice = updatedItems.map(i => (i.quantity * i.price)).reduce((a, b) => (a + b), 0);
 
 		this.props.updateOrder({
-			...this.props.order,
+			...this.props.orders.currentOrder,
 			totalPrice: updatedTotalPrice,
 			items: [...updatedItems]
 		});
 	}
 
 	handleRemoveOrderItem(item) {
-		const itemIndex = this.props.order.items.findIndex(i => i._id === item._id && i.orderedDate === item.orderedDate);
-		let updatedItems = [...this.props.order.items];
+		const itemIndex = this.props.orders.currentOrder.items.findIndex(i => i._id === item._id && i.orderedDate === item.orderedDate);
+		let updatedItems = [...this.props.orders.currentOrder.items];
 		if (itemIndex !== -1) {
 			updatedItems.splice(itemIndex, 1);
 		}
@@ -62,7 +62,7 @@ class OrderDetails extends Component {
 					<button class={style.addMoreItensBtn} onClick={this.handleAddMoreItens}>
 						Adicionar mais itens
 					</button>
-					{this.props.order.items.map(i =>
+					{this.props.orders.currentOrder.items.map(i =>
 						(
 							<OrderItem key={i._id + i.orderedDate} item={i} handleUpdateOrderItem={this.handleUpdateOrderItem} handleRemoveOrderItem={this.handleRemoveOrderItem} />
 						)
@@ -71,11 +71,11 @@ class OrderDetails extends Component {
 					<div class={style.orderPaymentContainer}>
 						<p class={style.orderItemContentField}>
 							<span>Subtotal: </span>
-							<span>R$ {this.props.order.totalPrice}</span>
+							<span>R$ {this.props.orders.currentOrder.totalPrice}</span>
 						</p>
 						<p class={style.orderItemContentField}>
 							<span>Total: </span>
-							<span>R$ {this.props.order.totalPrice}</span>
+							<span>R$ {this.props.orders.currentOrder.totalPrice}</span>
 						</p>
 					</div>
 				</div>

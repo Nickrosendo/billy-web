@@ -1,7 +1,7 @@
-export function setRestaurants(restaurants) {
+export function setRestaurants(list) {
 	return {
 		type: 'SET_RESTAURANTS',
-		restaurants
+		list
 	};
 }
 

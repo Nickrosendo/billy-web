@@ -88,8 +88,7 @@
 }
 
 .orderItemQuantityContainer {
-  display: flex;
-  align-items: center;
+  display: inline-block;
 }
 
 .orderItemQuantityBtn {
@@ -112,4 +111,40 @@
   justify-content: space-between;
   align-items: center;
   text-decoration: none;
+}
+
+.verticalListItem {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 15px;
+  margin-left: 0;
+  width: 100%;
+  text-decoration: none;
+  color: #444;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  background: #fff;
+  /* box-shadow: 3px 3px 5px #ccc; */
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.verticalListItem img {
+  width: 100px;
+  margin: 10px;
+  max-width: 30%;
+  height: 100px;
+  max-height: 40%;
+  border-radius: 12px;
+}
+
+.itemContent {
+  display: flex;
+  padding: 5px 10px;
+  flex-direction: column;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 12px;
+  width: calc(100% - 50px);
 }

@@ -23,6 +23,10 @@ class LoginContainer extends Component {
 		this.props.signIn(credentials);
 	}
 
+	handleSignup= () => {
+		route('/cadastro', true);
+	}
+
 	handleEmail(event) {
 		const email=event.target.value;
 		if (email) {
@@ -58,6 +62,7 @@ class LoginContainer extends Component {
 					<input class={style.input} type="text" placeholder="Email" value={this.state.email} onChange={this.handleEmail} />
 					<input class={style.input} type="password" placeholder="Senha" value={this.state.password} onChange={this.handlePassword} />
 					<input class={style.btn} type="submit" value="Entrar" onClick={this.handleSignin} />
+					<input class={style.btn} type="button" value="Cadastrar" onClick={this.handleSignup} />
 					{
 						this.props.auth.loginError? (
 							<div class={style.authErrorContainer}>

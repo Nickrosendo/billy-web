@@ -27,6 +27,10 @@ class SignUp extends Component {
 		this.props.signUp(newUser);
 	}
 
+	handleSignin= () => {
+		route('/login', true);
+	}
+
 	handleEmail(event) {
 		const email=event.target.value;
 		if (email) {
@@ -80,6 +84,7 @@ class SignUp extends Component {
 					<input class={style.input} type="text" placeholder="Email" value={this.state.email} onChange={this.handleEmail} />
 					<input class={style.input} type="password" placeholder="Senha" value={this.state.password} onChange={this.handlePassword} />
 					<input class={style.btn} type="submit" value="Cadastrar" onClick={this.handleSignup} />
+					<input class={style.btn} type="button" value="Entrar" onClick={this.handleSignin} />
 					{
 						this.props.auth.signUpError? (
 							<div class={style.authErrorContainer}>

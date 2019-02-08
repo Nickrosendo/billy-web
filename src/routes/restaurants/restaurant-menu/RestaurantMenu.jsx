@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
+import { route } from 'preact-router';
 
 import reduce from '../../../store/reducers';
 import * as actions from '../../../store/actions';
@@ -16,6 +17,9 @@ class RestaurantMenu extends Component {
 	}
 
 	handleAddOrderItem=(item) => {
+		if (!this.props.firebase.auth.uid) {
+			return route('/login', true);
+		}
 		if (this.props.orders.currentOrder.items.length>0) {
 			let updatedItems=[...this.props.order.order.items, item];
 			const updatedTotalPrice=updatedItems.map(i => (i.quantity*i.price)).reduce((a, b) => (a+b), 0);

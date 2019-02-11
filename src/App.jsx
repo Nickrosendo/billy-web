@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+// route components
 import RestaurantsList from './routes/restaurants/restaurants-list/RestaurantsList.jsx';
 
+// ui components
 import Header from './components/Header.jsx';
+import DrawerMenu from './components/DrawerMenu.jsx';
 
 class App extends Component {
 
-    state = {
-        restaurants: []
-    }
+	state = {
+		restaurants: [],
+		drawerOpen: false
+	}
 
-	fetchRestaurants=() => {
+	toggleDrawer = () => {
+		this.setState({
+			drawerOpen: !this.state.drawerOpen,
+		});
+	};
+
+	fetchRestaurants = () => {
 		if (!this.state.restaurants.length) {
 			axios.get('https://us-central1-billy-web.cloudfunctions.net/funcApp/api/restaurants')
 				// axios.get('http://192.168.0.111:4000/api/restaurants')
@@ -28,7 +38,8 @@ class App extends Component {
 	render() {
 		return (
 			<div id="app">
-				<Header />
+				<Header toggleDrawer={this.toggleDrawer.bind(this)} />
+				<DrawerMenu open={this.state.drawerOpen} toggleDrawer={this.toggleDrawer} />
 				<main className="route-container">
 					<RestaurantsList restaurants={this.state.restaurants} />
 				</main>

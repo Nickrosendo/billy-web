@@ -1,0 +1,40 @@
+.verticalList {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.verticalListItem {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 15px;
+  width: 100%;
+  text-decoration: none;
+  color: #444;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  background: #fff;
+  /* box-shadow: 3px 3px 5px #ccc; */
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.logoContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	font-weight: 500;
+	color: inherit;
+	text-decoration: none;
+}
+
+.logoContainer span {
+  font-size: 25px;
+}
+
+.logoImg {
+	width: 50px;
+	height: 50px;
+}

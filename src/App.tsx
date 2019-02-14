@@ -5,8 +5,8 @@ import axios from 'axios';
 import RestaurantsList from './routes/restaurants/restaurants-list/RestaurantsList.jsx';
 
 // ui components
-import Header from './components/Header.jsx';
-import DrawerMenu from './components/DrawerMenu.jsx';
+import Header from './components/Header';
+import DrawerMenu from './components/DrawerMenu';
 
 class App extends Component {
 

@@ -1,6 +1,4 @@
-import { h, Component } from 'preact';
-import { connect } from 'preact-redux';
-import { route } from 'preact-router';
+import react, { Component } from 'react';
 
 import reduce from '../../../store/reducers';
 import * as actions from '../../../store/actions';
@@ -9,7 +7,6 @@ import RestaurantMenuItem from './RestaurantMenuItem.jsx';
 
 import style from './style';
 
-@connect(reduce, actions)
 class RestaurantMenu extends Component {
 
 	state={

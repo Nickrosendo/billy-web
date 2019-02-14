@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import react, { Component } from 'react';
 import axios from 'axios';
 
 import RestaurantsList from './restaurants-list/RestaurantsList.jsx';
@@ -21,16 +21,14 @@ class RestaurantsContainer extends Component {
 		}
 	}
 
-	componentWillMount(){
+	componentWillMount() {
 		this.fetchRestaurants();
 	}
 
 	render() {
-		
+
 		return (
-			<div>
-				<RestaurantsList />
-			</div>
+			<RestaurantsList />
 		);
 	}
 }

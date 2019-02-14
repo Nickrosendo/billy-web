@@ -7,6 +7,10 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 
+interface IProps {
+  toggleDrawer: any
+}
+
 const styles = {
   root: {
     flexGrow: 1,
@@ -20,16 +24,15 @@ const styles = {
   },
 };
 
-class MenuAppBar extends React.Component {
+class MenuAppBar extends React.Component<IProps> {
 
   render() {
-    const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
+      <div>
         <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.props.toggleDrawer}>
+            <IconButton color="inherit" aria-label="Menu" onClick={this.props.toggleDrawer}>
               <MenuIcon />
             </IconButton>
           </Toolbar>
@@ -38,9 +41,5 @@ class MenuAppBar extends React.Component {
     );
   }
 }
-
-MenuAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(MenuAppBar);

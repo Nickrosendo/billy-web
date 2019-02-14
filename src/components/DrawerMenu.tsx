@@ -10,6 +10,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
+interface IProps {
+  open: boolean,
+  toggleDrawer: any
+}
+
 const styles = {
   list: {
     width: 250,
@@ -19,16 +24,15 @@ const styles = {
   },
 };
 
-class SwipeableTemporaryDrawer extends React.Component {
+class SwipeableTemporaryDrawer extends React.Component<IProps> {
   state = {
     left: false,
   };
 
   render() {
-    const { classes } = this.props;
 
     const sideList = (
-      <div className={classes.list}>
+      <div>
         <List>
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text}>
@@ -69,9 +73,5 @@ class SwipeableTemporaryDrawer extends React.Component {
     );
   }
 }
-
-SwipeableTemporaryDrawer.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(SwipeableTemporaryDrawer);

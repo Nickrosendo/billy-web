@@ -6,7 +6,7 @@ import RestaurantsList from './routes/restaurants/restaurants-list/RestaurantsLi
 
 // ui components
 import Header from './components/Header';
-import DrawerMenu from './components/DrawerMenu';
+import DrawerMenu from './components/drawer-menu/DrawerMenu';
 
 class App extends Component {
 

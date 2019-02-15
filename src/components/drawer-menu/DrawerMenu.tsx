@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -10,7 +9,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
-interface IProps {
+import LoggedInItems from './LoggedInItems';
+
+interface IProps extends WithStyles<typeof styles> {
   open: boolean,
   toggleDrawer: any
 }
@@ -18,10 +19,7 @@ interface IProps {
 const styles = {
   list: {
     width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
+  }
 };
 
 class SwipeableTemporaryDrawer extends React.Component<IProps> {
@@ -31,27 +29,7 @@ class SwipeableTemporaryDrawer extends React.Component<IProps> {
 
   render() {
 
-    const sideList = (
-      <div>
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </div>
-    );
+    const { classes } = this.props;
 
     return (
       <div>
@@ -66,7 +44,7 @@ class SwipeableTemporaryDrawer extends React.Component<IProps> {
             onClick={this.props.toggleDrawer}
             onKeyDown={this.props.toggleDrawer}
           >
-            {sideList}
+            <LoggedInItems />
           </div>
         </SwipeableDrawer>
       </div>

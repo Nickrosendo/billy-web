@@ -1,19 +1,21 @@
 import React from 'react';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import { connect } from 'react-redux';
 
 import LoggedInItems from './LoggedInItems';
+import LoggedOutItems from './LoggedOutItems';
+
+import Root from '../../store/reducers';
 
 interface IProps extends WithStyles<typeof styles> {
   open: boolean,
-  toggleDrawer: any
+  toggleDrawer: any,
+  firebase: {
+    auth: {
+      uid: any
+    }
+  }
 }
 
 const styles = {
@@ -23,17 +25,15 @@ const styles = {
 };
 
 class SwipeableTemporaryDrawer extends React.Component<IProps> {
-  state = {
-    left: false,
-  };
 
   render() {
-
-    const { classes } = this.props;
-
+    console.log('drawer props: ', this.props);
+    const { firebase } = this.props;
+    const items = firebase.auth.uid ? <LoggedInItems /> : <LoggedOutItems />;
     return (
       <div>
         <SwipeableDrawer
+          anchor="right"
           open={this.props.open}
           onClose={this.props.toggleDrawer}
           onOpen={this.props.toggleDrawer}
@@ -44,7 +44,7 @@ class SwipeableTemporaryDrawer extends React.Component<IProps> {
             onClick={this.props.toggleDrawer}
             onKeyDown={this.props.toggleDrawer}
           >
-            <LoggedInItems />
+            { items }
           </div>
         </SwipeableDrawer>
       </div>
@@ -52,4 +52,14 @@ class SwipeableTemporaryDrawer extends React.Component<IProps> {
   }
 }
 
-export default withStyles(styles)(SwipeableTemporaryDrawer);
+interface mappedState {
+  firebase: {
+    auth: {
+      uid: any
+    }
+  }
+}
+
+const mapStateToProps = (state: mappedState) => ({ firebase: state.firebase })
+
+export default withStyles(styles)(connect(mapStateToProps)(SwipeableTemporaryDrawer));

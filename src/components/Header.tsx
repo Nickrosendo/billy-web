@@ -12,6 +12,9 @@ interface IProps extends WithStyles<typeof styles> {
 }
 
 const theme = createMuiTheme({
+  typography:  {
+    useNextVariants: true
+  },
   palette: {
     primary: {
       main: 'rgb(255, 180, 106)'

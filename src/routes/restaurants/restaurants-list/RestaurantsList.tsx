@@ -1,10 +1,14 @@
 import React from 'react';
 
-import RestaurantsListItem from './RestaurantsListItem.jsx';
+import RestaurantsListItem from './RestaurantsListItem';
 
 import styles from './RestaurantsList.module.css';
 
-const RestaurantsList=(props) => (
+interface IProps {
+	restaurants: Array<any>
+}
+
+const RestaurantsList:React.SFC<IProps> = (props) => (
 	<div>
 		<div className={styles.logoContainer}>
 			<img className={styles.logoImg} src={require('../../../assets/images/billy-pizza.png')} alt="billy-logo" />

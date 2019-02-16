@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react';
 import axios from 'axios';
 
 // route components
-import RestaurantsList from './routes/restaurants/restaurants-list/RestaurantsList.jsx';
+import RestaurantsList from './routes/restaurants/restaurants-list/RestaurantsList';
 
 // ui components
 import Header from './components/Header';

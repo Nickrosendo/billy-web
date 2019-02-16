@@ -1,7 +1,11 @@
 import React from 'react';
 import styles from './RestaurantsListItem.module.css';
 
-const RestaurantListItem=(props) => (
+interface IProps {
+	item: any
+}
+
+const RestaurantListItem:React.SFC<IProps>=(props) => (
 	<li className={styles.verticalListItem} >
 		<img className={styles.verticalListItemImg} src={props.item.logo} alt={props.item.name}/>
 		<div className={styles.itemContent}>

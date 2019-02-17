@@ -1,4 +1,8 @@
- import React, { Component } from 'react';
+import React, { Component } from 'react';
+import {
+	BrowserRouter as Router,
+	Route
+} from 'react-router-dom';
 import axios from 'axios';
 
 // route components
@@ -42,6 +46,10 @@ class App extends Component {
 				<DrawerMenu open={this.state.drawerOpen} toggleDrawer={this.toggleDrawer} />
 				<main className="route-container">
 					<RestaurantsList restaurants={this.state.restaurants} />
+					{/* <Router>
+						<Route path="/" exact component={RestaurantsList} />}/>
+						<Route path="/restaurantes" component={<RestaurantsList restaurants={this.state.restaurants} />}/>
+					</Router>					 */}
 				</main>
 			</div>
 		);

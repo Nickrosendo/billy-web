@@ -91,6 +91,10 @@
   display: inline-block;
 }
 
+.orderItemQuantityContainer input, .orderItemQuantityContainer button {
+  display: inline-block; vertical-align: middle;
+}
+
 .orderItemQuantityBtn {
   padding: 4px;
   display: block;
@@ -147,4 +151,16 @@
   font-weight: 500;
   border-radius: 12px;
   width: calc(100% - 50px);
+}
+
+.itemContentData {
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.itemContentData p {
+  color: rgb(255, 180, 106);
+}
+
+.orderItemActionsContainer {
+  display: flex; align-items: center; font-size: 1em;
 }

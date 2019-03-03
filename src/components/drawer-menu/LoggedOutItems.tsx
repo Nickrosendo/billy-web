@@ -4,6 +4,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import { Link } from 'react-router-dom';
 
 import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -24,30 +25,36 @@ const LoggedOutItems: React.SFC<IProps> = (props) => {
 	const topList = [
 		{
 			text: 'Início',
+			route: '/',
 			icon: <HomeIcon />
 		},
 		{
 			text: 'Como pedir',
+			route: '/',
 			icon: <HelpIcon />
 		},
 		{
 			text: 'Cadastrar',
+			route: '/cadastro',
 			icon: <PersonAdd />
-        },
-        {
-            text: 'Entrar',
-            icon: <ExitToAppIcon />
-        }
+		},
+		{
+			text: 'Entrar',
+			route: '/login',
+			icon: <ExitToAppIcon />
+		}
 	];
 
 	return (
 		<div>
 			<List className={classes.list}>
-				{topList.map(({ text, icon }) => (
-					<ListItem button key={text}>
-						<ListItemIcon>{icon}</ListItemIcon>
-						<ListItemText primary={text} />
-					</ListItem>
+				{topList.map(({ text, icon, route }) => (
+					<Link style={{textDecoration: 'none'}} key={text} to={route} replace >
+						<ListItem button >
+							<ListItemIcon>{icon}</ListItemIcon>
+							<ListItemText primary={text} />
+						</ListItem>
+					</Link>
 				))}
 			</List>
 		</div>

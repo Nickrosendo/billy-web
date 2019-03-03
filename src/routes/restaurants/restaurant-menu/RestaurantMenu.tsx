@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import reduce from '../../../store/reducers';
 import { updateOrder, startOrder } from '../../../store/actions/orders';
 import { setRestaurant } from '../../../store/actions/restaurants';
 
@@ -13,18 +12,41 @@ interface MenuItem {
 	_id: string,
 	img: string,
 	name: String,
-	price: number
+	price: number,
+	quantity?: number
+}
+
+interface Restaurant {
+	_id: string,
+	name: string,
+	logo: string,
+	menu: Array<any>,
+	location: Object
 }
 
 
 interface IProps {
+	history: Array<any>,
+	restaurant?: {
+		_id: string,
+		name: string,
+		logo: string,
+		menu: Array<MenuItem>,
+		location: Object
+	},
 	restaurants: {
-		list: Array<any>,
+		list: Array<Restaurant>,
 		currentRestaurant: {
+			_id: String,
 			name: String,
 			menu: Array<MenuItem>
 		}
 	},
+	firebase: {
+		auth: {
+			uid: any
+		}
+	}
 	orders: {
 		currentOrder: {
 			items: Array<any>
@@ -38,43 +60,52 @@ interface IProps {
 
 class RestaurantMenu extends Component<IProps> {
 
-	state = {
-		currentRestaurant: {}
+	handleSetCurrentRestaurant = () => {
+		if (this.props.restaurants.currentRestaurant && this.props.restaurants.currentRestaurant._id === this.props.match.params.id) {
+			return false;
+		}
+		if (this.props.restaurants.list.length && this.props.match.params.id) {
+			const currentRestaurant = this.props.restaurants.list.find(r => r._id === this.props.match.params.id);
+			console.log('current::', currentRestaurant);
+			this.props.setRestaurant(currentRestaurant);
+		}
 	}
 
-	handleAddOrderItem = (item: Object) => {
-		// if (!this.props.firebase.auth.uid) {
-		// 	return route('/login', true);
-		// }
-		// if (this.props.orders.currentOrder.items.length>0) {
-		// 	let updatedItems=[...this.props.order.order.items, item];
-		// 	const updatedTotalPrice=updatedItems.map(i => (i.quantity*i.price)).reduce((a, b) => (a+b), 0);
+	handleAddOrderItem = (item: MenuItem, context: React.Context<any>) => {
+		console.log('item: ', item);
+		console.log('context: ', context);
+		if (!this.props.firebase.auth.uid) {
+			return this.props.history.push('/login');
+		}
+		if (this.props.orders.currentOrder.items.length > 0) {
+			let updatedItems = [...this.props.orders.currentOrder.items, item];
+			const updatedTotalPrice = updatedItems.map(i => (i.quantity * i.price)).reduce((a, b) => (a + b), 0);
 
-		// 	this.props.updateOrder({
-		// 		...this.props.order.order,
-		// 		totalPrice: updatedTotalPrice,
-		// 		items: [...updatedItems]
-		// 	});
-		// }
-		// else {
-		// 	const totalPrice=(item.quantity*item.price);
+			this.props.updateOrder({
+				...this.props.orders.currentOrder,
+				totalPrice: updatedTotalPrice,
+				items: [...updatedItems]
+			});
+		}
+		else {
+			const totalPrice = ((item.quantity || 1) * item.price);
+			
+			this.props.startOrder({
+				id: new Date(),
+				restaurantId: this.props.restaurants.currentRestaurant._id,
+				restaurantName: this.props.restaurants.currentRestaurant.name,
+				totalPrice,
+				items: [item],
+				status: 'iniciada'
+			});
 
-		// 	this.props.startOrder({
-		// 		id: new Date(),
-		// 		restaurantId: this.props.restaurants.currentRestaurant._id,
-		// 		restaurantName: this.props.restaurants.currentRestaurant.name,
-		// 		totalPrice,
-		// 		items: [item],
-		// 		status: 'iniciada'
-		// 	});
-
-		// }
+		}
 	}
 
 	menuItemsMap = () => {
 		if (this.props.restaurants.currentRestaurant && this.props.restaurants.currentRestaurant.menu) {
 			return this.props.restaurants.currentRestaurant.menu.map(item => (
-				<RestaurantMenuItem item={item} key={item._id} />
+				<RestaurantMenuItem handleAddOrderItem={this.handleAddOrderItem} item={item} key={item._id} />
 			));
 		}
 		return (
@@ -82,39 +113,47 @@ class RestaurantMenu extends Component<IProps> {
 		);
 	}
 
-	componentWillMount() {
-		if (this.props.restaurants.list.length && this.props.match.params.id) {
-			const currentRestaurant = this.props.restaurants.list.find(r => r._id === this.props.match.params.id);
-			this.props.setRestaurant(currentRestaurant);
-		}
+	constructor(props: IProps) {
+		super(props);
+		this.handleSetCurrentRestaurant();
+		console.log('menu props: ', this.props);
 	}
 
+
 	render() {
-		return (
+		 return this.props.restaurants.currentRestaurant ? (
 			<div className={style.detailContainer}>
 				<h1 className="text-center">
 					{this.props.restaurants.currentRestaurant.name}
 				</h1>
 				{this.menuItemsMap()}
 			</div>
-		);
+		) : null;
 	}
 }
 
-interface mappedState {	
+interface mappedState {
 	restaurants: {
 		list: Array<any>,
 		currentRestaurant: {
+			_id: String,
 			name: String,
 			menu: Array<MenuItem>
 		}
 	},
-	orders: {
-		currentOrder: Object
+	firebase: {
+		auth: {
+			uid: string
+		}
 	}
+	orders: {
+		currentOrder: {
+			items: Array<any>
+		}
+	},
 }
 
-const mapStateToProps = (state: mappedState) => ({ restaurants: state.restaurants });
+const mapStateToProps = (state: mappedState) => ({ restaurants: state.restaurants, firebase: state.firebase, orders: state.orders });
 
 export default connect(mapStateToProps, {
 	setRestaurant,

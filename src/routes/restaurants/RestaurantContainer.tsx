@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import {
-	BrowserRouter as Router,
+	Switch,
 	Route
 } from 'react-router-dom';
 
@@ -41,22 +41,29 @@ class RestaurantsContainer extends Component<IProps> {
 	}
 
 	render() {
+
 		console.log('restaurant props: ', this.props);
-		return (
-			<Router>
-				<div>
-					<Route path="/" exact component={() => <RestaurantsList restaurants={this.props.restaurants.list} />} />
-					<Route path="/:id" exact component={RestaurantMenu}/>
-				</div>
-			</Router>
-			// <RestaurantsList restaurants={this.props.restaurants.list } />
+		return this.state.loading ? null : (
+			<Switch>
+				<Route path="/" exact component={() => <RestaurantsList restaurants={this.props.restaurants.list} />} />
+				<Route path="/:id" component={RestaurantMenu} />
+			</Switch>
 		);
 	}
 }
 
+
+interface Restaurant {
+	_id: string,
+	name: string,
+	logo: string,
+	menu: Array<any>,
+	location: Object
+}
+
 interface mappedState {
 	restaurants: {
-		list: Array<any>,
+		list: Array<Restaurant>,
 		currentRestaurant: Object
 	}
 }

@@ -6,11 +6,13 @@ import {
 
 // route components
 import RestaurantContainer from './routes/restaurants/RestaurantContainer';
+import LoginContainer from './routes/login/LoginContainer.jsx';
 
 
 // ui components
 import Header from './components/Header';
 import DrawerMenu from './components/drawer-menu/DrawerMenu';
+import OrderLabel from './components/order-label/OrderLabel.jsx';
 
 class App extends Component {
 
@@ -26,18 +28,21 @@ class App extends Component {
 
 	render() {
 		return (
-			<div id="app">
-				<Header toggleDrawer={this.toggleDrawer.bind(this)} />
-				<DrawerMenu open={this.state.drawerOpen} toggleDrawer={this.toggleDrawer} />
-				<main className="route-container">
-					<Router>
+			<Router>
+				<div id="app">
+
+					<Header toggleDrawer={this.toggleDrawer.bind(this)} />
+					<DrawerMenu open={this.state.drawerOpen} toggleDrawer={this.toggleDrawer} />
+					<main className="route-container">
+
 						<div>
-							<Route path="/" exact component={RestaurantContainer} />
-							<Route path="/restaurantes" component={RestaurantContainer}/>
+							<Route path="/" component={RestaurantContainer} />
+							<Route path="/login" component={LoginContainer} />
 						</div>
-					</Router>
-				</main>
-			</div>
+						<OrderLabel />
+					</main>
+				</div>
+			</Router>
 		);
 	}
 }

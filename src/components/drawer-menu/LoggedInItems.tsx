@@ -5,6 +5,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import { Link } from 'react-router-dom';
 
 import HomeIcon from '@material-ui/icons/Home';
 import HistoryIcon from '@material-ui/icons/History';
@@ -28,14 +29,17 @@ const LoggedInItems: React.SFC<IProps> = (props) => {
 	const topList = [
 		{
 			text: 'Início',
+			route: '/',
 			icon: <HomeIcon />
 		},
 		{
 			text: 'Meus pedidos',
+			route: '/',
 			icon: <HistoryIcon />
 		},
 		{
 			text: 'Como pedir',
+			route: '/',
 			icon: <HelpIcon />
 		}
 	];
@@ -43,14 +47,17 @@ const LoggedInItems: React.SFC<IProps> = (props) => {
 	const bottomList = [
 		{
 			text: 'Perfil',
+			route: '/',
 			icon: <AccountCircleIcon />
 		},
 		{
 			text: 'Segurança',
+			route: '/',
 			icon: <SecurityIcon />
 		},
 		{
 			text: 'Sair',
+			route: '/',
 			icon: <ExitToAppIcon />
 		}
 	];
@@ -58,20 +65,24 @@ const LoggedInItems: React.SFC<IProps> = (props) => {
 	return (
 		<div>
 			<List className={classes.list}>
-				{topList.map(({ text, icon }) => (
-					<ListItem button key={text}>
-						<ListItemIcon>{icon}</ListItemIcon>
-						<ListItemText primary={text} />
-					</ListItem>
+				{topList.map(({ text, icon, route }) => (
+					<Link style={{textDecoration: 'none'}} to={route} key={text}>
+						<ListItem button >
+							<ListItemIcon>{icon}</ListItemIcon>
+							<ListItemText primary={text} />
+						</ListItem>
+					</Link>
 				))}
 			</List>
 			<Divider />
 			<List>
-				{bottomList.map(({ text, icon }) => (
-					<ListItem button key={text}>
-						<ListItemIcon>{icon}</ListItemIcon>
-						<ListItemText primary={text} />
-					</ListItem>
+				{bottomList.map(({ text, icon, route }) => (
+					<Link style={{textDecoration: 'none'}} to={route} key={text}>
+						<ListItem button >
+							<ListItemIcon>{icon}</ListItemIcon>
+							<ListItemText primary={text} />
+						</ListItem>
+					</Link>
 				))}
 			</List>
 		</div>

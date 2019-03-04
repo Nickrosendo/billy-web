@@ -15,7 +15,10 @@ import SecurityIcon from '@material-ui/icons/Security';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
-interface IProps extends WithStyles<typeof styles> { }
+interface IProps extends WithStyles<typeof styles> {
+	signOut: Function,
+	history? : Array<any>
+}
 
 const styles = {
 	list: {
@@ -26,6 +29,10 @@ const styles = {
 const LoggedInItems: React.SFC<IProps> = (props) => {
 	const { classes } = props;
 
+	const handleSignout = () => {
+    props.signOut();
+  }
+
 	const topList = [
 		{
 			text: 'Início',
@@ -34,7 +41,7 @@ const LoggedInItems: React.SFC<IProps> = (props) => {
 		},
 		{
 			text: 'Meus pedidos',
-			route: '/',
+			route: '/pedidos',
 			icon: <HistoryIcon />
 		},
 		{
@@ -57,7 +64,7 @@ const LoggedInItems: React.SFC<IProps> = (props) => {
 		},
 		{
 			text: 'Sair',
-			route: '/',
+			clickHandler: handleSignout,
 			icon: <ExitToAppIcon />
 		}
 	];
@@ -66,7 +73,7 @@ const LoggedInItems: React.SFC<IProps> = (props) => {
 		<div>
 			<List className={classes.list}>
 				{topList.map(({ text, icon, route }) => (
-					<Link style={{textDecoration: 'none'}} to={route} key={text}>
+					<Link style={{ textDecoration: 'none' }} to={route} key={text}>
 						<ListItem button >
 							<ListItemIcon>{icon}</ListItemIcon>
 							<ListItemText primary={text} />
@@ -76,14 +83,21 @@ const LoggedInItems: React.SFC<IProps> = (props) => {
 			</List>
 			<Divider />
 			<List>
-				{bottomList.map(({ text, icon, route }) => (
-					<Link style={{textDecoration: 'none'}} to={route} key={text}>
-						<ListItem button >
-							<ListItemIcon>{icon}</ListItemIcon>
-							<ListItemText primary={text} />
-						</ListItem>
-					</Link>
-				))}
+				{bottomList.map(({ text, icon, route, clickHandler }) => {
+					return route ? (
+						<Link style={{ textDecoration: 'none' }} to={route} key={text}>
+							<ListItem button >
+								<ListItemIcon>{icon}</ListItemIcon>
+								<ListItemText primary={text} />
+							</ListItem>
+						</Link>
+					) : (
+							<ListItem button onClick={clickHandler} key={text}>
+								<ListItemIcon>{icon}</ListItemIcon>
+								<ListItemText primary={text} />
+							</ListItem>
+						)
+				})}
 			</List>
 		</div>
 	)

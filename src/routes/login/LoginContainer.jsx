@@ -28,6 +28,8 @@ class LoginContainer extends Component {
 		const email=event.target.value;
 		if (email) {
 			this.setState({ email });
+		} else {
+			this.setState({ email: '' });
 		}
 	}
 
@@ -35,6 +37,8 @@ class LoginContainer extends Component {
 		const password=event.target.value;
 		if (password) {
 			this.setState({ password });
+		} else {
+			this.setState({ password: '' });
 		}
 	}
 

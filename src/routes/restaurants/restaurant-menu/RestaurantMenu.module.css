@@ -22,14 +22,6 @@
   border-radius: 12px;
 }
 
-.menuItemImg {
-  width: 60%;
-	height: 150px;
-	max-height: 30%;
-  border-radius: 8px;
-  display: inline-block;
-}
-
 .menuItemData {
   margin: 10px 0;
 }
@@ -47,9 +39,9 @@
 }
 
 .menuItemDataIngredients {
-	background: #fff;
-	margin: 10px 10%;
-  border-radius: 8px;  
+  background: #fff;
+  margin: 10px 10%;
+  border-radius: 8px;
   padding: 8px;
   text-align: left;
 }
@@ -66,10 +58,9 @@
   background: rgb(255, 180, 106);
   color: #fff;
   border: none;
-	margin-top: 10px;
+  margin-top: 10px;
   display: block;
-	width: 80%;
-
+  width: 80%;
 }
 
 .orderItemContainer {
@@ -91,8 +82,10 @@
   display: inline-block;
 }
 
-.orderItemQuantityContainer input, .orderItemQuantityContainer button {
-  display: inline-block; vertical-align: middle;
+.orderItemQuantityContainer input,
+.orderItemQuantityContainer button {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .orderItemQuantityBtn {
@@ -135,7 +128,7 @@
 
 .verticalListItem img {
   width: 100px;
-  margin: 10px;
+  margin: 0 5px;
   max-width: 30%;
   height: 100px;
   max-height: 40%;
@@ -144,7 +137,7 @@
 
 .itemContent {
   display: flex;
-  padding: 5px 10px;
+  padding: 5px;
   flex-direction: column;
   text-align: left;
   font-size: 18px;
@@ -154,7 +147,9 @@
 }
 
 .itemContentData {
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .itemContentData p {
@@ -162,5 +157,7 @@
 }
 
 .orderItemActionsContainer {
-  display: flex; align-items: center; font-size: 1em;
+  display: flex;
+  align-items: center;
+  font-size: 1em;
 }

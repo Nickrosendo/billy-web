@@ -3,10 +3,10 @@ import { withStyles, WithStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import { connect } from 'react-redux';
 
+import { signOut } from '../../store/actions/auth';
+
 import LoggedInItems from './LoggedInItems';
 import LoggedOutItems from './LoggedOutItems';
-
-import Root from '../../store/reducers';
 
 interface IProps extends WithStyles<typeof styles> {
   open: boolean,
@@ -15,7 +15,9 @@ interface IProps extends WithStyles<typeof styles> {
     auth: {
       uid: any
     }
-  }
+  },
+  signOut: Function,
+  history?: Array<any>
 }
 
 const styles = {
@@ -26,10 +28,17 @@ const styles = {
 
 class SwipeableTemporaryDrawer extends React.Component<IProps> {
 
+  handleSignout = () => {
+    console.log('props: ', this.props);
+    this.props.signOut();
+    if(this.props.history) 
+    this.props.history.push('/');
+  }
+
   render() {
-    console.log('drawer props: ', this.props);
+    console.log('menu props: ', this.props);
     const { firebase } = this.props;
-    const items = firebase.auth.uid ? <LoggedInItems /> : <LoggedOutItems />;
+    const items = firebase.auth.uid ? <LoggedInItems signOut={this.handleSignout} /> : <LoggedOutItems />;
     return (
       <div>
         <SwipeableDrawer
@@ -62,4 +71,6 @@ interface mappedState {
 
 const mapStateToProps = (state: mappedState) => ({ firebase: state.firebase })
 
-export default withStyles(styles)(connect(mapStateToProps)(SwipeableTemporaryDrawer));
+export default withStyles(styles)(connect(mapStateToProps, {
+  signOut
+})(SwipeableTemporaryDrawer));

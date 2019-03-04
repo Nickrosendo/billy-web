@@ -38,7 +38,7 @@ body {
 }
 
 .route-container {
-  padding: 20px;
+  padding: 20px 10px;
   margin-top: 56px;
   height: calc(100% - 56px);
   width: 100%;

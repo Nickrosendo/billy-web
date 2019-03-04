@@ -6,6 +6,7 @@ import {
 
 // route components
 import RestaurantContainer from './routes/restaurants/RestaurantContainer';
+import OrderContainer from './routes/order/OrderContainer.jsx';
 import LoginContainer from './routes/login/LoginContainer.jsx';
 
 
@@ -37,6 +38,7 @@ class App extends Component {
 
 						<div>
 							<Route path="/" component={RestaurantContainer} />
+							<Route path="/pedidos" component={OrderContainer} />
 							<Route path="/login" component={LoginContainer} />
 						</div>
 						<OrderLabel />

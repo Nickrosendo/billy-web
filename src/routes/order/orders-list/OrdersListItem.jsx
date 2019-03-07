@@ -2,12 +2,12 @@ import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
-import style from './OrdersList.module.css';
+import style from './OrdersListItem.module.css';
 
 const OrdersListItem=(props) => (
 	<Link className={style.orderListItem} to={`/pedidos/${props.order._id}`}>
-		<div classname={style.orderListItemPrice}>
-			<p> <p style={{ fontSize: 18 }} className="icon-coin-dollar" /> {props.order.totalPrice}</p>
+		<div className={style.orderListItemPrice}>
+			<p> <span style={{ fontSize: 18 }} className="icon-coin-dollar" /> {props.order.totalPrice}</p>
 		</div>
 		<div className={style.orderListItemCard}>
 			<p style={{ fontSize: 18 }}>{ props.order.restaurantName}</p>

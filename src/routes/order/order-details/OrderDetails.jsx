@@ -1,15 +1,13 @@
 import { h, Component } from 'preact';
 import { route } from 'preact-router';
-import { connect } from 'preact-redux';
+import { connect } from 'react-redux';
 
 import OrderItem from './OrderItem.jsx';
 
-import reduce from '../../../store/reducers';
 import * as actions from '../../../store/actions';
 
 import style from './style';
 
-@connect(reduce, actions)
 class OrderDetails extends Component {
 
 	handleAddMoreItens() {

@@ -15,58 +15,65 @@ class OrderContainer extends Component {
 	}
 
 	fetchOrders=() => {
-		this.setState({ loading: true});
-		const orders=[
-			{
-				id: 1,
-				date: new Date(),
-				totalPrice: 159.99,
-				items: [],
-				restaurantId: '',
-				restaurantName: 'Manhattan',
-				status: 'finalizada'
-			},
-			{
-				id: 2,
-				date: new Date(),
-				totalPrice: 89.99,
-				items: [],
-				restaurantId: '',
-				restaurantName: 'McDonalds',
-				status: 'finalizada'
-			},
-			{
-				id: 3,
-				date: new Date(),
-				totalPrice: 1099.99,
-				items: [],
-				restaurantId: '',
-				restaurantName: 'McDonalds',
-				status: 'finalizada'
-			}
-		];
-		this.props.setOrderHistory(orders);
-		this.setState({ loading: false});
+		if (this.props.orders&&this.props.orders.history.length) {
+			return false;
+		}
+		this.setState({ loading: true });
+		new Promise((resolve) => {
+			const orders=[
+				{
+					id: 1,
+					date: new Date(),
+					totalPrice: 159.99,
+					items: [],
+					restaurantId: '',
+					restaurantName: 'Manhattan',
+					status: 'finalizada'
+				},
+				{
+					id: 2,
+					date: new Date(),
+					totalPrice: 89.99,
+					items: [],
+					restaurantId: '',
+					restaurantName: 'McDonalds',
+					status: 'finalizada'
+				},
+				{
+					id: 3,
+					date: new Date(),
+					totalPrice: 1099.99,
+					items: [],
+					restaurantId: '',
+					restaurantName: 'McDonalds',
+					status: 'finalizada'
+				}
+			];
+			setTimeout(() => resolve(orders), 3000);
+		}).then(orders => {
+			this.props.setOrderHistory([...orders]);
+			this.setState({ loading: false });
+		})
 	}
 
-	constructor(...args) {
-		super(...args);
-		console.log('orderContainer props: ', this.props);
-		if (!this.props.firebase.auth.uid) {
-			this.props.history.push('/');
-		}
-
+	componentDidMount() {
 		this.fetchOrders();
 	}
 
-
 	render() {
-		return this.state.loading ? null : (
-			<Switch>
-				<Route path="/pedidos/" exact component={() => <OrdersList orders={this.props.orders.list} />} />
-				{/* <Route path="/pedidos/:id" component={OrderDetails} /> */}
-			</Switch>
-		);
+		return this.state.loading? (
+			<p>Carregando pedidos...</p>
+		):(
+				<Switch>
+					{
+						this.props.orders.history.length?
+							(
+								<Route path="/pedidos/" exact component={() => <OrdersList orders={this.props.orders.history} />} />
+							):null
+					}
+					{/* <Route path="/pedidos/:id" component={OrderDetails} /> */}
+				</Switch>
+			);
 	}
 };
 

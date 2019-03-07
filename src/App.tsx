@@ -3,6 +3,8 @@ import {
 	BrowserRouter as Router,
 	Route
 } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 
 // route components
 import RestaurantContainer from './routes/restaurants/RestaurantContainer';
@@ -15,7 +17,23 @@ import Header from './components/Header';
 import DrawerMenu from './components/drawer-menu/DrawerMenu';
 import OrderLabel from './components/order-label/OrderLabel.jsx';
 
-class App extends Component {
+interface Order {
+	id: String,
+	startDate: Date,
+	totalPrice: Number,
+	items: Array<any>,
+	restaurantId: String,
+	status: String
+}
+
+interface IProps {
+	orders: {
+		history: Array<Order>,
+		currentOrder: Order
+	}
+}
+
+class App extends Component<IProps> {
 
 	state = {
 		drawerOpen: false
@@ -34,7 +52,7 @@ class App extends Component {
 
 					<Header toggleDrawer={this.toggleDrawer.bind(this)} />
 					<DrawerMenu open={this.state.drawerOpen} toggleDrawer={this.toggleDrawer} />
-					<main className="route-container">
+					<main className="route-container" style={this.props.orders.currentOrder.items.length>0? {paddingBottom: 66 }:{}}>
 
 						<div>
 							<Route path="/" component={RestaurantContainer} />
@@ -49,4 +67,13 @@ class App extends Component {
 	}
 }
 
-export default App;
+interface mappedState {
+	orders: {
+		history: Array<Order>,
+		currentOrder: Order
+	}
+}
+
+const mapStateToProps = (state: mappedState) => ({ orders: state.orders })
+
+export default connect(mapStateToProps)(App);

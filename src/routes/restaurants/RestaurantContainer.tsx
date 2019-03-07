@@ -27,6 +27,9 @@ class RestaurantsContainer extends Component<IProps> {
 	}
 
 	fetchRestaurants = () => {
+		if(this.props.restaurants && this.props.restaurants.list.length) {
+			return false;
+		}
 		this.setState({ loading: true });
 		axios.get('https://us-central1-billy-web.cloudfunctions.net/funcApp/api/restaurants')
 			// axios.get('http://192.168.0.111:4000/api/restaurants')
@@ -36,16 +39,18 @@ class RestaurantsContainer extends Component<IProps> {
 			});
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		this.fetchRestaurants();
 	}
 
 	render() {
 
 		console.log('restaurant props: ', this.props);
-		return this.state.loading ? null : (
+		return this.state.loading ? (<p>Carregando restaurantes...</p>) : (
 			<Switch>
-				<Route path="/" exact component={() => <RestaurantsList restaurants={this.props.restaurants.list} />} />
+				{
+					this.props.restaurants.list.length ? (<Route path="/" exact component={() => <RestaurantsList restaurants={this.props.restaurants.list} />} />) : null
+				}
 				<Route path="/:id" component={RestaurantMenu} />
 			</Switch>
 		);

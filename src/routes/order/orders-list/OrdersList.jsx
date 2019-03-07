@@ -7,8 +7,9 @@ import style from './OrdersList.module.css';
 
 const OrdersList=(props) => {
 	const { orders }=props;
+	console.log('orders list: ', orders);
 	const ordersMap=() => orders.map(item => (
-		<OrdersListItem order={item} />
+		<OrdersListItem order={item} key={item.id} />
 	));
 	const noOrders=() => (
 		<li className={style.noOrdersContainer} >
@@ -25,11 +26,11 @@ const OrdersList=(props) => {
 	return (
 		<div>
 			<h1 style={{textAlign: 'center', fontWeight: 500 }} >Histórico de pedidos</h1>
-			{/* <ul className={style.ordersList}>
+			<ul className={style.ordersList}>
 				{
 					orders.length>0? ordersMap():noOrders()
 				}
-			</ul> */}
+			</ul>
 		</div>
 	);
 };

@@ -25,9 +25,9 @@ export function setOrderHistory(history) {
 }
 
 
-export function startOrder(currentOrder) {
+export function setCurrentOrder(currentOrder) {
 	return {
-		type: 'START_ORDER',
+		type: 'SET_CURRENT_ORDER',
 		currentOrder
 	};
 }

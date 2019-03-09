@@ -52,7 +52,7 @@ class App extends Component<IProps> {
 
 					<Header toggleDrawer={this.toggleDrawer.bind(this)} />
 					<DrawerMenu open={this.state.drawerOpen} toggleDrawer={this.toggleDrawer} />
-					<main className="route-container" style={this.props.orders.currentOrder.items.length>0? {paddingBottom: 66 }:{}}>
+					<main className="route-container" style={this.props.orders.currentOrder && this.props.orders.currentOrder.items && this.props.orders.currentOrder.items.length>0? {paddingBottom: 66 }:{}}>
 
 						<div>
 							<Route path="/" component={RestaurantContainer} />

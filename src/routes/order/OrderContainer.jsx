@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import { setOrderHistory } from '../../store/actions/orders';
 
-// import OrderDetails from './order-details/OrderDetails.jsx';
+import OrderDetails from './order-details/OrderDetails.jsx';
 import OrdersList from './orders-list/OrdersList.jsx';
 
 
@@ -71,7 +71,7 @@ class OrderContainer extends Component {
 								<Route path="/pedidos/" exact component={() => <OrdersList orders={this.props.orders.history} />} />
 							):null
 					}
-					{/* <Route path="/pedidos/:id" component={OrderDetails} /> */}
+					<Route path="/pedidos/:id" component={OrderDetails} />
 				</Switch>
 			);
 	}

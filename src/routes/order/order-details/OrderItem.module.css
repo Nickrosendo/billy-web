@@ -1,0 +1,29 @@
+
+.orderItemContainer {
+	border-top: 1px dotted #444;
+	padding: 10px;
+	margin: 10px 0;
+	position: relative;
+}
+
+.orderItemEditContainer {
+	position: absolute;
+	top: 10px;
+	right: 0;
+	display: flex;
+	align-items: center;
+}
+
+.orderItemEditBtn {
+	border: none;
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+	margin-right: 10px;
+	background: transparent;
+}
+
+.orderItemContentField {
+	display: flex;
+	justify-content: space-between;
+}

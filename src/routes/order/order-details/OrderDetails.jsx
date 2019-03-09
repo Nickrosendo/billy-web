@@ -1,17 +1,25 @@
-import { h, Component } from 'preact';
-import { route } from 'preact-router';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import OrderItem from './OrderItem.jsx';
 
-import * as actions from '../../../store/actions';
+import { updateOrder, setCurrentOrder } from '../../../store/actions/orders';
 
-import style from './style';
+import style from './OrderDetails.module.css';
 
 class OrderDetails extends Component {
 
-	handleAddMoreItens() {
-		route(`/restaurantes/${this.props.orders.currentOrder.restaurantId}`, true);
+	handleSetCurrentOrder = () => {
+		if (this.props.orders.currentOrder && this.props.orders.currentOrder.id === this.props.match.params.id) {
+			return false;
+		}
+		if (this.props.orders.history.length && this.props.match.params.id) {
+			const currentOrder = this.props.orders.history.find(o => o.id === this.props.match.params.id);
+			console.log('this.props.orders.history: ', this.props.match.params.id)
+			console.log('currentOrder::', currentOrder);
+			this.props.setCurrentOrder(currentOrder);
+		}
 	}
 
 	handleUpdateOrderItem(updatedItem) {
@@ -47,42 +55,48 @@ class OrderDetails extends Component {
 
 	constructor(...args) {
 		super(...args);
-		this.handleAddMoreItens = this.handleAddMoreItens.bind(this);
 		this.handleUpdateOrderItem = this.handleUpdateOrderItem.bind(this);
 		this.handleRemoveOrderItem = this.handleRemoveOrderItem.bind(this);
+		this.handleSetCurrentOrder();
 	}
 
 	render() {
-		return (
-			<div>
-				<h1 class="text-center"> Detalhes do pedido</h1>
-				<div class={style.orderContainer}>
-					<button class={style.addMoreItensBtn} onClick={this.handleAddMoreItens}>
-						Adicionar mais itens
-					</button>
-					{this.props.orders.currentOrder.items.map(i =>
-						(
-							<OrderItem key={i._id + i.orderedDate} item={i} handleUpdateOrderItem={this.handleUpdateOrderItem} handleRemoveOrderItem={this.handleRemoveOrderItem} />
-						)
-					)}
-					<p class={style.orderPaymentTitle}> Pagamento </p>
-					<div class={style.orderPaymentContainer}>
-						<p class={style.orderItemContentField}>
-							<span>Subtotal: </span>
-							<span>R$ {this.props.orders.currentOrder.totalPrice}</span>
-						</p>
-						<p class={style.orderItemContentField}>
-							<span>Total: </span>
-							<span>R$ {this.props.orders.currentOrder.totalPrice}</span>
-						</p>
-					</div>
-				</div>
-				<button class={style.orderPaymentBtn} >
-					Realizar pagamento
-				</button>
-			</div>
-		);
+		return this.props.orders.currentOrder ? (
+			<h1>teste</h1>
+			// <div>
+			// 	<h1 className="text-center"> Detalhes do pedido</h1>
+			// 	<div className={style.orderDetailsOrderContainer}>
+			// 		<Link className={style.orderDetailsAddMoreItensBtn} to={`/restaurantes/${this.props.orders.currentOrder.restaurantId}`}>
+			// 			Adicionar mais itens
+			// 		</Link>
+			// 		{this.props.orders.currentOrder.items.map(i =>
+			// 			(
+			// 				<OrderItem key={i._id + i.orderedDate} item={i} handleUpdateOrderItem={this.handleUpdateOrderItem} handleRemoveOrderItem={this.handleRemoveOrderItem} />
+			// 			)
+			// 		)}
+			// 		<p className={style.orderDetailsPaymentTitle}> Pagamento </p>
+			// 		<div className={style.orderDetailsPaymentContainer}>
+			// 			<p className={style.orderDeatilsContentField}>
+			// 				<span>Subtotal: </span>
+			// 				<span>R$ {this.props.orders.currentOrder.totalPrice}</span>
+			// 			</p>
+			// 			<p className={style.orderDeatilsContentField}>
+			// 				<span>Total: </span>
+			// 				<span>R$ {this.props.orders.currentOrder.totalPrice}</span>
+			// 			</p>
+			// 		</div>
+			// 	</div>
+			// 	<button className={style.orderDetailsPaymentBtn} >
+			// 		Realizar pagamento
+			// 	</button>
+			// </div>
+		): null;
 	}
 }
 
-export default OrderDetails;
+const mapStateToProps = (state) => ({ orders: state.orders })
+
+export default connect(mapStateToProps, {
+	updateOrder,
+	setCurrentOrder
+})(OrderDetails);

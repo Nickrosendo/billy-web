@@ -1,6 +1,6 @@
-import { h, Component } from 'preact';
+import React, { Component } from 'react';
 
-import style from './style.css';
+import style from './OrderItem.module.css';
 
 class OrderItem extends Component {
 
@@ -83,19 +83,19 @@ class OrderItem extends Component {
 	render() {
 		return (
 			<div>
-				<div class={style.orderItemContainer}>
-					<div class={style.orderItemEditContainer}>
-						<button onClick={this.handleEdit} class={style.orderItemEditBtn+' transparent-btn-pressed'}> <i class={this.state.editing? 'icon icon-check text-success':'icon icon-edit'} /> </button>
-						<button onClick={this.handleRemove} class={style.orderItemEditBtn+' transparent-btn-pressed'}> <i class={this.state.editing? 'icon icon-close text-danger':'icon icon-trash-o'} /> </button>
+				<div className={style.orderItemContainer}>
+					<div className={style.orderItemEditContainer}>
+						<button onClick={this.handleEdit} className={style.orderItemEditBtn+' transparent-btn-pressed'}> <i className={this.state.editing? 'icon icon-check text-success':'icon icon-edit'} /> </button>
+						<button onClick={this.handleRemove} className={style.orderItemEditBtn+' transparent-btn-pressed'}> <i className={this.state.editing? 'icon icon-close text-danger':'icon icon-trash-o'} /> </button>
 					</div>
 					<div>
-						<p style="display: flex; align-items: center;">
+						<p style={{ display: 'flex', alignItems: 'center' }}>
 							<span>{this.state.editingQuantity>0? this.state.editingQuantity:this.props.item.quantity}x</span>
 							{
 								this.state.editing? (
 									<div>
-										<button onClick={this.handleSubtract} class="transparent-btn-pressed" style="display: inline-block; margin-left: 10px; padding: 4px; color: #444; font-size: 10px;" type="button"><i class="icon icon-minus1" /></button>
-										<button onClick={this.handleAdd} class="transparent-btn-pressed" style="display: inline-block; margin-left: 10px; padding: 4px; color: #444;	font-size: 10px;" type="button"><i class="icon icon-plus1" /></button>
+										<button onClick={this.handleSubtract} className="transparent-btn-pressed" style={{ display: 'inline-block', marginLeft: 10, padding: 4, color: '#444', fontSize: 10 }} type="button"><i className="icon icon-minus1" /></button>
+										<button onClick={this.handleAdd} className="transparent-btn-pressed" style={{ display: 'inline-block', marginLeft: 10, padding: 4, color: '#444', fontSize: 10 }} type="button"><i className="icon icon-plus1" /></button>
 									</div>
 								):null
 							}
@@ -104,7 +104,7 @@ class OrderItem extends Component {
 						<p>R$ {this.state.totalPrice} ( {this.state.editingQuantity} x {this.props.item.price} )</p>
 						{
 							this.state.editing? (
-								<input onChange={this.handleEditObservation} value={this.state.editingObservation} type="textarea" placeholder="Observações" style="width: 100%; height: 40px; padding: 8px; margin-top: 10px; resize: none; border: 1px solid #ddd; border-radius: 8px; outline: 0;" />
+								<input onChange={this.handleEditObservation} value={this.state.editingObservation} type="textarea" placeholder="Observações" style={{ width: '100%', height: 40, padding: 8, marginTop: 10, resize: 'none', border: '1px solid #ddd', borderRadius: 8, outline: 0 }} />
 							):this.props.item.observation? (
 								<p> Observações: {this.props.item.observation}</p>
 							):null

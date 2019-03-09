@@ -1,18 +1,11 @@
 const INITIAL_STATE={
-	currentOrder: {
-		id: '',
-		startDate: '',
-		totalPrice: 0,
-		items: [],
-		restaurantId: '',
-		status: ''
-	},
+	currentOrder: { },
 	history: []
 };
 
 let ACTIONS={
 	SET_HISTORY: ({ ...state }, { history }) => ({ ...state, history }),
-	START_ORDER: ({ ...state }, { currentOrder }) => ({ ...state, currentOrder, history: [...state.history, currentOrder] }),
+	SET_CURRENT_ORDER: ({ ...state }, { currentOrder }) => ({ ...state, currentOrder, history: [...state.history, currentOrder] }),
 	UPDATE_CURRENT_ORDER: ({ ...state }, { currentOrder }) => ({ ...state, currentOrder: { ...state.currentOrder, ...currentOrder } }),
 	// ADD_CURRENT_ORDER_ITEM: ({ ...state}, { item }) => ({ ...state, currentOrder: { ...state.currentOrder, }})
 	REMOVE_CURRENT_ORDER_ITEM: ({ items, ...state }, { itemId }) => ({

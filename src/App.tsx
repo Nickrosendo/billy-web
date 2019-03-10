@@ -15,7 +15,6 @@ import LoginContainer from './routes/login/LoginContainer.jsx';
 // ui components
 import Header from './components/Header';
 import DrawerMenu from './components/drawer-menu/DrawerMenu';
-import OrderLabel from './components/order-label/OrderLabel.jsx';
 
 interface Order {
 	id: String,
@@ -55,11 +54,10 @@ class App extends Component<IProps> {
 					<main className="route-container" style={this.props.orders.currentOrder && this.props.orders.currentOrder.items && this.props.orders.currentOrder.items.length>0? {paddingBottom: 66 }:{}}>
 
 						<div>
-							<Route path="/" component={RestaurantContainer} />
+							<Route path="/restaurantes" component={RestaurantContainer} />
 							<Route path="/pedidos" component={OrderContainer} />
 							<Route path="/login" component={LoginContainer} />
 						</div>
-						<OrderLabel />
 					</main>
 				</div>
 			</Router>

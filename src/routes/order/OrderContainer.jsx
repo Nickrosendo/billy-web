@@ -22,28 +22,61 @@ class OrderContainer extends Component {
 		new Promise((resolve) => {
 			const orders=[
 				{
-					id: 1,
+					id: '1',
 					date: new Date(),
 					totalPrice: 159.99,
-					items: [],
+					items: [{
+						description: "O mais famoso lanche do mundo",
+						img: "https://amp.businessinsider.com/images/5a7aea7b7101ad094069a41b-750-563.png",
+						ingredients: ["Hamburguer", "Pao", "Salada", "Queijo", "Molho Especial"],
+						name: "Big Mac",
+						observation: "",
+						orderedDate: new Date(),
+						price: "20",
+						quantity: 3,
+						status: "à confirmar",
+						_id: "5bf02ba4e3d3c4001650db4c"
+					}],
 					restaurantId: '',
 					restaurantName: 'Manhattan',
 					status: 'finalizada'
 				},
 				{
-					id: 2,
+					id: '2',
 					date: new Date(),
 					totalPrice: 89.99,
-					items: [],
+					items: [{
+						description: "O mais famoso lanche do mundo",
+						img: "https://amp.businessinsider.com/images/5a7aea7b7101ad094069a41b-750-563.png",
+						ingredients: ["Hamburguer", "Pao", "Salada", "Queijo", "Molho Especial"],
+						name: "Big Mac",
+						observation: "",
+						orderedDate: new Date(),
+						price: "20",
+						quantity: 3,
+						status: "à confirmar",
+						_id: "5bf02ba4e3d3c4001650db4c"
+					}],
 					restaurantId: '',
 					restaurantName: 'McDonalds',
 					status: 'finalizada'
 				},
 				{
-					id: 3,
+					id: '3',
 					date: new Date(),
 					totalPrice: 1099.99,
-					items: [],
+					items: [{
+						description: "O mais famoso lanche do mundo",
+						img: "https://amp.businessinsider.com/images/5a7aea7b7101ad094069a41b-750-563.png",
+						ingredients: ["Hamburguer", "Pao", "Salada", "Queijo", "Molho Especial"],
+						name: "Big Mac",
+						observation: "",
+						orderedDate: new Date(),
+						price: "20",
+						quantity: 3,
+						status: "à confirmar",
+						_id: "5bf02ba4e3d3c4001650db4c"
+					}],
 					restaurantId: '',
 					restaurantName: 'McDonalds',
 					status: 'finalizada'

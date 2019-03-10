@@ -7,7 +7,7 @@ interface IProps {
 }
 
 const RestaurantListItem: React.SFC<IProps> = (props) => (
-	<Link className={styles.verticalListItem} to={`/${props.item._id}`}>
+	<Link className={styles.verticalListItem} to={`/restaurantes/${props.item._id}`}>
 		<img className={styles.verticalListItemImg} src={props.item.logo} alt={props.item.name} />
 		<div className={styles.itemContent}>
 			<p>{props.item.name}</p>

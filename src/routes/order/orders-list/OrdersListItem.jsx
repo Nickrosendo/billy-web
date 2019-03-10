@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import style from './OrdersListItem.module.css';
 
 const OrdersListItem=(props) => (
-	<Link className={style.orderListItem} to={`/pedidos/${props.order._id || props.order.id}`}>
+	<Link className={style.orderListItem} to={`/pedidos/${props.order.id}`}>
 		<div className={style.orderListItemPrice}>
 			<p> <span style={{ fontSize: 18 }} className="icon-coin-dollar" /> {props.order.totalPrice}</p>
 		</div>

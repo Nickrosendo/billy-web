@@ -49,7 +49,10 @@ interface IProps {
 	}
 	orders: {
 		currentOrder: {
-			items: Array<any>
+			items: Array<any>,
+			totalPrice: Number,
+			restaurantId: String,
+			status: String
 		}
 	},
 	match: any,
@@ -77,7 +80,7 @@ class RestaurantMenu extends Component<IProps> {
 		if (!this.props.firebase.auth.uid) {
 			return this.props.history.push('/login');
 		}
-		if (this.props.orders.currentOrder.items.length > 0) {
+		if (this.props.orders.currentOrder && this.props.orders.currentOrder.items && this.props.orders.currentOrder.items.length > 0 && this.props.orders.currentOrder.status !== 'finalizada') {
 			let updatedItems = [...this.props.orders.currentOrder.items, item];
 			const updatedTotalPrice = updatedItems.map(i => (i.quantity * i.price)).reduce((a, b) => (a + b), 0);
 
@@ -89,15 +92,16 @@ class RestaurantMenu extends Component<IProps> {
 		}
 		else {
 			const totalPrice = ((item.quantity || 1) * item.price);
-			
-			this.props.setCurrentOrder({
-				id: new Date(),
+			const currentOrder = {
+				id: parseInt((Math.random()*100).toString()).toString(),
 				restaurantId: this.props.restaurants.currentRestaurant._id,
 				restaurantName: this.props.restaurants.currentRestaurant.name,
 				totalPrice,
 				items: [item],
 				status: 'iniciada'
-			});
+			};
+			console.log('restaurantMenu CurrentOrder: ', currentOrder);
+			this.props.setCurrentOrder(currentOrder);
 
 		}
 	}
@@ -148,7 +152,10 @@ interface mappedState {
 	}
 	orders: {
 		currentOrder: {
-			items: Array<any>
+			items: Array<any>,
+			totalPrice: Number,
+			restaurantId: String,
+			status: String
 		}
 	},
 }

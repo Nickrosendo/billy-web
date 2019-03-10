@@ -16,7 +16,7 @@ class OrderDetails extends Component {
 		}
 		if (this.props.orders.history.length && this.props.match.params.id) {
 			const currentOrder = this.props.orders.history.find(o => o.id === this.props.match.params.id);
-			console.log('this.props.orders.history: ', this.props.match.params.id)
+			// console.log('this.props.orders.history: ', this.props.match.params.id)
 			console.log('currentOrder::', currentOrder);
 			this.props.setCurrentOrder(currentOrder);
 		}
@@ -61,36 +61,37 @@ class OrderDetails extends Component {
 	}
 
 	render() {
-		return this.props.orders.currentOrder ? (
-			<h1>teste</h1>
-			// <div>
-			// 	<h1 className="text-center"> Detalhes do pedido</h1>
-			// 	<div className={style.orderDetailsOrderContainer}>
-			// 		<Link className={style.orderDetailsAddMoreItensBtn} to={`/restaurantes/${this.props.orders.currentOrder.restaurantId}`}>
-			// 			Adicionar mais itens
-			// 		</Link>
-			// 		{this.props.orders.currentOrder.items.map(i =>
-			// 			(
-			// 				<OrderItem key={i._id + i.orderedDate} item={i} handleUpdateOrderItem={this.handleUpdateOrderItem} handleRemoveOrderItem={this.handleRemoveOrderItem} />
-			// 			)
-			// 		)}
-			// 		<p className={style.orderDetailsPaymentTitle}> Pagamento </p>
-			// 		<div className={style.orderDetailsPaymentContainer}>
-			// 			<p className={style.orderDeatilsContentField}>
-			// 				<span>Subtotal: </span>
-			// 				<span>R$ {this.props.orders.currentOrder.totalPrice}</span>
-			// 			</p>
-			// 			<p className={style.orderDeatilsContentField}>
-			// 				<span>Total: </span>
-			// 				<span>R$ {this.props.orders.currentOrder.totalPrice}</span>
-			// 			</p>
-			// 		</div>
-			// 	</div>
-			// 	<button className={style.orderDetailsPaymentBtn} >
-			// 		Realizar pagamento
-			// 	</button>
-			// </div>
-		): null;
+		return this.props.orders.currentOrder && this.props.orders.currentOrder.id ? (
+			<div>
+				<h1 className="text-center"> Detalhes do pedido</h1>
+				<div className={style.orderDetailsOrderContainer}>
+					<Link className={style.orderDetailsAddMoreItensBtn} to={`/restaurantes/${this.props.orders.currentOrder.restaurantId}`}>
+						Adicionar mais itens
+					</Link>
+					{this.props.orders.currentOrder.items.map(i =>
+						(
+							<OrderItem key={i._id + i.orderedDate} item={i} handleUpdateOrderItem={this.handleUpdateOrderItem} handleRemoveOrderItem={this.handleRemoveOrderItem} />
+						)
+					)}
+					<p className={style.orderDetailsPaymentTitle}> Pagamento </p>
+					<div className={style.orderDetailsPaymentContainer}>
+						<p className={style.orderDeatilsContentField}>
+							<span>Subtotal: </span>
+							<span>R$ {this.props.orders.currentOrder.totalPrice}</span>
+						</p>
+						<p className={style.orderDeatilsContentField}>
+							<span>Total: </span>
+							<span>R$ {this.props.orders.currentOrder.totalPrice}</span>
+						</p>
+					</div>
+				</div>
+				<button className={style.orderDetailsPaymentBtn} >
+					Realizar pagamento
+				</button>
+			</div>
+		): (
+			<h1>Pedido não encontrado</h1>
+		);
 	}
 }
 

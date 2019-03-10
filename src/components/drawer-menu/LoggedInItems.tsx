@@ -36,7 +36,7 @@ const LoggedInItems: React.SFC<IProps> = (props) => {
 	const topList = [
 		{
 			text: 'Início',
-			route: '/',
+			route: '/restaurantes',
 			icon: <HomeIcon />
 		},
 		{

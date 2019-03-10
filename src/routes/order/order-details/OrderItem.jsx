@@ -72,7 +72,9 @@ class OrderItem extends Component {
 		this.handleAdd=this.handleAdd.bind(this);
 		this.handleSubtract=this.handleSubtract.bind(this);
 		this.handleEditObservation=this.handleEditObservation.bind(this);
+	}
 
+	componentDidMount() {
 		this.setState({
 			editingQuantity: this.props.item.quantity,
 			editingObservation: this.props.item.observation,

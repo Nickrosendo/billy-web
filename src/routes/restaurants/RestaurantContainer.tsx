@@ -8,6 +8,7 @@ import {
 
 import RestaurantsList from './restaurants-list/RestaurantsList';
 import RestaurantMenu from './restaurant-menu/RestaurantMenu';
+import OrderLabel from '../../components/order-label/OrderLabel.jsx';
 
 // redux actions
 import { setRestaurants } from '../../store/actions/restaurants';
@@ -47,12 +48,15 @@ class RestaurantsContainer extends Component<IProps> {
 
 		console.log('restaurant props: ', this.props);
 		return this.state.loading ? (<p>Carregando restaurantes...</p>) : (
-			<Switch>
-				{
-					this.props.restaurants.list.length ? (<Route path="/" exact component={() => <RestaurantsList restaurants={this.props.restaurants.list} />} />) : null
-				}
-				<Route path="/:id" component={RestaurantMenu} />
-			</Switch>
+			<div>
+				<Switch>
+					{
+						this.props.restaurants.list.length ? (<Route path="/restaurantes" exact component={() => <RestaurantsList restaurants={this.props.restaurants.list} />} />) : null
+					}
+					<Route path="/restaurantes/:id" component={RestaurantMenu} />
+				</Switch>
+				<OrderLabel />
+			</div>
 		);
 	}
 }

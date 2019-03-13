@@ -94,6 +94,7 @@ class OrderContainer extends Component {
 	}
 
 	render() {
+		console.log('pedidos props: ', this.props);
 		return this.state.loading? (
 			<p>Carregando pedidos...</p>
 		):(

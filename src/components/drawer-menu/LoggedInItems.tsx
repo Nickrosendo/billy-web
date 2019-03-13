@@ -46,7 +46,7 @@ const LoggedInItems: React.SFC<IProps> = (props) => {
 		},
 		{
 			text: 'Como pedir',
-			route: '/',
+			route: '/ajuda',
 			icon: <HelpIcon />
 		}
 	];
@@ -54,12 +54,12 @@ const LoggedInItems: React.SFC<IProps> = (props) => {
 	const bottomList = [
 		{
 			text: 'Perfil',
-			route: '/',
+			route: '/perfil',
 			icon: <AccountCircleIcon />
 		},
 		{
 			text: 'Segurança',
-			route: '/',
+			route: '/seguranca',
 			icon: <SecurityIcon />
 		},
 		{

@@ -21,7 +21,7 @@ class LoginContainer extends Component {
 	}
 
 	handleSignup=() => {
-		this.props.history.push('/');
+		this.props.history.push('/cadastro');
 	}
 
 	handleEmail(event) {

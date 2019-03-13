@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -27,10 +28,11 @@ const LoggedOutItems: React.SFC<IProps> = (props) => {
 			text: 'Início',
 			route: '/restaurantes',
 			icon: <HomeIcon />
+
 		},
 		{
 			text: 'Como pedir',
-			route: '/',
+			route: '/ajuda',
 			icon: <HelpIcon />
 		},
 		{

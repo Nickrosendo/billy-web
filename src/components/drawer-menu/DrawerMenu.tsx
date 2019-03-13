@@ -29,14 +29,12 @@ const styles = {
 class SwipeableTemporaryDrawer extends React.Component<IProps> {
 
   handleSignout = () => {
-    console.log('props: ', this.props);
     this.props.signOut();
     if(this.props.history) 
     this.props.history.push('/');
   }
 
   render() {
-    console.log('menu props: ', this.props);
     const { firebase } = this.props;
     const items = firebase.auth.uid ? <LoggedInItems signOut={this.handleSignout} /> : <LoggedOutItems />;
     return (

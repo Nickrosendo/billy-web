@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -6,10 +7,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { openDrawer } from '../store/actions/ui';
 
 
 interface IProps extends WithStyles<typeof styles> {
-  toggleDrawer: any
+  openDrawer: any
 }
 
 const theme = createMuiTheme({
@@ -47,10 +49,10 @@ class MenuAppBar extends React.Component<IProps> {
             <Toolbar>
               <Grid
                 justify="flex-end"
-                container              
+                container
               >
                 <Grid item>
-                  <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.props.toggleDrawer}>
+                  <IconButton className={classes.menuButton} color="inherit" aria-label="Menu" onClick={this.props.openDrawer}>
                     <MenuIcon />
                   </IconButton>
                 </Grid>
@@ -63,4 +65,4 @@ class MenuAppBar extends React.Component<IProps> {
   }
 }
 
-export default withStyles(styles)(MenuAppBar);
+export default connect(null, { openDrawer} )(withStyles(styles)(MenuAppBar));

@@ -4,22 +4,23 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import { connect } from 'react-redux';
 
 import { signOut } from '../../store/actions/auth';
+import { openDrawer, closeDrawer } from '../../store/actions/ui';
 
 import LoggedInItems from './LoggedInItems';
 import LoggedOutItems from './LoggedOutItems';
 
 interface IProps extends WithStyles<typeof styles> {
-  open: boolean,
-  toggleDrawer: any,
   firebase: {
     auth: {
       uid: any
     }
   },
   ui: {
-    drawerOpen: Boolean
+    drawerOpen: boolean
   }
   signOut: Function,
+  openDrawer: any,
+  closeDrawer: any,
   history?: Array<any>
 }
 
@@ -44,15 +45,15 @@ class SwipeableTemporaryDrawer extends React.Component<IProps> {
       <div>
         <SwipeableDrawer
           anchor="right"
-          open={this.props.open}
-          onClose={this.props.toggleDrawer}
-          onOpen={this.props.toggleDrawer}
+          open={this.props.ui.drawerOpen}
+          onClose={this.props.closeDrawer}
+          onOpen={this.props.openDrawer}
         >
           <div
             tabIndex={0}
             role="button"
-            onClick={this.props.toggleDrawer}
-            onKeyDown={this.props.toggleDrawer}
+            onClick={this.props.closeDrawer}
+            onKeyDown={this.props.closeDrawer}
           >
             { items }
           </div>
@@ -69,12 +70,14 @@ interface mappedState {
     }
   },
   ui: {
-    drawerOpen: Boolean
+    drawerOpen: boolean
   }
 }
 
 const mapStateToProps = (state: mappedState) => ({ firebase: state.firebase, ui: state.ui })
 
 export default withStyles(styles)(connect(mapStateToProps, {
-  signOut
+  signOut,
+  openDrawer,
+  closeDrawer
 })(SwipeableTemporaryDrawer));

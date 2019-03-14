@@ -7,6 +7,8 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+// route utils
+import PrivateRoute from './components/route-utils/PrivateRoute.jsx';
 
 // route components
 import RestaurantContainer from './routes/restaurants/RestaurantContainer';
@@ -17,29 +19,11 @@ import ProfileContainer from './routes/profile/ProfileContainer.jsx';
 import HelpContainer from './routes/help/HelpContainer.jsx';
 import SecurityContainer from './routes/security/SecurityContainer.jsx';
 
-
 // ui components
 import Header from './components/Header';
 import DrawerMenu from './components/drawer-menu/DrawerMenu';
 
-// route utils
-import PrivateRoute from './components/route-utils/PrivateRoute.jsx';
-
-
-interface Order {
-	id: String,
-	startDate: Date,
-	totalPrice: Number,
-	items: Array<any>,
-	restaurantId: String,
-	status: String
-}
-
 interface IProps {
-	orders: {
-		history: Array<Order>,
-		currentOrder: Order
-	},
 	firebase: {
 		auth: {
 			isLoaded: Boolean
@@ -49,18 +33,9 @@ interface IProps {
 
 class App extends Component<IProps> {
 
-	state = {
-		drawerOpen: false
-	}
-
-	toggleDrawer = () => {
-		this.setState({
-			drawerOpen: !this.state.drawerOpen,
-		});
-	};
-
 	render() {
-	
+
+		// only start app when firebase auth is Loaded
 		if (!this.props.firebase.auth.isLoaded) {
 			return false
 		}
@@ -69,9 +44,9 @@ class App extends Component<IProps> {
 			<div id="app">
 				<Router>
 					<div>
-						<Header toggleDrawer={this.toggleDrawer.bind(this)} />
-						<DrawerMenu open={this.state.drawerOpen} toggleDrawer={this.toggleDrawer} />
-						<main className="route-container" style={this.props.orders.currentOrder && this.props.orders.currentOrder.items && this.props.orders.currentOrder.items.length > 0 ? { paddingBottom: 66 } : {}}>
+						<Header />
+						<DrawerMenu />
+						<main className="route-container" >
 							<Switch>
 								<Route path="/restaurantes" component={RestaurantContainer} />
 								<Route path="/login" component={LoginContainer} />
@@ -90,11 +65,7 @@ class App extends Component<IProps> {
 	}
 }
 
-interface mappedState {
-	orders: {
-		history: Array<Order>,
-		currentOrder: Order
-	},
+interface mappedStoreState {
 	firebase: {
 		auth: {
 			isLoaded: Boolean
@@ -102,6 +73,6 @@ interface mappedState {
 	}
 }
 
-const mapStateToProps = (state: mappedState) => ({ orders: state.orders, firebase: state.firebase })
+const mapStateToProps = (state: mappedStoreState) => ({ firebase: state.firebase })
 
 export default connect(mapStateToProps)(App);

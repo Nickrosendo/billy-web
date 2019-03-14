@@ -10,10 +10,30 @@ import RestaurantsList from './restaurants-list/RestaurantsList';
 import RestaurantMenu from './restaurant-menu/RestaurantMenu';
 import OrderLabel from '../../components/order-label/OrderLabel.jsx';
 
-// redux actions
 import { setRestaurants } from '../../store/actions/restaurants';
 
+interface Order {
+	id: String,
+	startDate: Date,
+	totalPrice: Number,
+	items: Array<any>,
+	restaurantId: String,
+	status: String
+}
+
+interface Restaurant {
+	_id: string,
+	name: string,
+	logo: string,
+	menu: Array<any>,
+	location: Object
+}
+
 interface IProps {
+	orders: {
+		history: Array<Order>,
+		currentOrder: Order
+	},
 	restaurants: {
 		list: Array<any>,
 		currentRestaurant: Object
@@ -45,10 +65,9 @@ class RestaurantsContainer extends Component<IProps> {
 	}
 
 	render() {
-
-		console.log('restaurant props: ', this.props);
+		console.log('render restaurant');
 		return this.state.loading ? (<p>Carregando restaurantes...</p>) : (
-			<div>
+			<div style={this.props.orders.currentOrder && this.props.orders.currentOrder.items && this.props.orders.currentOrder.items.length > 0 ? { paddingBottom: 66 } : {}}>
 				<Switch>
 					{
 						this.props.restaurants.list.length ? (<Route path="/restaurantes" exact component={() => <RestaurantsList restaurants={this.props.restaurants.list} />} />) : null
@@ -61,23 +80,19 @@ class RestaurantsContainer extends Component<IProps> {
 	}
 }
 
-
-interface Restaurant {
-	_id: string,
-	name: string,
-	logo: string,
-	menu: Array<any>,
-	location: Object
-}
-
 interface mappedState {
+	orders: {
+		history: Array<Order>,
+		currentOrder: Order
+	},
 	restaurants: {
 		list: Array<Restaurant>,
 		currentRestaurant: Object
 	}
 }
 
-const mapStateToProps = (state: mappedState) => ({ restaurants: state.restaurants })
+const mapStateToProps = (state: mappedState) => ({ restaurants: state.restaurants, orders: state.orders })
+
 
 export default connect(mapStateToProps, {
 	setRestaurants

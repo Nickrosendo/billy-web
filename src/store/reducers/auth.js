@@ -15,7 +15,6 @@ export default (state = INITIAL_STATE, action) => {
 				signUpError: null
 			};
 		case 'LOGIN_SUCCESS':
-			console.log('login success');
 			return {
 				...state,
 				isAuth: true,

@@ -17,7 +17,7 @@ class OrderDetails extends Component {
 		if (this.props.orders.history.length && this.props.match.params.id) {
 			const currentOrder = this.props.orders.history.find(o => o.id === this.props.match.params.id);
 			// console.log('this.props.orders.history: ', this.props.match.params.id)
-			console.log('currentOrder::', currentOrder);
+			// console.log('currentOrder::', currentOrder);
 			this.props.setCurrentOrder(currentOrder);
 		}
 	}

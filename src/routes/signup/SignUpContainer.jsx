@@ -26,7 +26,7 @@ class SignUpContainer extends Component {
 	}
 
 	handleSignin = () => (
-		<Redirect />
+		<Redirect to={'/login'}/>
 	)
 
 	handleEmail(event) {
@@ -65,7 +65,11 @@ class SignUpContainer extends Component {
 	}
 
 	render() {
-		
+		if (this.props.firebase.auth.uid) {
+			return (
+				<Redirect to={'/restaurantes'} />
+			)
+		}
 		return (
 			<div>
 				<div className={style.logoContainer}>

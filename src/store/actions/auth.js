@@ -8,7 +8,7 @@ export function setUser(user) {
 export const signIn=credentials => (dispatch, getState, { getFirebase }) => {
 	const firebase=getFirebase();
 
-	firebase.auth().signInWithEmailAndPassword(
+	return firebase.auth().signInWithEmailAndPassword(
 		credentials.email,
 		credentials.password
 	).then(() => {

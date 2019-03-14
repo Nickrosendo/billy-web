@@ -16,6 +16,9 @@ interface IProps extends WithStyles<typeof styles> {
       uid: any
     }
   },
+  ui: {
+    drawerOpen: Boolean
+  }
   signOut: Function,
   history?: Array<any>
 }
@@ -64,10 +67,13 @@ interface mappedState {
     auth: {
       uid: any
     }
+  },
+  ui: {
+    drawerOpen: Boolean
   }
 }
 
-const mapStateToProps = (state: mappedState) => ({ firebase: state.firebase })
+const mapStateToProps = (state: mappedState) => ({ firebase: state.firebase, ui: state.ui })
 
 export default withStyles(styles)(connect(mapStateToProps, {
   signOut

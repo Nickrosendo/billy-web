@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { signIn } from '../../store/actions';
 import style from './LoginContainer.module.css';
@@ -17,7 +18,7 @@ class LoginContainer extends Component {
 			email: this.state.email,
 			password: this.state.password
 		};
-		this.props.signIn(credentials);
+		this.props.signIn(credentials)
 	}
 
 	handleSignup=() => {
@@ -51,7 +52,9 @@ class LoginContainer extends Component {
 
 	render() {
 		if (this.props.firebase.auth.uid) {
-			this.props.history.push('/');
+			return (
+				<Redirect to={'/restaurantes'} />
+			)
 		}
 		return (
 			<div>

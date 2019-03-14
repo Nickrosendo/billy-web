@@ -26,6 +26,9 @@ class ProfileContainer extends Component {
 				<p>
 					{this.state.user.name}
 				</p>
+				<p>
+					{this.props.firebase.auth.email}
+				</p>
 			</div>
 		);
 	}

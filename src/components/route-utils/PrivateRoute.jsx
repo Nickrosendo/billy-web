@@ -1,16 +1,16 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
-// const mapStateToProps = (state) => ({ firebase: state.firebase })
+const mapStateToProps = (state) => ({ firebase: state.firebase })
 
-const PrivateRoute = ({ auth, component: Component, ...rest }) => {
-    console.log('rest: ', rest);
+const PrivateRoute = ({ firebase, component: Component, ...rest }) => {
+    const isAuth = Boolean(firebase && firebase.auth && firebase.auth.uid);
     return (
         <Route
             {...rest}
-            render={props =>
-                auth ? (
+            component={props =>
+                isAuth ? (
                     <Component {...props} />
                 ) : (
                         <Redirect
@@ -25,4 +25,4 @@ const PrivateRoute = ({ auth, component: Component, ...rest }) => {
     );
 };
 
-export default PrivateRoute;
+export default connect(mapStateToProps)(PrivateRoute);

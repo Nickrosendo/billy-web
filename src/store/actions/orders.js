@@ -32,10 +32,10 @@ export function setCurrentOrder(currentOrder) {
 	};
 }
 
-export function updateOrder(order) {
+export function updateCurrentOrder(currentOrder) {
 	return {
-		type: 'UPDATE_ORDER',
-		order
+		type: 'UPDATE_CURRENT_ORDER',
+		currentOrder
 	};
 }
 

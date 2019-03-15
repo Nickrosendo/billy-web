@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { updateOrder, setCurrentOrder } from '../../../store/actions/orders';
+import { updateCurrentOrder, setCurrentOrder } from '../../../store/actions/orders';
 import { setRestaurant } from '../../../store/actions/restaurants';
 
 import RestaurantMenuItem from './RestaurantMenuItem';
@@ -58,7 +58,7 @@ interface IProps {
 	match: any,
 	setRestaurant: Function,
 	setCurrentOrder: Function,
-	updateOrder: Function
+	updateCurrentOrder: Function
 }
 
 class RestaurantMenu extends Component<IProps> {
@@ -84,7 +84,7 @@ class RestaurantMenu extends Component<IProps> {
 			let updatedItems = [...this.props.orders.currentOrder.items, item];
 			const updatedTotalPrice = updatedItems.map(i => (i.quantity * i.price)).reduce((a, b) => (a + b), 0);
 
-			this.props.updateOrder({
+			this.props.updateCurrentOrder({
 				...this.props.orders.currentOrder,
 				totalPrice: updatedTotalPrice,
 				items: [...updatedItems]
@@ -165,5 +165,5 @@ const mapStateToProps = (state: mappedState) => ({ restaurants: state.restaurant
 export default connect(mapStateToProps, {
 	setRestaurant,
 	setCurrentOrder,
-	updateOrder
+	updateCurrentOrder
 })(RestaurantMenu);

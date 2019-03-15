@@ -91,7 +91,7 @@ class OrderItem extends Component {
 						<button onClick={this.handleRemove} className={style.orderItemEditBtn+' transparent-btn-pressed'}> <i className={this.state.editing? 'icon icon-close text-danger':'icon icon-trash-o'} /> </button>
 					</div>
 					<div>
-						<p style={{ display: 'flex', alignItems: 'center' }}>
+						<div style={{ display: 'flex', alignItems: 'center' }}>
 							<span>{this.state.editingQuantity>0? this.state.editingQuantity:this.props.item.quantity}x</span>
 							{
 								this.state.editing? (
@@ -101,7 +101,7 @@ class OrderItem extends Component {
 									</div>
 								):null
 							}
-						</p>
+						</div>
 						<p>{this.props.item.name}</p>
 						<p>R$ {this.state.totalPrice} ( {this.state.editingQuantity} x {this.props.item.price} )</p>
 						{

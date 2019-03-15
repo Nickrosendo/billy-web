@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import OrderItem from './OrderItem.jsx';
 
-import { updateOrder, setCurrentOrder } from '../../../store/actions/orders';
+import { updateCurrentOrder, setCurrentOrder } from '../../../store/actions/orders';
 
 import style from './OrderDetails.module.css';
 
@@ -23,6 +23,7 @@ class OrderDetails extends Component {
 	}
 
 	handleUpdateOrderItem(updatedItem) {
+		
 		const itemIndex = this.props.orders.currentOrder.items.findIndex(i => i._id === updatedItem._id);
 		let updatedItems = [...this.props.orders.currentOrder.items];
 		if (itemIndex !== -1) {
@@ -30,8 +31,8 @@ class OrderDetails extends Component {
 		}
 
 		const updatedTotalPrice = updatedItems.map(i => (i.quantity * i.price)).reduce((a, b) => (a + b), 0);
-
-		this.props.updateOrder({
+		console.log('updatedTotalPrice: ', updatedTotalPrice);
+		this.props.updateCurrentOrder({
 			...this.props.orders.currentOrder,
 			totalPrice: updatedTotalPrice,
 			items: [...updatedItems]
@@ -46,7 +47,7 @@ class OrderDetails extends Component {
 		}
 		const updatedTotalPrice = updatedItems.map(i => (i.quantity * i.price)).reduce((a, b) => (a + b), 0);
 
-		this.props.updateOrder({
+		this.props.updateCurrentOrder({
 			...this.props.order,
 			totalPrice: updatedTotalPrice,
 			items: [...updatedItems]
@@ -98,6 +99,6 @@ class OrderDetails extends Component {
 const mapStateToProps = (state) => ({ orders: state.orders })
 
 export default connect(mapStateToProps, {
-	updateOrder,
+	updateCurrentOrder,
 	setCurrentOrder
 })(OrderDetails);

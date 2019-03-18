@@ -23,15 +23,38 @@ import SecurityContainer from './routes/security/SecurityContainer.jsx';
 import Header from './components/Header';
 import DrawerMenu from './components/drawer-menu/DrawerMenu';
 
+// actions
+import { fetchOrders } from './store/actions/orders';
+import { fetchRestaurants } from './store/actions/restaurants';
+
 interface IProps {
 	firebase: {
 		auth: {
 			isLoaded: Boolean
 		}
-	}
+	},
+	fetchOrders: Function,
+	fetchRestaurants: Function
 }
 
 class App extends Component<IProps> {
+
+	state = {
+		loading: false
+	}
+
+	initializeApp = () => {
+		Promise.all([this.props.fetchOrders(), this.props.fetchRestaurants()])
+			.then(() => this.setState({ loading: false }))
+			.catch((error) => {
+				console.error('Error initializing App::', error)
+			})
+	}
+
+	constructor(args: any) {
+		super(args);
+		this.initializeApp();
+	}
 
 	render() {
 
@@ -40,7 +63,7 @@ class App extends Component<IProps> {
 			return false
 		}
 
-		return (
+		return this.state.loading ? (<p>Inicializando...</p>) : (
 			<div id="app">
 				<Router>
 					<div>
@@ -75,4 +98,4 @@ interface mappedStoreState {
 
 const mapStateToProps = (state: mappedStoreState) => ({ firebase: state.firebase })
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { fetchOrders, fetchRestaurants })(App);

@@ -1,21 +1,50 @@
-// export const testThunk = (test) => {
-// 	return (dispatch, getState, { getFirebase, getFirestore }) => {
-// 		const firestore = getFirestore();
-// 		firestore.collection('users').where('name', '==', 'Admin').get().then((res) => {
-// 			res.forEach(doc => {
-// 				// doc.data() is never undefined for query doc snapshots
-// 				console.log(doc.id, ' => ', doc.data());
-// 			});
-// 		});
-// 		setTimeout(() => {
-// 			console.log('inside timeout');
-// 			return dispatch({
-// 				type: 'TEST_THUNK',
-// 				test
-// 			});
-// 		}, 5000);
-// 	};
-// };
+
+export const fetchOrders=() => async (dispatch, getState, { getFirebase, getFirestore }) => {
+	const firestore=getFirestore();
+
+	await firestore.collection("orders").get().then((snapshot) => {
+		const history=[];
+		snapshot.forEach((doc) => {
+			const date = doc.data().date.toDate()
+			const order={
+				id: doc.id,
+				...doc.data(),
+				date
+			}
+			history.push(order)
+		})
+
+		dispatch({
+			type: 'SET_HISTORY',
+			history
+		})
+		return true;
+	})
+		.catch(err => {
+			console.error('Error fetching Orders', err);
+			return false;
+		});
+}
+
+export const createOrder=(order) => async (dispatch, getState, { getFirebase, getFirestore }) => {
+	const firestore=getFirestore();
+
+	await firestore.collection("orders").add(order).then(({ id }) => {
+		const createdOrder = {
+			id,
+			...order
+		}
+		dispatch({
+			type: 'CREATE_ORDER',
+			order: createdOrder
+		})
+		return true;
+	})
+		.catch(err => {
+			console.error("Error adding document: ", err);
+			return false;
+		});
+}
 
 export function setOrderHistory(history) {
 	return {
@@ -23,7 +52,6 @@ export function setOrderHistory(history) {
 		history
 	};
 }
-
 
 export function setCurrentOrder(currentOrder) {
 	return {

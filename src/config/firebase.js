@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
-import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/database'
+import 'firebase/firestore';
 
 // Initialize firebase
 const config={
@@ -14,6 +15,13 @@ const config={
 
 firebase.initializeApp(config);
 firebase.firestore();
+// const db = firebase.firestore();
+
+// db.collection("orders").get().then((querySnapshot) => {	
+// 	querySnapshot.forEach((doc) => {
+// 			console.log(doc.data());
+// 	});
+// });
 
 export default firebase;
 

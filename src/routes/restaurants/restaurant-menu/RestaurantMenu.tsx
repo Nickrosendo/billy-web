@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { updateCurrentOrder, setCurrentOrder } from '../../../store/actions/orders';
+import { updateCurrentOrder, setCurrentOrder, createOrder } from '../../../store/actions/orders';
 import { setRestaurant } from '../../../store/actions/restaurants';
 
 import RestaurantMenuItem from './RestaurantMenuItem';
@@ -58,7 +58,8 @@ interface IProps {
 	match: any,
 	setRestaurant: Function,
 	setCurrentOrder: Function,
-	updateCurrentOrder: Function
+	updateCurrentOrder: Function,
+	createOrder: Function
 }
 
 class RestaurantMenu extends Component<IProps> {
@@ -92,16 +93,16 @@ class RestaurantMenu extends Component<IProps> {
 		}
 		else {
 			const totalPrice = ((item.quantity || 1) * item.price);
-			const currentOrder = {
-				id: parseInt((Math.random()*100).toString()).toString(),
+			const newOrder = {
+				date: new Date(),
 				restaurantId: this.props.restaurants.currentRestaurant._id,
 				restaurantName: this.props.restaurants.currentRestaurant.name,
 				totalPrice,
 				items: [item],
 				status: 'iniciada'
 			};
-			console.log('restaurantMenu CurrentOrder: ', currentOrder);
-			this.props.setCurrentOrder(currentOrder);
+			this.props.createOrder(newOrder)
+			// this.props.setCurrentOrder(currentOrder);
 
 		}
 	}
@@ -165,5 +166,6 @@ const mapStateToProps = (state: mappedState) => ({ restaurants: state.restaurant
 export default connect(mapStateToProps, {
 	setRestaurant,
 	setCurrentOrder,
-	updateCurrentOrder
+	updateCurrentOrder,
+	createOrder
 })(RestaurantMenu);

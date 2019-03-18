@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import {
 	Switch,
 	Route
@@ -43,30 +42,8 @@ interface IProps {
 
 class RestaurantsContainer extends Component<IProps> {
 
-	state = {
-		loading: false
-	}
-
-	fetchRestaurants = () => {
-		if(this.props.restaurants && this.props.restaurants.list.length) {
-			return false;
-		}
-		this.setState({ loading: true });
-		axios.get('https://us-central1-billy-web.cloudfunctions.net/funcApp/api/restaurants')
-			// axios.get('http://192.168.0.111:4000/api/restaurants')
-			.then(({ data }) => {
-				this.props.setRestaurants([...data]);
-				this.setState({ loading: false });
-			});
-	}
-
-	componentDidMount() {
-		this.fetchRestaurants();
-	}
-
 	render() {
-		console.log('render restaurant');
-		return this.state.loading ? (<p>Carregando restaurantes...</p>) : (
+		return (
 			<div style={this.props.orders.currentOrder && this.props.orders.currentOrder.items && this.props.orders.currentOrder.items.length > 0 ? { paddingBottom: 66 } : {}}>
 				<Switch>
 					{

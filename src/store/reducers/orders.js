@@ -5,6 +5,7 @@ const INITIAL_STATE={
 
 let ACTIONS={
 	SET_HISTORY: ({ ...state }, { history }) => ({ ...state, history }),
+	CREATE_ORDER: ({ ...state }, { order }) => ({ ...state, currentOrder: { ...order }, history: [...state.history, {...order}] }),
 	SET_CURRENT_ORDER: ({ ...state }, { currentOrder }) => {
 		const newOrder = !state.history.some(o => o.id === currentOrder.id)
 		if(newOrder) {

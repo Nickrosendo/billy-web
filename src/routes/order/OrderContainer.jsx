@@ -2,102 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 
-import { setOrderHistory } from '../../store/actions/orders';
-
 import OrderDetails from './order-details/OrderDetails.jsx';
 import OrdersList from './orders-list/OrdersList.jsx';
 
 
 class OrderContainer extends Component {
 
-	state={
-		loading: false
-	}
-
-	fetchOrders=() => {
-		if (this.props.orders&&this.props.orders.history.length) {
-			return false;
-		}
-		this.setState({ loading: true });
-		new Promise((resolve) => {
-			const orders=[
-				{
-					id: '1',
-					date: new Date(),
-					totalPrice: 159.99,
-					items: [{
-						description: "O mais famoso lanche do mundo",
-						img: "https://amp.businessinsider.com/images/5a7aea7b7101ad094069a41b-750-563.png",
-						ingredients: ["Hamburguer", "Pao", "Salada", "Queijo", "Molho Especial"],
-						name: "Big Mac",
-						observation: "",
-						orderedDate: new Date(),
-						price: "20",
-						quantity: 3,
-						status: "à confirmar",
-						_id: "5bf02ba4e3d3c4001650db4c"
-					}],
-					restaurantId: '',
-					restaurantName: 'Manhattan',
-					status: 'finalizada'
-				},
-				{
-					id: '2',
-					date: new Date(),
-					totalPrice: 89.99,
-					items: [{
-						description: "O mais famoso lanche do mundo",
-						img: "https://amp.businessinsider.com/images/5a7aea7b7101ad094069a41b-750-563.png",
-						ingredients: ["Hamburguer", "Pao", "Salada", "Queijo", "Molho Especial"],
-						name: "Big Mac",
-						observation: "",
-						orderedDate: new Date(),
-						price: "20",
-						quantity: 3,
-						status: "à confirmar",
-						_id: "5bf02ba4e3d3c4001650db4c"
-					}],
-					restaurantId: '',
-					restaurantName: 'McDonalds',
-					status: 'finalizada'
-				},
-				{
-					id: '3',
-					date: new Date(),
-					totalPrice: 1099.99,
-					items: [{
-						description: "O mais famoso lanche do mundo",
-						img: "https://amp.businessinsider.com/images/5a7aea7b7101ad094069a41b-750-563.png",
-						ingredients: ["Hamburguer", "Pao", "Salada", "Queijo", "Molho Especial"],
-						name: "Big Mac",
-						observation: "",
-						orderedDate: new Date(),
-						price: "20",
-						quantity: 3,
-						status: "à confirmar",
-						_id: "5bf02ba4e3d3c4001650db4c"
-					}],
-					restaurantId: '',
-					restaurantName: 'McDonalds',
-					status: 'finalizada'
-				}
-			];
-			setTimeout(() => resolve(orders), 3000);
-		}).then(orders => {
-			this.props.setOrderHistory([...orders]);
-			this.setState({ loading: false });
-		})
-	}
-
-	componentDidMount() {
-		this.fetchOrders();
-	}
-
 	render() {
-		console.log('pedidos props: ', this.props);
-		return this.state.loading? (
-			<p>Carregando pedidos...</p>
-		):(
+		return (
 				<Switch>
 					{
 						this.props.orders.history.length?
@@ -113,6 +25,4 @@ class OrderContainer extends Component {
 
 const mapStateToProps=(state) => ({ firebase: state.firebase, orders: state.orders })
 
-export default connect(mapStateToProps, {
-	setOrderHistory
-})(OrderContainer);
+export default connect(mapStateToProps)(OrderContainer);

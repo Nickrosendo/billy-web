@@ -26,7 +26,25 @@ let ACTIONS={
 	REMOVE_CURRENT_ORDER_ITEM: ({ items, ...state }, { itemId }) => ({
 		todos: items.filter(i => i._id!==itemId),
 		...state
-	})
+	}),
+	CLOSE_ORDER: ({ ...state }, {orderId} ) => {
+		console.log('orderId: ', orderId)
+		const orderIndex = state.history.findIndex( o => o.id === orderId)
+		if(orderIndex !== -1) {
+			console.log('entrou orderIndex')
+			let closedOrder = { ...state.history[orderIndex] }
+			let updatedHistory = [...state.history]
+			closedOrder.status = 'finalizada'
+			updatedHistory[orderIndex] = closedOrder
+			if(orderId === state.currentOrder.id) {
+				console.log('entrou currentOrder')
+				return ({ ...state, history: updatedHistory, currentOrder: closedOrder })
+			}
+			console.log('entrou else')
+			return ({ ...state, history: updatedHistory })
+		}
+		return ({ ...state })
+	}
 };
 
 export default (state=INITIAL_STATE, action) => action&&ACTIONS[action.type]? ACTIONS[action.type](state, action):state;

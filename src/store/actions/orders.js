@@ -46,6 +46,28 @@ export const createOrder=(order) => async (dispatch, getState, { getFirebase, ge
 		});
 }
 
+export const closeOrder=(orderId) => async (dispatch,getState, { getFirebase, getFirestore }) => {
+  try {
+  const firestore = getFirestore();
+
+  await firestore.collection("orders").doc(orderId).update({
+	  status: 'finalizada'
+  }).then(() => {
+	console.log('atualizou')
+	dispatch({
+		type: 'CLOSE_ORDER',
+		orderId
+	})
+  })
+  return true
+  } catch(error) {
+	  if(error) {
+		  console.error("Error on closingOrder: ", error)
+		  return false;
+	  }
+  }
+}
+
 export function setOrderHistory(history) {
 	return {
 		type: 'SET_HISTORY',

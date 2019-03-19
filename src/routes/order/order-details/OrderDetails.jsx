@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import OrderItem from './OrderItem.jsx';
 
-import { updateCurrentOrder, setCurrentOrder } from '../../../store/actions/orders';
+import { updateCurrentOrder, setCurrentOrder, closeOrder } from '../../../store/actions/orders';
 
 import style from './OrderDetails.module.css';
 
@@ -22,8 +22,12 @@ class OrderDetails extends Component {
 		}
 	}
 
+	handleCloseOrder = () => {
+		this.props.closeOrder(this.props.orders.currentOrder.id)
+	}
+
 	handleUpdateOrderItem(updatedItem) {
-		
+
 		const itemIndex = this.props.orders.currentOrder.items.findIndex(i => i._id === updatedItem._id);
 		let updatedItems = [...this.props.orders.currentOrder.items];
 		if (itemIndex !== -1) {
@@ -66,12 +70,17 @@ class OrderDetails extends Component {
 			<div>
 				<h1 className="text-center"> Detalhes do pedido</h1>
 				<div className={style.orderDetailsOrderContainer}>
-					<Link className={style.orderDetailsAddMoreItensBtn} to={`/restaurantes/${this.props.orders.currentOrder.restaurantId}`}>
-						Adicionar mais itens
+					{
+						this.props.orders.currentOrder.status !== 'finalizada' ? (
+							<Link className={style.orderDetailsAddMoreItensBtn} to={`/restaurantes/${this.props.orders.currentOrder.restaurantId}`}>
+								Adicionar mais itens
 					</Link>
+						) : null
+					}
+
 					{this.props.orders.currentOrder.items.map(i =>
 						(
-							<OrderItem key={i._id + i.orderedDate} item={i} handleUpdateOrderItem={this.handleUpdateOrderItem} handleRemoveOrderItem={this.handleRemoveOrderItem} />
+							<OrderItem order={this.props.orders.currentOrder} key={i._id + i.orderedDate} item={i} handleUpdateOrderItem={this.handleUpdateOrderItem} handleRemoveOrderItem={this.handleRemoveOrderItem} />
 						)
 					)}
 					<p className={style.orderDetailsPaymentTitle}> Pagamento </p>
@@ -86,13 +95,22 @@ class OrderDetails extends Component {
 						</p>
 					</div>
 				</div>
-				<button className={style.orderDetailsPaymentBtn} >
-					Realizar pagamento
-				</button>
+				{
+					this.props.orders.currentOrder.status === 'finalizada' ? (
+						<h2 style={{ textAlign: "center", color: "green" }}>
+							{this.props.orders.currentOrder.status}
+						</h2>
+					) : (
+							<button className={style.orderDetailsPaymentBtn} onClick={this.handleCloseOrder}>
+								Realizar pagamento
+				        </button>
+						)
+
+				}
 			</div>
-		): (
-			<h1>Pedido não encontrado</h1>
-		);
+		) : (
+				<h1>Pedido não encontrado</h1>
+			);
 	}
 }
 
@@ -100,5 +118,6 @@ const mapStateToProps = (state) => ({ orders: state.orders })
 
 export default connect(mapStateToProps, {
 	updateCurrentOrder,
-	setCurrentOrder
+	setCurrentOrder,
+	closeOrder
 })(OrderDetails);

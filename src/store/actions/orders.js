@@ -27,23 +27,31 @@ export const fetchOrders=() => async (dispatch, getState, { getFirebase, getFire
 }
 
 export const createOrder=(order) => async (dispatch, getState, { getFirebase, getFirestore }) => {
-	const firestore=getFirestore();
-
-	await firestore.collection("orders").add(order).then(({ id }) => {
-		const createdOrder = {
-			id,
-			...order
-		}
-		dispatch({
-			type: 'CREATE_ORDER',
-			order: createdOrder
-		})
-		return true;
+	const createdOrder = {
+		id: new Date(),
+		...order
+	}
+	dispatch({
+		type: 'CREATE_ORDER',
+		order: createdOrder
 	})
-		.catch(err => {
-			console.error("Error adding document: ", err);
-			return false;
-		});
+	// const firestore=getFirestore();
+
+	// await firestore.collection("orders").add(order).then(({ id }) => {
+	// 	const createdOrder = {
+	// 		id,
+	// 		...order
+	// 	}
+	// 	dispatch({
+	// 		type: 'CREATE_ORDER',
+	// 		order: createdOrder
+	// 	})
+	// 	return true;
+	// })
+	// 	.catch(err => {
+	// 		console.error("Error adding document: ", err);
+	// 		return false;
+	// 	});
 }
 
 export const closeOrder=(orderId) => async (dispatch,getState, { getFirebase, getFirestore }) => {

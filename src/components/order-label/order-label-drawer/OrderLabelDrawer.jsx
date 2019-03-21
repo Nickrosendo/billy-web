@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 
+import OrderLabelDrawerContent from './OrderLabelDrawerContent.jsx';
+
 // import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 // import style from './OrderLabel.module.css';
@@ -33,7 +35,6 @@ class OrderLabelDrawer extends Component {
 
     render() {
         const { classes } = this.props;
-        console.log('clsses: ', this.props);
         return (
             <SwipeableDrawer
                 anchor="bottom"
@@ -42,9 +43,7 @@ class OrderLabelDrawer extends Component {
                 onOpen={this.props.toggleDrawer}
                 PaperProps={{ className: classes.paper }}
             >
-                <div>
-                    Pedido
-                </div>
+                <OrderLabelDrawerContent />
             </SwipeableDrawer>
         );
     }

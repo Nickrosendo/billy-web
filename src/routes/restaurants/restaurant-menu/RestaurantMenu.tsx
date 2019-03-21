@@ -101,7 +101,7 @@ class RestaurantMenu extends Component<IProps> {
 				items: [item],
 				status: 'iniciada'
 			};
-			this.props.createOrder(newOrder)
+			this.props.createOrder(newOrder);
 			// this.props.setCurrentOrder(currentOrder);
 
 		}

@@ -3,11 +3,12 @@ import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import style from './OrderLabel.module.css';
+// redux actions
+import { toggleOrderLabelBanner } from '../../store/actions/ui';
+import OrderLabelDrawer from './order-label-drawer/OrderLabelDrawer.jsx';
+import OrderLabelBanner from './order-label-banner/OrderLabelBanner.jsx';
 
-import OrderLabelDrawer from './OrderLabelDrawer.jsx';
-
-const mapStateToProps = (state) => ({ orders: state.orders })
+const mapStateToProps = (state) => ({ orders: state.orders, ui: state.ui })
 
 class OrderLabel extends Component {
 
@@ -15,34 +16,36 @@ class OrderLabel extends Component {
 		orderLabelDrawerOpen: false
 	}
 
-	openOrderLabelDrawer = () => {
-		this.setState({
-			orderLabelDrawerOpen: true
-		})
+	toggleOrderLabelDrawer = () => {
+		if (this.state.orderLabelDrawerOpen) {
+			this.setState({
+				orderLabelDrawerOpen: false
+			});
+		} else {
+			this.setState({
+				orderLabelDrawerOpen: true
+			});
+		}
+		this.props.toggleOrderLabelBanner();
 	}
-
-	closeOrderLabelDrawer = () => {
-		this.setState({
-			orderLabelDrawerOpen: false
-		})
-	}
-	
 
 	render() {
+
 		const { orders } = this.props;
-		return (orders && orders.currentOrder && orders.currentOrder.status !== 'finalizada' && orders.currentOrder.id && orders.currentOrder.items.length > 0 ? (
+		return (
 			<div>
-				<OrderLabelDrawer open={this.state.orderLabelDrawerOpen} openDrawer={this.openOrderLabelDrawer} closeDrawer={this.closeOrderLabelDrawer
-				}/>
-				<div className={style.orderLabelContainer} onClick={this.openOrderLabelDrawer}>
-					{/* <Link className={style.orderLabelContainer} to={`/pedidos/${orders.currentOrder.id}`}></Link> */}
-					<i className="icon icon-bell" style={{ fontSize: 20 }} />
-					<span style={{ textTransform: 'capitalize' }}> Acompanhar pedido</span>
-					<span className={style.orderLabelPriceContainer}> R$ {orders.currentOrder.totalPrice}</span>
-				</div>
+				<OrderLabelBanner
+					open={this.props.ui.orderLabelBannerOpen}
+					currentOrder={orders.currentOrder}
+					openOrderLabelDrawer={this.toggleOrderLabelDrawer}
+				/>
+				<OrderLabelDrawer
+					open={this.state.orderLabelDrawerOpen}
+					toggleDrawer={this.toggleOrderLabelDrawer}
+				/>
 			</div>
-		) : null);
+		)
 	}
 };
 
-export default connect(mapStateToProps)(OrderLabel);
+export default connect(mapStateToProps, { toggleOrderLabelBanner })(OrderLabel);

@@ -35,6 +35,9 @@ export const createOrder=(order) => async (dispatch, getState, { getFirebase, ge
 		type: 'CREATE_ORDER',
 		order: createdOrder
 	})
+	dispatch({
+		type: 'TOGGLE_ORDER_LABEL_BANNER'
+	})
 	// const firestore=getFirestore();
 
 	// await firestore.collection("orders").add(order).then(({ id }) => {

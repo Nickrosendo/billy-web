@@ -1,6 +1,7 @@
 
 const INITIAL_STATE = {
-	drawerOpen: false
+	drawerOpen: false,
+	orderLabelBannerOpen: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -15,6 +16,12 @@ export default (state = INITIAL_STATE, action) => {
 				...state,
 				drawerOpen: false
 			};
+		case 'TOGGLE_ORDER_LABEL_BANNER':
+			const orderLabelBannerOpen = state.orderLabelBannerOpen ? (false) : (true);
+			return {
+				...state,
+				orderLabelBannerOpen
+			}	
 		default:
 			return state;
 	}

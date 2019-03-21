@@ -19,28 +19,30 @@ const styles = {
         paddingright: 20
     },
     paper: {
-        top: '25%',
-        left: 20,
-        right: 20,
         borderTopLeftRadius: 8,
-        borderTopRightRadius: 8
+        borderTopRightRadius: 8,
+        marginLeft: '5%',
+        marginRight: '5%',
+        marginTop: '15%',
+        height: '100%',
+        outline: 0
     }
 };
 
 class OrderLabelDrawer extends Component {
 
     render() {
-        const { orders, classes } = this.props;
+        const { classes } = this.props;
         console.log('clsses: ', this.props);
         return (
             <SwipeableDrawer
                 anchor="bottom"
                 open={this.props.open}
-                onClose={this.props.closeDrawer}
-                onOpen={this.props.openDrawer}
-                className={classes.list}
+                onClose={this.props.toggleDrawer}
+                onOpen={this.props.toggleDrawer}
+                PaperProps={{ className: classes.paper }}
             >
-                <div className={classes.paper}>
+                <div>
                     Pedido
                 </div>
             </SwipeableDrawer>

@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom'
+
+// redux actions 
+import { confirmOrder } from '../../../store/actions/orders';
 
 // import style from '../styles/OrderLabelDrawerContent.module.css';
 import OrderItem from '../../../routes/order/order-details/OrderItem';
@@ -27,6 +31,20 @@ class OrderLabelDrawerContent extends Component {
 
     render() {
         const { classes }=this.props;
+        const ConfirmOrderButton=withRouter(({ history }) => (
+            <Button variant="contained" color="primary" className={classes.root} onClick={ () => { 
+                const toBeConfirmedOrder = {
+                    ...this.props.orders.currentOrder,
+                    status: 'à confirmar'
+                }
+                this.props.confirmOrder(toBeConfirmedOrder).then(() => {
+                    history.push(`/pedidos/${this.props.orders.currentOrder.id}`);
+                });
+             }}>
+                Confirmar
+            </Button>
+        ))
+        
         return (
             <div style={{ padding: 10 }}>
                 <h1 style={{ textAlign: 'center' }}>Meu Pedido</h1>
@@ -38,9 +56,7 @@ class OrderLabelDrawerContent extends Component {
                     )}
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Button variant="contained" color="primary" className={classes.root}>
-                        Confirmar
-                    </Button>
+                    <ConfirmOrderButton />
                     <Button variant="contained" color="primary" className={classes.root}>
                         Cancelar
                     </Button>
@@ -52,4 +68,4 @@ class OrderLabelDrawerContent extends Component {
 
 const mapStateToProps=(state) => ({ orders: state.orders })
 
-export default withStyles(styles)(connect(mapStateToProps)(OrderLabelDrawerContent));
+export default withStyles(styles)(connect(mapStateToProps, { confirmOrder })(OrderLabelDrawerContent));

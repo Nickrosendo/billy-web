@@ -1,10 +1,10 @@
 
-const INITIAL_STATE = {
+const INITIAL_STATE={
 	drawerOpen: false,
 	orderLabelBannerOpen: false
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default (state=INITIAL_STATE, action) => {
 	switch (action.type) {
 		case 'OPEN_DRAWER_MENU':
 			return {
@@ -17,11 +17,16 @@ export default (state = INITIAL_STATE, action) => {
 				drawerOpen: false
 			};
 		case 'TOGGLE_ORDER_LABEL_BANNER':
-			const orderLabelBannerOpen = state.orderLabelBannerOpen ? (false) : (true);
+			const orderLabelBannerOpen=state.orderLabelBannerOpen? (false):(true);
 			return {
 				...state,
 				orderLabelBannerOpen
-			}	
+			}
+		case 'OPEN_ORDER_LABEL_BANNER':
+			return {
+				...state,
+				orderLabelBannerOpen: true
+			}
 		default:
 			return state;
 	}

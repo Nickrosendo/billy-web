@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { updateCurrentOrder, setCurrentOrder, createOrder } from '../../../store/actions/orders';
+import { updateCurrentOrder, setCurrentOrder, startOrder } from '../../../store/actions/orders';
 import { setRestaurant } from '../../../store/actions/restaurants';
 
 import RestaurantMenuItem from './RestaurantMenuItem';
@@ -59,7 +59,7 @@ interface IProps {
 	setRestaurant: Function,
 	setCurrentOrder: Function,
 	updateCurrentOrder: Function,
-	createOrder: Function
+	startOrder: Function
 }
 
 class RestaurantMenu extends Component<IProps> {
@@ -100,8 +100,8 @@ class RestaurantMenu extends Component<IProps> {
 				totalPrice,
 				items: [item],
 				status: 'iniciada'
-			};
-			this.props.createOrder(newOrder);
+			};			
+			this.props.startOrder(newOrder);
 			// this.props.setCurrentOrder(currentOrder);
 
 		}
@@ -167,5 +167,5 @@ export default connect(mapStateToProps, {
 	setRestaurant,
 	setCurrentOrder,
 	updateCurrentOrder,
-	createOrder
+	startOrder
 })(RestaurantMenu);

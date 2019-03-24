@@ -5,7 +5,7 @@ export const fetchOrders=() => async (dispatch, getState, { getFirebase, getFire
 	await firestore.collection("orders").get().then((snapshot) => {
 		const history=[];
 		snapshot.forEach((doc) => {
-			const date = doc.data().date.toDate()
+			const date=doc.data().date.toDate()
 			const order={
 				id: doc.id,
 				...doc.data(),
@@ -26,57 +26,66 @@ export const fetchOrders=() => async (dispatch, getState, { getFirebase, getFire
 		});
 }
 
-export const createOrder=(order) => async (dispatch, getState, { getFirebase, getFirestore }) => {
-	const createdOrder = {
-		id: new Date(),
-		...order
-	}
+export const confirmOrder=(order) => async (dispatch, getState, { getFirebase, getFirestore }) => {
+	const firestore=getFirestore();
+
+	return await firestore.collection("orders").add(order).then(({ id }) => {
+		const createdOrder={
+			id,
+			...order
+		}
+		dispatch({
+			type: 'CONFIRM_ORDER',
+			order: createdOrder
+		})
+		return true;
+	})
+		.catch(err => {
+			console.error("Error adding document: ", err);
+			return false;
+		});
+}
+
+export const startOrder=(order) => (dispatch) => {
 	dispatch({
-		type: 'CREATE_ORDER',
-		order: createdOrder
+		type: 'START_ORDER',
+		order
 	})
 	dispatch({
 		type: 'TOGGLE_ORDER_LABEL_BANNER'
 	})
-	// const firestore=getFirestore();
-
-	// await firestore.collection("orders").add(order).then(({ id }) => {
-	// 	const createdOrder = {
-	// 		id,
-	// 		...order
-	// 	}
-	// 	dispatch({
-	// 		type: 'CREATE_ORDER',
-	// 		order: createdOrder
-	// 	})
-	// 	return true;
-	// })
-	// 	.catch(err => {
-	// 		console.error("Error adding document: ", err);
-	// 		return false;
-	// 	});
 }
 
-export const closeOrder=(orderId) => async (dispatch,getState, { getFirebase, getFirestore }) => {
-  try {
-  const firestore = getFirestore();
+export const closeOrder=(orderId) => async (dispatch, getState, { getFirebase, getFirestore }) => {
+	try {
+		const firestore=getFirestore();
 
-  await firestore.collection("orders").doc(orderId).update({
-	  status: 'finalizada'
-  }).then(() => {
-	console.log('atualizou')
+		await firestore.collection("orders").doc(orderId).update({
+			status: 'finalizada'
+		}).then(() => {
+			console.log('atualizou')
+			dispatch({
+				type: 'CLOSE_ORDER',
+				orderId
+			})
+		})
+		return true
+	} catch (error) {
+		if (error) {
+			console.error("Error on closingOrder: ", error)
+			return false;
+		}
+	}
+}
+
+export const updateCurrentOrder = (currentOrder) => (dispatch) =>{
 	dispatch({
-		type: 'CLOSE_ORDER',
-		orderId
+		type: 'UPDATE_CURRENT_ORDER',
+		currentOrder
+	});
+	dispatch({
+		type: 'OPEN_ORDER_LABEL_BANNER'
 	})
-  })
-  return true
-  } catch(error) {
-	  if(error) {
-		  console.error("Error on closingOrder: ", error)
-		  return false;
-	  }
-  }
 }
 
 export function setOrderHistory(history) {
@@ -89,13 +98,6 @@ export function setOrderHistory(history) {
 export function setCurrentOrder(currentOrder) {
 	return {
 		type: 'SET_CURRENT_ORDER',
-		currentOrder
-	};
-}
-
-export function updateCurrentOrder(currentOrder) {
-	return {
-		type: 'UPDATE_CURRENT_ORDER',
 		currentOrder
 	};
 }

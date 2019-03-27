@@ -1,7 +1,32 @@
 import React, { Component } from 'react';
-import style from './RestaurantMenu.module.css';
+import Button from '@material-ui/core/Button';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-interface IProps {
+import style from './RestaurantMenuItem.module.css';
+
+
+const styles = {
+	root: {
+		color: 'white',
+		marginRight: 5,
+		width: '100%'
+	}
+};
+
+const theme = createMuiTheme({
+	typography: {
+		useNextVariants: true
+	},
+	palette: {
+		primary: {
+			main: 'rgb(255, 180, 106)'
+		}
+	}
+});
+
+
+interface IProps extends WithStyles<typeof styles> {
 	item: {
 		img: string,
 		name: String,
@@ -25,14 +50,13 @@ class RestaurantMenuItem extends Component<IProps, IState> {
 	}
 
 	handleOrderItem = () => {
-		const orderItem={
+		const orderItem = {
 			...this.props.item,
 			quantity: this.state.quantity,
 			observation: this.state.observation,
 			orderedDate: new Date(),
 			status: 'à confirmar'
 		};
-		console.log('orderItem: ', orderItem)
 		this.props.handleAddOrderItem(orderItem);
 	}
 
@@ -45,7 +69,7 @@ class RestaurantMenuItem extends Component<IProps, IState> {
 			this.setState({ quantity: this.state.quantity - 1 });
 	}
 
-	showObservation=() => {
+	showObservation = () => {
 		this.setState({ showObservation: true });
 	}
 
@@ -60,23 +84,8 @@ class RestaurantMenuItem extends Component<IProps, IState> {
 		}
 	}
 
-	// handleAddObservation = (event:React.FormEvent<HTMLInputElement>) => {
-	// 	const observation=event.currentTarget.value;
-	// 	if (observation) {
-	// 		this.setState({ observation });
-	// 	}
-	// }
-
-	// constructor(...args) {
-	// 	super(...args);
-	// 	this.handleOrderItem=this.handleOrderItem.bind(this);
-	// 	this.handleAdd=this.handleAdd.bind(this);
-	// 	this.handleSubtract=this.handleSubtract.bind(this);
-	// 	this.handleManualChange=this.handleManualChange.bind(this);
-	// 	this.handleAddObservation=this.handleAddObservation.bind(this);
-	// }
-
 	render() {
+		const { classes } = this.props;
 		return (
 			<div className={style.verticalListItem} >
 				<img src={this.props.item.img} />
@@ -93,9 +102,12 @@ class RestaurantMenuItem extends Component<IProps, IState> {
 						</div>
 					</div>
 
-					<div className={style.orderItemActionsContainer + 'text-left'} >
-						<p className={style.menuItemDataPrice} style={{ marginRight: 5 }} onClick={this.handleOrderItem}>Adicionar</p>
-						<p className={style.menuItemDataPrice} onClick={this.showObservation}>Detalhes</p>
+					<div className={style.orderItemActionsContainer} >
+						<MuiThemeProvider theme={theme}>
+							<Button variant="contained" color="primary" className={classes.root} onClick={this.handleOrderItem}>
+								Adicionar
+              </Button>
+						</MuiThemeProvider>
 					</div>
 				</div>
 			</div>
@@ -104,4 +116,4 @@ class RestaurantMenuItem extends Component<IProps, IState> {
 	}
 }
 
-export default RestaurantMenuItem;
+export default withStyles(styles)(RestaurantMenuItem);

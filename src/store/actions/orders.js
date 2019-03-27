@@ -78,6 +78,15 @@ export const closeOrder=(orderId) => async (dispatch, getState, { getFirebase, g
 	}
 }
 
+export const clearCurrentOrder = () => (dispatch) => {
+	dispatch({
+		type: 'CLEAR_CURRENT_ORDER'
+	})
+	dispatch({
+		type: 'CLOSE_ORDER_LABEL'
+	})
+}
+
 export const updateCurrentOrder = (currentOrder) => (dispatch) =>{
 	dispatch({
 		type: 'UPDATE_CURRENT_ORDER',

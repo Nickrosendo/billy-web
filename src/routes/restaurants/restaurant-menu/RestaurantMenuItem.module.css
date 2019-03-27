@@ -128,7 +128,7 @@
 
 .verticalListItem img {
   width: 100px;
-  margin: 0 5px;
+  margin: 5px;
   max-width: 30%;
   height: 100px;
   max-height: 40%;
@@ -154,4 +154,11 @@
 
 .itemContentData p {
   color: rgb(255, 180, 106);
+}
+
+.orderItemActionsContainer {
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  margin-top: 4px;
 }

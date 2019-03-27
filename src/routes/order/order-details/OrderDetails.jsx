@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import OrderItem from './OrderItem.jsx';
@@ -100,11 +100,7 @@ class OrderDetails extends Component {
 					</div>
 				</div>
 				{
-					this.props.orders.currentOrder.status==='finalizada'? (
-						<h2 style={{ textAlign: "center", color: "green" }}>
-							{this.props.orders.currentOrder.status}
-						</h2>
-					):(
+					this.props.orders.currentOrder.status==='finalizada'? null:(
 							<button className={style.orderDetailsPaymentBtn} onClick={this.handleCloseOrder}>
 								Realizar pagamento
 				        </button>

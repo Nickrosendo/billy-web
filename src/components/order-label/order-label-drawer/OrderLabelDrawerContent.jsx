@@ -76,7 +76,8 @@ class OrderLabelDrawerContent extends Component {
             <Button variant="contained" color="primary" className={classes.root} onClick={() => {
                 const toBeConfirmedOrder={
                     ...this.props.orders.currentOrder,
-                    status: 'à confirmar'
+                    status: 'à confirmar',
+                    userID: this.props.firebase.auth.uid
                 }
                 this.props.confirmOrder(toBeConfirmedOrder).then(() => {
                     history.push(`/pedidos/${this.props.orders.currentOrder.id}`);
@@ -109,6 +110,6 @@ class OrderLabelDrawerContent extends Component {
     }
 }
 
-const mapStateToProps=(state) => ({ orders: state.orders })
+const mapStateToProps=(state) => ({ orders: state.orders, firebase: state.firebase })
 
 export default withStyles(styles)(connect(mapStateToProps, { confirmOrder, updateCurrentOrder, clearCurrentOrder })(OrderLabelDrawerContent));

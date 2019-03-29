@@ -7,7 +7,6 @@ import style from './OrdersList.module.css';
 
 const OrdersList=(props) => {
 	const { orders }=props;
-	// console.log('orders list: ', orders);
 	const ordersMap=() => orders.map(item => (
 		<OrdersListItem order={item} key={item.id} />
 	));

@@ -45,7 +45,10 @@ class App extends Component<IProps> {
 
 	initializeApp = () => {
 		Promise.all([this.props.fetchOrders(), this.props.fetchRestaurants()])
-			.then(() => this.setState({ loading: false }))
+			.then((res) => {
+				console.log('initialized: ', res)
+				this.setState({ loading: false })
+			})
 			.catch((error) => {
 				console.error('Error initializing App::', error)
 			})

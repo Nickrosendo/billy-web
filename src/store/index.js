@@ -8,9 +8,9 @@ import firebase from '../config/firebase';
 
 let ssrCompose;
 if (typeof window!=='undefined') {
-	ssrCompose=compose(applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })), reactReduxFirebase(firebase), reduxFirestore(firebase));
+	ssrCompose=compose(applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })), reactReduxFirebase(firebase, { attachAuthIsReady: true}), reduxFirestore(firebase));
 	if (typeof window.__REDUX_DEVTOOLS_EXTENSION__==='function') {
-		ssrCompose=compose(applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),  reactReduxFirebase(firebase), reduxFirestore(firebase), window.__REDUX_DEVTOOLS_EXTENSION__());
+		ssrCompose=compose(applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),  reactReduxFirebase(firebase, { attachAuthIsReady: true}), reduxFirestore(firebase), window.__REDUX_DEVTOOLS_EXTENSION__());
 	}
 }
 

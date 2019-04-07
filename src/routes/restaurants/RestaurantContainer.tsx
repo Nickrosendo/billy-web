@@ -10,12 +10,11 @@ import RestaurantMenu from './restaurant-menu/RestaurantMenu';
 import OrderLabel from '../../components/order-label/OrderLabel.jsx';
 
 import { setRestaurants } from '../../store/actions/restaurants';
+import Loading from '../../components/Loading';
 
 const LazyRestaurantList = lazy(() => import('./restaurants-list/RestaurantsList'));
 const LazyRestaurantMenu = lazy(() => import('./restaurant-menu/RestaurantMenu'));
 const LazyOrderLabel = lazy(() => import('../../components/order-label/OrderLabel.jsx'));
-
-const loadingComponent = () => (<div> Loading...</div>);
 
 interface Order {
 	id: String,
@@ -54,7 +53,7 @@ class RestaurantsContainer extends Component<IProps> {
 			<div style={this.props.orders.currentOrder && this.props.orders.currentOrder.items && this.props.orders.currentOrder.items.length > 0 ? { paddingBottom: 66 } : {}}>
 				<Switch>
 					{
-						this.props.restaurants.list.length ? (<Route path="/restaurantes" exact component={() => <Suspense fallback={loadingComponent()}> <LazyRestaurantList restaurants={this.props.restaurants.list} /> </Suspense>} />) : null
+						this.props.restaurants.list.length ? (<Route path="/restaurantes" exact component={() => <Suspense fallback={<Loading />}> <LazyRestaurantList restaurants={this.props.restaurants.list} /> </Suspense>} />) : null
 					}
 					<Route path="/restaurantes/:id" component={RestaurantMenu} />
 				</Switch>

@@ -23,28 +23,20 @@ import SecurityContainer from './routes/security/SecurityContainer.jsx';
 import Header from './components/Header';
 import DrawerMenu from './components/drawer-menu/DrawerMenu';
 
+import store from './store';
+
 // actions
 import { fetchOrders } from './store/actions/orders';
 import { fetchRestaurants } from './store/actions/restaurants';
 
-interface IProps {
-	firebase: {
-		auth: {
-			isLoaded: Boolean
-		}
-	},
-	fetchOrders: Function,
-	fetchRestaurants: Function
-}
+class App extends Component {
 
-class App extends Component<IProps> {
-
-	state = {
-		loading: false
+	state={
+		loading: true
 	}
 
-	initializeApp = () => {
-		Promise.all([this.props.fetchOrders(), this.props.fetchRestaurants()])
+	initializeApp=() => {
+		Promise.all([store.firebaseAuthIsReady, this.props.fetchOrders(), this.props.fetchRestaurants()])
 			.then((res) => {
 				console.log('initialized: ', res)
 				this.setState({ loading: false })
@@ -54,19 +46,18 @@ class App extends Component<IProps> {
 			})
 	}
 
-	constructor(args: any) {
+	constructor(args) {
 		super(args);
 		this.initializeApp();
 	}
 
 	render() {
-
-		// only start app when firebase auth is Loaded
-		if (!this.props.firebase.auth.isLoaded) {
-			return false
-		}
-
-		return this.state.loading ? (<p>Inicializando...</p>) : (
+		console.log('isLoaded: ', this.props.firebase.auth);
+		// // only start app when firebase auth is Loaded
+		// if (!this.props.firebase.auth.isLoaded) {
+		// 	return false
+		// }
+		return (
 			<div id="app">
 				<Router>
 					<div>
@@ -91,14 +82,6 @@ class App extends Component<IProps> {
 	}
 }
 
-interface mappedStoreState {
-	firebase: {
-		auth: {
-			isLoaded: Boolean
-		}
-	}
-}
-
-const mapStateToProps = (state: mappedStoreState) => ({ firebase: state.firebase })
+const mapStateToProps=(state) => ({ firebase: state.firebase })
 
 export default connect(mapStateToProps, { fetchOrders, fetchRestaurants })(App);

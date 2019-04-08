@@ -5,8 +5,9 @@ export const fetchOrders = () => async (
 ) => {
   const firestore = getFirestore();
   const firebase = getFirebase();
-
+  console.log('entrou');
   firebase.auth().onAuthStateChanged(async (user) => {
+    console.log('user: ', user)
 	if (user && user.uid) {
 		const {uid} = user;
 		await firestore
@@ -14,6 +15,7 @@ export const fetchOrders = () => async (
 		  .where("userID", "==", uid)
 		  .get()
 		  .then(snapshot => {
+        console.log('uid:', uid)
 			const history = [];
 			snapshot.forEach(doc => {
 			  const date = doc.data().date.toDate();
@@ -21,10 +23,11 @@ export const fetchOrders = () => async (
 				id: doc.id,
 				...doc.data(),
 				date
-			  };
+        };
+        console.log('order: ', order)
 			  history.push(order);
 			});
-			
+      console.log('history: ', history)
 			dispatch({
 			  type: "SET_HISTORY",
 			  history

@@ -9,14 +9,10 @@ import OrdersList from './orders-list/OrdersList.jsx';
 class OrderContainer extends Component {
 
 	render() {
+
 		return (
 				<Switch>
-					{
-						this.props.orders.history.length?
-							(
-								<Route path="/pedidos/" exact component={() => <OrdersList orders={this.props.orders.history} />} />
-							):null
-					}
+					<Route path="/pedidos/" exact component={() => <OrdersList orders={this.props.orders.history} />} />
 					<Route path="/pedidos/:id" component={OrderDetails} />
 				</Switch>
 			);

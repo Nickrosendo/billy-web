@@ -7,7 +7,53 @@ import { updateCurrentOrder, setCurrentOrder, closeOrder } from '../../../store/
 
 import style from './OrderDetails.module.css';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+import green from '@material-ui/core/colors/green';
+import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import CheckIcon from '@material-ui/icons/Check';
+import SaveIcon from '@material-ui/icons/Save';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles=theme => ({
+	root: {
+		display: 'flex',
+		alignItems: 'center',
+	},
+	wrapper: {
+		margin: theme.spacing.unit,
+		position: 'relative',
+	},
+	buttonSuccess: {
+		backgroundColor: green[500],
+		'&:hover': {
+			backgroundColor: green[700],
+		},
+	},
+	fabProgress: {
+		color: green[500],
+		position: 'absolute',
+		top: -6,
+		left: -6,
+		zIndex: 1,
+	},
+	buttonProgress: {
+		color: green[500],
+		position: 'absolute',
+		top: '50%',
+		left: '50%',
+		marginTop: -12,
+		marginLeft: -12,
+	},
+});
+
+
 class OrderDetails extends Component {
+
+	state={
+		success: false,
+		loading: false
+	}
 
 	handleSetCurrentOrder=() => {
 		if (this.props.orders.currentOrder&&this.props.orders.currentOrder.id===this.props.match.params.id) {
@@ -17,10 +63,6 @@ class OrderDetails extends Component {
 			const currentOrder=this.props.orders.history.find(o => o.id===this.props.match.params.id);
 			this.props.setCurrentOrder(currentOrder);
 		}
-	}
-
-	handleCloseOrder=() => {
-		this.props.closeOrder(this.props.orders.currentOrder.id)
 	}
 
 	handleUpdateOrderItem(updatedItem) {
@@ -55,6 +97,25 @@ class OrderDetails extends Component {
 		});
 	}
 
+	handleButtonClick=() => {
+		if (!this.state.loading) {
+			this.setState(
+				{
+					success: false,
+					loading: true,
+				},
+				() => {
+					this.props.closeOrder(this.props.orders.currentOrder.id).then(() => {
+						this.setState({
+							loading: false,
+							success: true,
+						});
+					})
+				},
+			);
+		}
+	};
+
 	constructor(...args) {
 		super(...args);
 		this.handleUpdateOrderItem=this.handleUpdateOrderItem.bind(this);
@@ -63,6 +124,9 @@ class OrderDetails extends Component {
 	}
 
 	render() {
+		const { loading, success }=this.state;
+		const { classes }=this.props;
+
 		return this.props.orders.currentOrder&&this.props.orders.currentOrder.id? (
 			<div>
 				{/* <h1 className="text-center"> Detalhes do pedido</h1> */}
@@ -98,12 +162,31 @@ class OrderDetails extends Component {
 				</div>
 				{
 					this.props.orders.currentOrder.status==='finalizada'? null:(
-							<button className={style.orderDetailsPaymentBtn} onClick={this.handleCloseOrder}>
-								Realizar pagamento
-				        </button>
-						)
+						<button className={style.orderDetailsPaymentBtn} onClick={this.handleCloseOrder}>
+							Realizar pagamento
+				    </button>
+					)
 
 				}
+				<div className={classes.root}>
+					<div className={classes.wrapper}>
+						<Fab color="primary" onClick={this.handleButtonClick}>
+							{this.props.orders.currentOrder.status==='finalizada'? <CheckIcon />:<SaveIcon />}
+						</Fab>
+						{loading&&<CircularProgress size={68} className={classes.fabProgress} />}
+					</div>
+					<div className={classes.wrapper}>
+						<Button
+							variant="contained"
+							color="primary"
+							disabled={this.props.orders.currentOrder.status==='finalizada'}
+							onClick={this.handleButtonClick}
+						>
+							{this.props.orders.currentOrder.status==='finalizada'? 'Pagamento Realizado' :'Realizar Pagamento'}
+          </Button>
+						{loading&&<CircularProgress size={24} className={classes.buttonProgress} />}
+					</div>
+				</div>
 			</div>
 		):(
 				<h1>Pedido não encontrado</h1>
@@ -113,8 +196,8 @@ class OrderDetails extends Component {
 
 const mapStateToProps=(state) => ({ orders: state.orders })
 
-export default connect(mapStateToProps, {
+export default withStyles(styles)(connect(mapStateToProps, {
 	updateCurrentOrder,
 	setCurrentOrder,
 	closeOrder
-})(OrderDetails);
+})(OrderDetails));

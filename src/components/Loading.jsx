@@ -4,12 +4,12 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
   progress: {
-		width: 100,
-		height: 100,
+		// width: 100,
+		// height: 100,
 		marginLeft: '40%',
-		marginTop: 200,
+		marginTop: '40%',
 		color: '#ffb46a',
-		fontSize: 25
+		// fontSize: 25
   },
 });
 

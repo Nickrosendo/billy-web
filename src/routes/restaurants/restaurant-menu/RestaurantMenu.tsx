@@ -70,7 +70,6 @@ class RestaurantMenu extends Component<IProps> {
 		}
 		if (this.props.restaurants.list.length && this.props.match.params.id) {
 			const currentRestaurant = this.props.restaurants.list.find(r => r._id === this.props.match.params.id);
-			console.log('current::', currentRestaurant);
 			this.props.setRestaurant(currentRestaurant);
 		}
 	}

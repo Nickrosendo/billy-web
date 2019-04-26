@@ -9,7 +9,6 @@ interface IProps {
 }
 
 const RestaurantsList:React.SFC<IProps> = (props) => {
-	console.log('list props: ', props);
 	return (
 		<div>
 			<div className={styles.logoContainer}>

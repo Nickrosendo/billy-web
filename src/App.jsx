@@ -22,8 +22,7 @@ import SecurityContainer from './routes/security/SecurityContainer.jsx';
 // ui components
 import Header from './components/Header';
 import DrawerMenu from './components/drawer-menu/DrawerMenu';
-
-import store from './store';
+import Loading from './components/Loading';
 
 // actions
 import { fetchOrders } from './store/actions/orders';
@@ -36,9 +35,8 @@ class App extends Component {
 	}
 
 	initializeApp=() => {
-		Promise.all([store.firebaseAuthIsReady, this.props.fetchOrders(), this.props.fetchRestaurants()])
+		Promise.all([this.props.fetchOrders(), this.props.fetchRestaurants()])
 			.then((res) => {
-				console.log('initialized: ', res)
 				this.setState({ loading: false })
 			})
 			.catch((error) => {
@@ -52,12 +50,8 @@ class App extends Component {
 	}
 
 	render() {
-		console.log('isLoaded: ', this.props.firebase.auth);
-		// // only start app when firebase auth is Loaded
-		// if (!this.props.firebase.auth.isLoaded) {
-		// 	return false
-		// }
-		return (
+		
+		return this.state.loading ? (<Loading />) : (
 			<div id="app">
 				<Router>
 					<div>

@@ -5,41 +5,36 @@ export const fetchOrders = () => async (
 ) => {
   const firestore = getFirestore();
   const firebase = getFirebase();
-  console.log('entrou');
-  firebase.auth().onAuthStateChanged(async (user) => {
-    console.log('user: ', user)
-	if (user && user.uid) {
-		const {uid} = user;
-		await firestore
-		  .collection("orders")
-		  .where("userID", "==", uid)
-		  .get()
-		  .then(snapshot => {
-        console.log('uid:', uid)
-			const history = [];
-			snapshot.forEach(doc => {
-			  const date = doc.data().date.toDate();
-			  const order = {
-				id: doc.id,
-				...doc.data(),
-				date
-        };
-        console.log('order: ', order)
-			  history.push(order);
-			});
-      console.log('history: ', history)
-			dispatch({
-			  type: "SET_HISTORY",
-			  history
-			});
-			return true;
-		  })
-		  .catch(err => {
-			console.error("Error fetching Orders", err);
-			return false;
-		  });
-	  } 
-  });  
+  firebase.auth().onAuthStateChanged(async user => {
+    if (user && user.uid) {
+      const { uid } = user;
+      await firestore
+        .collection("orders")
+        .where("userID", "==", uid)
+        .get()
+        .then(snapshot => {
+          const history = [];
+          snapshot.forEach(doc => {
+            const date = doc.data().date.toDate();
+            const order = {
+              id: doc.id,
+              ...doc.data(),
+              date
+            };
+            history.push(order);
+          });
+          dispatch({
+            type: "SET_HISTORY",
+            history
+          });
+          return true;
+        })
+        .catch(err => {
+          console.error("Error fetching Orders", err);
+          return false;
+        });
+    }
+  });
 };
 
 export const confirmOrder = order => async (

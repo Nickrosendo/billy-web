@@ -42,16 +42,13 @@ let ACTIONS={
 		console.log('orderId: ', orderId)
 		const orderIndex=state.history.findIndex(o => o.id===orderId)
 		if (orderIndex!==-1) {
-			console.log('entrou orderIndex')
 			let closedOrder={ ...state.history[orderIndex] }
 			let updatedHistory=[...state.history]
 			closedOrder.status='finalizada'
 			updatedHistory[orderIndex]=closedOrder
 			if (orderId===state.currentOrder.id) {
-				console.log('entrou currentOrder')
 				return ({ ...state, history: updatedHistory, currentOrder: closedOrder })
 			}
-			console.log('entrou else')
 			return ({ ...state, history: updatedHistory })
 		}
 		return ({ ...state })

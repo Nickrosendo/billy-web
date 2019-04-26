@@ -48,13 +48,14 @@ interface IProps {
 class RestaurantsContainer extends Component<IProps> {
 
 	render() {
-		console.log("render: ", this.props.restaurants.list);
 		return (
 			<div style={this.props.orders.currentOrder && this.props.orders.currentOrder.items && this.props.orders.currentOrder.items.length > 0 ? { paddingBottom: 66 } : {}}>
 				<Switch>
-					{
-						this.props.restaurants.list.length ? (<Route path="/restaurantes" exact component={() => <Suspense fallback={<Loading />}> <LazyRestaurantList restaurants={this.props.restaurants.list} /> </Suspense>} />) : null
-					}
+					<Route path="/restaurantes" exact>
+						<Suspense fallback={<Loading />}>
+							<LazyRestaurantList restaurants={this.props.restaurants.list} />
+						</Suspense>
+					</Route>
 					<Route path="/restaurantes/:id" component={RestaurantMenu} />
 				</Switch>
 				<OrderLabel />

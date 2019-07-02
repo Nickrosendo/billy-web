@@ -46,7 +46,7 @@ export const confirmOrder = order => async (
 
   return await firestore
     .collection("orders")
-    .add(order)
+    .add(order)    
     .then(({ id }) => {
       const createdOrder = {
         id,
@@ -56,7 +56,21 @@ export const confirmOrder = order => async (
         type: "CONFIRM_ORDER",
         order: createdOrder
       });
-      return true;
+
+      firestore.collection("orders").doc(createdOrder.id)
+        .onSnapshot(function(doc) {
+          dispatch({
+            type: "UPDATE_CURRENT_ORDER",
+            currentOrder: {
+              id: doc.id,
+              ...doc.data()
+            }
+          }); 
+          console.log("Current data: ", doc.data());
+          console.log("Current document: ", doc);
+        });
+      
+      return createdOrder;
     })
     .catch(err => {
       console.error("Error adding document: ", err);
@@ -73,6 +87,27 @@ export const startOrder = order => dispatch => {
     type: "TOGGLE_ORDER_LABEL_BANNER"
   });
 };
+
+export const listenToOrderChanges = orderId => async (
+  dispatch,
+  getState,
+  { getFirebase, getFirestore }
+) => {
+  try {
+    const firestore = getFirestore();
+
+    firestore.collection("orders").doc(orderId)
+    .onSnapshot(function(doc) {
+        console.log("Current data: ", doc.data());
+    });
+
+  } catch (error) {
+    if (error) {
+      console.error("Error on listen to changes: ", error);
+      return false;
+    }
+  }
+}
 
 export const closeOrder = orderId => async (
   dispatch,

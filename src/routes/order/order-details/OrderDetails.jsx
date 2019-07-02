@@ -70,6 +70,7 @@ class OrderDetails extends Component {
         o => o.id === this.props.match.params.id
       );
       this.props.setCurrentOrder(currentOrder);
+      // this.props.listenToOrderChanges(currentOrder.id)
     }
   };
 
@@ -226,7 +227,7 @@ export default withStyles(styles)(
     {
       updateCurrentOrder,
       setCurrentOrder,
-      closeOrder
+      closeOrder    
     }
   )(OrderDetails)
 );

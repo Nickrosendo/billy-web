@@ -1,0 +1,52 @@
+{
+  "name": "buy-list",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
+    "axios": "^0.18.0",
+    "firebase": "^5.8.3",
+    "firebase-tools": "^6.3.1",
+    "moment": "^2.24.0",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-redux": "^6.0.0",
+    "react-redux-firebase": "^2.2.6",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.3",
+    "redux": "^4.0.1",
+    "redux-firestore": "^0.6.4",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "deploy": "yarn build && firebase deploy",
+    "serve-build": "yarn build && serve -s build",
+    "serve": "serve",
+    "firebase": "firebase"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@types/jest": "^24.0.4",
+    "@types/node": "^11.9.3",
+    "@types/react": "^16.8.3",
+    "@types/react-dom": "^16.8.1",
+    "@types/react-redux": "^7.0.1",
+    "@types/react-router-dom": "^4.3.1",
+    "prop-types": "^15.6.2",
+    "serve": "^10.1.2",
+    "typescript": "^3.3.3"
+  }
+}

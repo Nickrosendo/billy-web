@@ -1,0 +1,164 @@
+.detailContainer {
+  padding-top: 15px;
+}
+
+.menuItemContainer {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 15px 0;
+  text-align: center;
+}
+
+.menuItemName {
+  background: transparent;
+  color: rgb(255, 180, 106);
+  border: 1px solid rgb(255, 180, 106);
+  font-weight: 500;
+  font-size: 22px;
+  padding: 8px;
+  margin: 8px 0;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.menuItemData {
+  margin: 10px 0;
+}
+
+.menuItemDataPrice {
+  display: inline-block;
+  width: auto;
+  margin-top: 8px;
+  padding: 8px;
+  background: rgb(255, 180, 106);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.menuItemDataIngredients {
+  background: #fff;
+  margin: 10px 10%;
+  border-radius: 8px;
+  padding: 8px;
+  text-align: left;
+}
+
+.menuItemDataIngredientsTitle {
+  font-size: 16px;
+  color: rgb(255, 180, 106);
+  font-weight: 500;
+}
+
+.menuItemDataOrder {
+  padding: 6px;
+  border-radius: 6px;
+  background: rgb(255, 180, 106);
+  color: #fff;
+  border: none;
+  margin-top: 10px;
+  display: block;
+  width: 80%;
+}
+
+.orderItemContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.orderItemInput {
+  padding: 6px;
+  min-width: 10px;
+  width: 50px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.orderItemQuantityContainer {
+  display: inline-block;
+}
+
+.orderItemQuantityContainer input,
+.orderItemQuantityContainer button {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.orderItemQuantityBtn {
+  padding: 4px;
+  display: block;
+  margin: 0 5px;
+}
+
+.confirmOrderLabelContainer {
+  height: auto;
+  font-size: 16px;
+  width: 100%;
+  background: #216C2A;
+  color: #fff;
+  padding: 15px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+}
+
+.verticalListItem {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 15px;
+  margin-left: 0;
+  width: 100%;
+  text-decoration: none;
+  color: #444;
+  border: 1px solid #aaa;
+  border-radius: 8px;
+  background: #fff;
+  /* box-shadow: 3px 3px 5px #ccc; */
+  box-shadow: 0 8px 6px -6px black;
+}
+
+.verticalListItem img {
+  width: 100px;
+  margin: 5px;
+  max-width: 30%;
+  height: 100px;
+  max-height: 40%;
+  border-radius: 12px;
+}
+
+.itemContent {
+  display: flex;
+  padding: 5px;
+  flex-direction: column;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 12px;
+  width: calc(100% - 50px);
+}
+
+.itemContentData {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemContentData p {
+  color: rgb(255, 180, 106);
+}
+
+.orderItemActionsContainer {
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  margin-top: 4px;
+}

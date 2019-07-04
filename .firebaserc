@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "billy-web"
+  },
+  "targets": {
+    "billy-web": {
+      "hosting": {
+        "client": [
+          "billy-client"
+        ]
+      }
+    }
+  }
+}

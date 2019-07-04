@@ -1,0 +1,52 @@
+.orderDetailsOrderContainer {
+	padding: 8px;
+	color: #444;
+}
+
+.orderDetailsAddMoreItensBtn {
+	border: 1px solid rgb(255, 180, 106);
+	border-radius: 8px;
+	color: rgb(255, 180, 106);
+	background: #fff;
+	box-shadow: 3px 3px 5px #ccc;
+	width: 100%;
+	padding: 8px;
+	font-size: 16px;
+	text-align: center;
+	display: inline-block;
+}
+
+.orderStatus {
+	color: rgb(255, 180, 106);
+	text-align: center;
+}
+
+.orderDetailsPaymentTitle {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.orderDetailsPaymentContainer {
+	border-bottom: 1px dotted #444;
+	border-top: 1px dotted #444;
+	margin: 10px 0;
+	padding: 10px;
+}
+
+.orderDetailsPaymentBtn {
+	padding: 6px;
+	border-radius: 6px;
+	background: rgb(255, 180, 106);
+	box-shadow: 3px 3px 5px #ccc;
+	color: #fff;
+	border: none;
+	margin-top: 10px;
+	display: block;
+	width: 100%;
+}
+
+
+.orderDeatilsContentField {
+	display: flex;
+	justify-content: space-between;
+}

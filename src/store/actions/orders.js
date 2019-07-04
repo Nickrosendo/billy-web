@@ -5,36 +5,35 @@ export const fetchOrders = () => async (
 ) => {
   const firestore = getFirestore();
   const firebase = getFirebase();
-  firebase.auth().onAuthStateChanged(async user => {
-    if (user && user.uid) {
-      const { uid } = user;
-      await firestore
-        .collection("orders")
-        .where("userID", "==", uid)
-        .get()
-        .then(snapshot => {
-          const history = [];
-          snapshot.forEach(doc => {
-            const date = doc.data().date.toDate();
-            const order = {
-              id: doc.id,
-              ...doc.data(),
-              date
-            };
-            history.push(order);
-          });
-          dispatch({
-            type: "SET_HISTORY",
-            history
-          });
-          return true;
-        })
-        .catch(err => {
-          console.error("Error fetching Orders", err);
-          return false;
-        });
-    }
-  });
+
+  const uid = firebase.auth().getUid();
+
+  await firestore
+    .collection("orders")
+    .where("userID", "==", uid)    
+    .orderBy("date", "desc")
+    .get()
+    .then(snapshot => {
+      const history = [];
+      snapshot.forEach(doc => {
+        const date = doc.data().date.toDate();
+        const order = {
+          id: doc.id,
+          ...doc.data(),
+          date
+        };
+        history.push(order);
+      });
+      dispatch({
+        type: "SET_HISTORY",
+        history
+      });
+      return true;
+    })
+    .catch(err => {
+      console.error("Error fetching Orders", err);
+      return false;
+    });
 };
 
 export const confirmOrder = order => async (
@@ -46,7 +45,7 @@ export const confirmOrder = order => async (
 
   return await firestore
     .collection("orders")
-    .add(order)    
+    .add(order)
     .then(({ id }) => {
       const createdOrder = {
         id,
@@ -57,7 +56,9 @@ export const confirmOrder = order => async (
         order: createdOrder
       });
 
-      firestore.collection("orders").doc(createdOrder.id)
+      firestore
+        .collection("orders")
+        .doc(createdOrder.id)
         .onSnapshot(function(doc) {
           dispatch({
             type: "UPDATE_CURRENT_ORDER",
@@ -65,11 +66,11 @@ export const confirmOrder = order => async (
               id: doc.id,
               ...doc.data()
             }
-          }); 
+          });
           console.log("Current data: ", doc.data());
           console.log("Current document: ", doc);
         });
-      
+
       return createdOrder;
     })
     .catch(err => {
@@ -96,18 +97,19 @@ export const listenToOrderChanges = orderId => async (
   try {
     const firestore = getFirestore();
 
-    firestore.collection("orders").doc(orderId)
-    .onSnapshot(function(doc) {
+    firestore
+      .collection("orders")
+      .doc(orderId)
+      .onSnapshot(function(doc) {
         console.log("Current data: ", doc.data());
-    });
-
+      });
   } catch (error) {
     if (error) {
       console.error("Error on listen to changes: ", error);
       return false;
     }
   }
-}
+};
 
 export const closeOrder = orderId => async (
   dispatch,

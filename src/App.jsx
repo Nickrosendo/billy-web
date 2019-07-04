@@ -27,6 +27,7 @@ import Loading from './components/Loading';
 // actions
 import { fetchOrders } from './store/actions/orders';
 import { fetchRestaurants } from './store/actions/restaurants';
+import { fetchProfile } from './store/actions/auth';
 
 class App extends Component {
 
@@ -35,7 +36,7 @@ class App extends Component {
 	}
 
 	initializeApp=() => {
-		Promise.all([this.props.fetchOrders(), this.props.fetchRestaurants()])
+		Promise.all([this.props.fetchOrders(), this.props.fetchRestaurants(), this.props.fetchProfile()])
 			.then((res) => {
 				this.setState({ loading: false })
 			})
@@ -78,4 +79,4 @@ class App extends Component {
 
 const mapStateToProps=(state) => ({ firebase: state.firebase })
 
-export default connect(mapStateToProps, { fetchOrders, fetchRestaurants })(App);
+export default connect(mapStateToProps, { fetchOrders, fetchRestaurants, fetchProfile })(App);

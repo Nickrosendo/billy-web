@@ -2,8 +2,8 @@
 const INITIAL_STATE = {
 	isAuth: false,
 	loginError: null,
-	signUpError: null,
-	name: 'Nicolas'
+  signUpError: null,
+  profile: {}
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -19,7 +19,12 @@ export default (state = INITIAL_STATE, action) => {
 				...state,
 				isAuth: true,
 				loginError: null
-			};
+      };
+    case 'SET_PROFILE':
+        return {
+          ...state,
+          profile: {...action.profile}
+        }  
 		case 'LOGIN_ERROR':
 			console.error('Erro ao identificar usuario:: ', action.error);
 			return {

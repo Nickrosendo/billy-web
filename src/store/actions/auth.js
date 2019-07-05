@@ -66,13 +66,23 @@ export const signUp = newUser => (
 	firebase
 	.auth()
 	.createUserWithEmailAndPassword(newUser.email, newUser.password)
-	.then(res =>
-		firestore
+	.then(res => {
+
+    const profile = {
+			firstName: newUser.firstName,
+			lastName: newUser.lastName,
+			email: newUser.email
+		};
+
+    firestore
 		.collection("users")
 		.doc(res.user.uid)
-		.set({ firstName: newUser.firstName, lastName: newUser.lastName, email: newUser.email })
-	)
-	.then(() => dispatch({ type: "SIGNUP_SUCCESS" }))
+		.set(profile)
+
+    dispatch({ type: 'SET_PROFILE', profile });
+    dispatch({ type: 'SIGNUP_SUCCESS' });
+  }
+	)	
 	.catch(error => {
 		dispatch({ type: "SIGNUP_ERROR", error });
 		return setTimeout(() => dispatch({ type: "CLEAR_AUTH_ERRORS" }), 5000);

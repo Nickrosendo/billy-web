@@ -73,7 +73,7 @@ const LoggedInItems: React.SFC<IProps> = (props) => {
 		<div>
 			<List className={classes.list}>
 				{topList.map(({ text, icon, route }) => (
-					<Link style={{ textDecoration: 'none' }} to={route} key={text} replace={true}>
+          <Link style={{ textDecoration: 'none', color: '#333' }} to={route} key={text} replace={true}>
 						<ListItem button >
 							<ListItemIcon>{icon}</ListItemIcon>
 							<ListItemText primary={text} />
@@ -85,7 +85,7 @@ const LoggedInItems: React.SFC<IProps> = (props) => {
 			<List>
 				{bottomList.map(({ text, icon, route, clickHandler }) => {
 					return route ? (
-						<Link style={{ textDecoration: 'none' }} to={route} key={text} replace={true}>
+            <Link style={{ textDecoration: 'none', color: '#333' }} to={route} key={text} replace={true}>
 							<ListItem button >
 								<ListItemIcon>{icon}</ListItemIcon>
 								<ListItemText primary={text} />

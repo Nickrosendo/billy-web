@@ -51,7 +51,7 @@ const LoggedOutItems: React.SFC<IProps> = (props) => {
 		<div>
 			<List className={classes.list}>
 				{topList.map(({ text, icon, route }) => (
-					<Link style={{textDecoration: 'none'}} key={text} to={route} replace >
+          <Link style={{ textDecoration: 'none', color: '#333'}} key={text} to={route} replace >
 						<ListItem button >
 							<ListItemIcon>{icon}</ListItemIcon>
 							<ListItemText primary={text} />

@@ -14,10 +14,7 @@ interface IProps extends WithStyles<typeof styles> {
   openDrawer: any
 }
 
-const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true
-  },
+const theme = createMuiTheme({  
   palette: {
     primary: {
       main: 'rgb(255, 180, 106)'

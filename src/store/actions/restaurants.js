@@ -1,4 +1,3 @@
-import axios from "axios";
 import { RestaurantsServices } from "../../services";
 
 export function setRestaurants(list) {

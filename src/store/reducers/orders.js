@@ -1,26 +1,26 @@
 const INITIAL_STATE = {
   currentOrder: {},
-  history: []
+  history: [],
 };
 
 let ACTIONS = {
   SET_HISTORY: ({ ...state }, { history }) => ({ ...state, history }),
   START_ORDER: ({ ...state }, { order }) => ({
     ...state,
-    currentOrder: { ...order }
+    currentOrder: { ...order },
   }),
   CONFIRM_ORDER: ({ ...state }, { order }) => ({
     ...state,
     currentOrder: { ...order },
-    history: [...state.history, { ...order }]
+    history: [...state.history, { ...order }],
   }),
   SET_CURRENT_ORDER: ({ ...state }, { currentOrder }) => {
-    const newOrder = !state.history.some(o => o.id === currentOrder.id);
+    const newOrder = !state.history.some((o) => o.id === currentOrder.id);
     if (newOrder) {
       return {
         ...state,
         currentOrder,
-        history: [...state.history, currentOrder]
+        history: [...state.history, currentOrder],
       };
     } else {
       return { ...state, currentOrder, history: [...state.history] };
@@ -29,15 +29,15 @@ let ACTIONS = {
   UPDATE_CURRENT_ORDER: ({ ...state }, { currentOrder }) => {
     let updatedHistory = [...state.history];
     const currentOrderIndex = state.history.findIndex(
-      o => o.id === currentOrder.id
+      (o) => o.id === currentOrder.id
     );
     let updatedCurrentOrder = {
-      ...state.currentOrder
+      ...state.currentOrder,
     };
     if (state.currentOrder.id === currentOrder.id) {
       updatedCurrentOrder = {
         ...state.currentOrder,
-        ...currentOrder
+        ...currentOrder,
       };
     }
     if (updatedCurrentOrder.items.length === 0) {
@@ -46,7 +46,7 @@ let ACTIONS = {
     if (currentOrderIndex !== -1) {
       if (currentOrder.items.length === 0) {
         updatedHistory = updatedHistory.filter(
-          order => order._id !== currentOrder._id
+          (order) => order._id !== currentOrder._id
         );
       } else {
         updatedHistory[currentOrderIndex] = { ...currentOrder };
@@ -55,17 +55,17 @@ let ACTIONS = {
     return {
       ...state,
       history: updatedHistory,
-      currentOrder: updatedCurrentOrder
+      currentOrder: updatedCurrentOrder,
     };
   },
   // ADD_CURRENT_ORDER_ITEM: ({ ...state}, { item }) => ({ ...state, currentOrder: { ...state.currentOrder, }})
   REMOVE_CURRENT_ORDER_ITEM: ({ items, ...state }, { itemId }) => ({
-    todos: items.filter(i => i._id !== itemId),
-    ...state
+    todos: items.filter((i) => i._id !== itemId),
+    ...state,
   }),
   CLOSE_ORDER: ({ ...state }, { orderId }) => {
     console.log("orderId: ", orderId);
-    const orderIndex = state.history.findIndex(o => o.id === orderId);
+    const orderIndex = state.history.findIndex((o) => o.id === orderId);
     if (orderIndex !== -1) {
       let closedOrder = { ...state.history[orderIndex] };
       let updatedHistory = [...state.history];
@@ -80,8 +80,10 @@ let ACTIONS = {
   },
   CLEAR_CURRENT_ORDER: ({ ...state }) => {
     return { ...state, currentOrder: { items: [] } };
-  }
+  },
 };
 
-export default (state = INITIAL_STATE, action) =>
+const ordersReducer = (state = INITIAL_STATE, action) =>
   action && ACTIONS[action.type] ? ACTIONS[action.type](state, action) : state;
+
+export default ordersReducer;

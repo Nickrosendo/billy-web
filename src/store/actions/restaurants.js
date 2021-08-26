@@ -1,20 +1,21 @@
 import axios from "axios";
+import { RestaurantsServices } from "../../services";
 
 export function setRestaurants(list) {
   return {
     type: "SET_RESTAURANTS",
-    list
+    list,
   };
 }
 
 export function setRestaurant(currentRestaurant) {
   return {
     type: "SET_RESTAURANT",
-    currentRestaurant
+    currentRestaurant,
   };
 }
 
-const getCurrentLocation = options => {
+const getCurrentLocation = (options) => {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(
       resolve,
@@ -27,21 +28,16 @@ const getCurrentLocation = options => {
   });
 };
 
-export const fetchNearRestaurants = () => async dispatch => {
+export const fetchNearRestaurants = () => async (dispatch) => {
   try {
     const position = await getCurrentLocation();
     if (position) {
-      const cordinates = {
-        latitude: position.coords.latitude,
-        longitute: position.coords.longitude
-      };
-      const { data } = await axios.post(
-        "https://us-central1-billy-web.cloudfunctions.net/funcApp/api/restaurants",
-        { cordinates }
-      );
+      const coordinates = [position.coords.latitude, position.coords.longitude];
+      const restaurantService = new RestaurantsServices();
+      const list = await restaurantService.fetchNearRestaurants(coordinates);
       dispatch({
         type: "SET_RESTAURANTS",
-        list: data
+        list,
       });
       return true;
     }
@@ -53,14 +49,14 @@ export const fetchNearRestaurants = () => async dispatch => {
   }
 };
 
-export const fetchRestaurants = () => async dispatch => {
+export const fetchRestaurants = () => async (dispatch) => {
   try {
-    const { data } = await axios.get(
-      "https://us-central1-billy-web.cloudfunctions.net/funcApp/api/restaurants"
-    );
+    const restaurantService = new RestaurantsServices();
+    const list = await restaurantService.fetchAllRestaurants();
+
     dispatch({
       type: "SET_RESTAURANTS",
-      list: data
+      list,
     });
     return true;
   } catch (error) {
